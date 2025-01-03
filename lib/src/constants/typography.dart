@@ -4,8 +4,8 @@ import 'colors.dart';
 
 /// This class provides a typography system for Infinity.
 /// This class is not meant to be instantiated.
-class AppTypography {
-  AppTypography._();
+class InfinityTypography {
+  InfinityTypography._();
 
   /// Default text style that serves as the foundation for all other styles
   static const TextStyle _default = TextStyle(

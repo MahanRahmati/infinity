@@ -64,16 +64,16 @@ class InfinityTheme {
   /// Configures the text theme for both light and dark modes.
   static TextTheme? _textTheme() {
     return TextTheme(
-      displayLarge: AppTypography.title1,
-      displayMedium: AppTypography.title2,
-      displaySmall: AppTypography.title2,
-      headlineLarge: AppTypography.title3,
-      headlineMedium: AppTypography.heading,
-      bodyLarge: AppTypography.body,
-      bodyMedium: AppTypography.body,
-      labelLarge: AppTypography.captionHeading,
-      labelMedium: AppTypography.caption,
-      labelSmall: AppTypography.caption.copyWith(fontSize: 12),
+      displayLarge: InfinityTypography.title1,
+      displayMedium: InfinityTypography.title2,
+      displaySmall: InfinityTypography.title2,
+      headlineLarge: InfinityTypography.title3,
+      headlineMedium: InfinityTypography.heading,
+      bodyLarge: InfinityTypography.body,
+      bodyMedium: InfinityTypography.body,
+      labelLarge: InfinityTypography.captionHeading,
+      labelMedium: InfinityTypography.caption,
+      labelSmall: InfinityTypography.caption.copyWith(fontSize: 12),
     );
   }
 
