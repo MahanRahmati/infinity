@@ -13,6 +13,9 @@ const double _disabledOpacity = 0.5;
 /// The value of the [InteractionState] that represents a hovered state.
 const double _hover = 0.03;
 
+/// The value of the [InteractionState] that represents a focused state.
+const double _focused = 0.05;
+
 /// The value of the [InteractionState] that represents a pressed state.
 const double _pressed = 0.08;
 
@@ -103,6 +106,7 @@ class InfinityColors {
   ) {
     final double value = switch (state) {
       InteractionState.hover => _hover,
+      InteractionState.focused => _focused,
       InteractionState.pressed => _pressed,
     };
 
@@ -201,13 +205,14 @@ enum BackgroundType {
   window,
   headerbar,
   sidebar,
-  card;
+  card,
 }
 
 /// Represents different interaction states for UI elements.
 enum InteractionState {
   hover,
-  pressed;
+  focused,
+  pressed,
 }
 
 /// Defines status types for displaying different states of operations or
