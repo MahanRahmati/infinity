@@ -56,17 +56,17 @@ class ICard extends StatelessWidget {
             borderRadius: BorderRadius.circular(InfinityDimens.borderRadius),
             side: BorderSide(
               color: borderColor,
-              width: InfinityDimens.borderWidth,
+              width: InfinityDimens.borderThickness,
             ),
           ),
         ),
         child: Padding(
           padding: margin,
           child: Padding(
-            padding: const EdgeInsets.all(InfinityDimens.borderWidth),
+            padding: const EdgeInsets.all(InfinityDimens.borderThickness),
             child: SmoothClipRRect(
               borderRadius: BorderRadius.circular(
-                InfinityDimens.borderRadius - InfinityDimens.borderWidth,
+                InfinityDimens.borderRadius - InfinityDimens.borderThickness,
               ),
               child: child,
             ),

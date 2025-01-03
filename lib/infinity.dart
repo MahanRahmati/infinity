@@ -8,3 +8,4 @@ export 'src/constants/dimens.dart';
 export 'src/constants/theme.dart';
 export 'src/constants/typography.dart';
 export 'src/widgets/card.dart';
+export 'src/widgets/divider.dart';
