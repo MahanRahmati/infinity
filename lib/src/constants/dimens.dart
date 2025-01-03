@@ -11,6 +11,9 @@ class InfinityDimens {
   /// Tiny padding - 2.0
   static const double tinyPadding = base * 0.25;
 
+  /// Border width - 2.0
+  static const double borderWidth = base * 0.25;
+
   /// Small padding - 4.0
   static const double smallPadding = base * 0.5;
 
