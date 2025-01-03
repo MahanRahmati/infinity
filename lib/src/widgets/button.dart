@@ -21,6 +21,8 @@ class IButton extends StatelessWidget {
   /// [borderRadius] optional custom border radius.
   /// [elavation] optional custom elevation level.
   /// [statusType] optional custom status type.
+  /// [padding] spacing around the button's outer edge.
+  /// [margin] spacing around the button's inner content.
   /// [onPressed] callback when button is tapped.
   /// [onLongPress] callback when button is long pressed.
   const IButton({
@@ -34,6 +36,8 @@ class IButton extends StatelessWidget {
     this.borderRadius,
     this.elavation,
     this.statusType,
+    this.padding,
+    this.margin,
     this.onPressed,
     this.onLongPress,
   });
@@ -48,6 +52,8 @@ class IButton extends StatelessWidget {
   /// [backgroundColor] optional custom background color.
   /// [elavation] optional custom elevation level.
   /// [statusType] optional custom status type.
+  /// [padding] spacing around the button's outer edge.
+  /// [margin] spacing around the button's inner content.
   /// [onPressed] callback when button is tapped.
   /// [onLongPress] callback when button is long pressed.
   IButton.icon({
@@ -60,12 +66,11 @@ class IButton extends StatelessWidget {
     this.backgroundColor,
     this.elavation,
     this.statusType,
+    this.padding,
     this.onPressed,
     this.onLongPress,
-  })  : child = Padding(
-          padding: const EdgeInsets.all(InfinityDimens.padding),
-          child: Icon(icon),
-        ),
+  })  : child = Icon(icon),
+        margin = const EdgeInsets.all(InfinityDimens.padding),
         borderRadius = InfinityDimens.smallBorderRadius;
 
   /// The widget below this widget in the tree.
@@ -107,6 +112,12 @@ class IButton extends StatelessWidget {
 
   /// The button's status type.
   final StatusType? statusType;
+
+  /// The button's padding.
+  final EdgeInsetsGeometry? padding;
+
+  /// The spacing around the button's contents.
+  final EdgeInsetsGeometry? margin;
 
   /// The callback that is called when the button is tapped or otherwise
   /// activated.
@@ -158,28 +169,38 @@ class IButton extends StatelessWidget {
 
         return Semantics(
           button: true,
-          child: DecoratedBox(
-            decoration: ShapeDecoration(
-              shape: SmoothRectangleBorder(
-                borderRadius: BorderRadius.circular(
-                  borderRadius ?? InfinityDimens.borderRadius,
+          child: Padding(
+            padding: padding ?? const EdgeInsets.all(InfinityDimens.padding),
+            child: DecoratedBox(
+              decoration: ShapeDecoration(
+                shape: SmoothRectangleBorder(
+                  borderRadius: BorderRadius.circular(
+                    borderRadius ?? InfinityDimens.smallBorderRadius,
+                  ),
+                  side: BorderSide(
+                    color: InfinityColors.getButtonBorderColor(bgColor, state),
+                    width: InfinityDimens.borderThickness,
+                  ),
                 ),
-                side: BorderSide(
-                  color: InfinityColors.getButtonBorderColor(bgColor, state),
-                  width: InfinityDimens.borderThickness,
-                ),
+                color: bg,
               ),
-              color: bg,
-            ),
-            child: Align(
-              alignment: alignment,
-              widthFactor: 1.0,
-              heightFactor: 1.0,
-              child: DefaultTextStyle(
-                style: textStyle,
-                child: IconTheme(
-                  data: iconTheme,
-                  child: child ?? const SizedBox.shrink(),
+              child: Align(
+                alignment: alignment,
+                widthFactor: 1.0,
+                heightFactor: 1.0,
+                child: DefaultTextStyle(
+                  style: textStyle,
+                  child: IconTheme(
+                    data: iconTheme,
+                    child: Padding(
+                      padding: margin ??
+                          const EdgeInsets.symmetric(
+                            vertical: InfinityDimens.padding,
+                            horizontal: InfinityDimens.mediumPadding,
+                          ),
+                      child: child ?? const SizedBox.shrink(),
+                    ),
+                  ),
                 ),
               ),
             ),
