@@ -20,6 +20,7 @@ class IButton extends StatelessWidget {
   /// [backgroundColor] optional custom background color.
   /// [borderRadius] optional custom border radius.
   /// [elavation] optional custom elevation level.
+  /// [statusType] optional custom status type.
   /// [onPressed] callback when button is tapped.
   /// [onLongPress] callback when button is long pressed.
   const IButton({
@@ -32,9 +33,28 @@ class IButton extends StatelessWidget {
     this.backgroundColor,
     this.borderRadius,
     this.elavation,
+    this.statusType,
     this.onPressed,
     this.onLongPress,
   });
+
+  IButton.icon({
+    super.key,
+    required final IconData icon,
+    this.focusNode,
+    this.onFocusChange,
+    this.autofocus = false,
+    this.alignment = Alignment.center,
+    this.backgroundColor,
+    this.elavation,
+    this.statusType,
+    this.onPressed,
+    this.onLongPress,
+  })  : child = Padding(
+          padding: const EdgeInsets.all(InfinityDimens.padding),
+          child: Icon(icon),
+        ),
+        borderRadius = InfinityDimens.smallBorderRadius;
 
   /// The widget below this widget in the tree.
   ///
@@ -73,6 +93,9 @@ class IButton extends StatelessWidget {
   /// The button's elevation.
   final int? elavation;
 
+  /// The button's status type.
+  final StatusType? statusType;
+
   /// The callback that is called when the button is tapped or otherwise
   /// activated.
   ///
@@ -93,13 +116,34 @@ class IButton extends StatelessWidget {
       onPressed: onPressed,
       onLongPress: onLongPress,
       builder: (final BuildContext context, final InteractionState? state) {
-        final Color color = backgroundColor ??
+        Color bgColor = backgroundColor ??
             InfinityColors.getButtonBackgroundColor(
               context,
               elavation: elavation ?? 1,
             );
-        final Color bg =
-            state == null ? color : InfinityColors.getStateColor(color, state);
+        Color fgColor = InfinityColors.getForegroundColor(context);
+
+        if (statusType != null) {
+          fgColor = InfinityColors.getStatusColor(
+            context,
+            statusType!,
+          );
+          bgColor = fgColor.withTransparency(0.15);
+        }
+
+        final Color bg = state == null
+            ? bgColor
+            : InfinityColors.getStateColor(bgColor, state);
+        final Color fg =
+            state == InteractionState.disabled ? fgColor.dimmed() : fgColor;
+
+        final TextStyle textStyle = InfinityTypography.body.copyWith(
+          color: fg,
+        );
+        final IconThemeData iconTheme = IconTheme.of(context).copyWith(
+          color: fg,
+        );
+
         return Semantics(
           button: true,
           child: DecoratedBox(
@@ -109,7 +153,7 @@ class IButton extends StatelessWidget {
                   borderRadius ?? InfinityDimens.borderRadius,
                 ),
                 side: BorderSide(
-                  color: InfinityColors.getButtonBorderColor(color, state),
+                  color: InfinityColors.getButtonBorderColor(bgColor, state),
                   width: InfinityDimens.borderThickness,
                 ),
               ),
@@ -120,8 +164,11 @@ class IButton extends StatelessWidget {
               widthFactor: 1.0,
               heightFactor: 1.0,
               child: DefaultTextStyle(
-                style: InfinityTypography.body,
-                child: child ?? const SizedBox.shrink(),
+                style: textStyle,
+                child: IconTheme(
+                  data: iconTheme,
+                  child: child ?? const SizedBox.shrink(),
+                ),
               ),
             ),
           ),
