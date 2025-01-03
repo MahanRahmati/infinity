@@ -184,6 +184,17 @@ class InfinityColors {
     return getElevationColor(context, elavation);
   }
 
+  /// Returns the button border color.
+  static Color getButtonBorderColor(
+    final Color baseColor,
+    final InteractionState? state,
+  ) {
+    if (state == InteractionState.focused) {
+      return getStateColor(baseColor, InteractionState.pressed);
+    }
+    return InfinityColors.transparent;
+  }
+
   /// Returns the border color.
   static Color getBorderColor(
     final BuildContext context, {
