@@ -38,6 +38,18 @@ class IButton extends StatelessWidget {
     this.onLongPress,
   });
 
+  /// Creates an Infinity button with an icon.
+  ///
+  /// [icon] optional icon to display inside the button.
+  /// [focusNode] defines the focus behavior for keyboard navigation.
+  /// [onFocusChange] called when button focus changes.
+  /// [autofocus] whether button should focus itself when first displayed.
+  /// [alignment] positions the child within the button, defaults to center.
+  /// [backgroundColor] optional custom background color.
+  /// [elavation] optional custom elevation level.
+  /// [statusType] optional custom status type.
+  /// [onPressed] callback when button is tapped.
+  /// [onLongPress] callback when button is long pressed.
   IButton.icon({
     super.key,
     required final IconData icon,
