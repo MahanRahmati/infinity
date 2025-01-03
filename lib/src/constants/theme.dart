@@ -11,7 +11,7 @@ class InfinityTheme {
 
   /// Creates a light theme for the application.
   static ThemeData light({
-    Color? colorSchemeSeed,
+    final Color? colorSchemeSeed,
   }) {
     return ThemeData(
       brightness: Brightness.light,
@@ -37,7 +37,7 @@ class InfinityTheme {
 
   /// Creates a dark theme for the application.
   static ThemeData dark({
-    Color? colorSchemeSeed,
+    final Color? colorSchemeSeed,
   }) {
     return ThemeData(
       brightness: Brightness.dark,
