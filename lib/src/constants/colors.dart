@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart' show Brightness, Theme;
 import 'package:flutter/widgets.dart';
 
+import 'interaction_state.dart';
+
 /// The opacity of the border of the dialog.
 const double _borderOpacity = 0.15;
 
@@ -108,7 +110,13 @@ class InfinityColors {
       InteractionState.hover => _hover,
       InteractionState.focused => _focused,
       InteractionState.pressed => _pressed,
+      InteractionState.disabled => _disabledOpacity,
     };
+
+    // For disabled state, use opacity
+    if (state == InteractionState.disabled) {
+      return baseColor.withTransparency(value);
+    }
 
     // For light colors, darken and for dark colors, lighten by value.
     return baseColor.adjustLightness(
@@ -206,13 +214,6 @@ enum BackgroundType {
   headerbar,
   sidebar,
   card,
-}
-
-/// Represents different interaction states for UI elements.
-enum InteractionState {
-  hover,
-  focused,
-  pressed,
 }
 
 /// Defines status types for displaying different states of operations or
