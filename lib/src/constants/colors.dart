@@ -21,7 +21,10 @@ const double _pressed = 0.08;
 class InfinityColors {
   InfinityColors._();
 
-  /// Pure white color used as base for light themes
+  /// Pure black color
+  static const Color black = Color(0xFF000000);
+
+  /// Pure white color
   static const Color white = Color(0xFFFFFFFF);
 
   /// Fully transparent color
