@@ -4,12 +4,12 @@ import '../constants/dimens.dart';
 
 /// A container widget that centers and constrains its child's width and
 /// follows Infinity's design system.
-class BoundedBox extends StatelessWidget {
+class IBoundedBox extends StatelessWidget {
   /// Creates a bounded box that centers and constrains its child.
   ///
   /// [child] the widget to display inside the bounded box with constrained
   /// width.
-  const BoundedBox({
+  const IBoundedBox({
     super.key,
     this.child,
   });
