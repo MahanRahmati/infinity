@@ -1,0 +1,22 @@
+name: example
+description: Showcase Infinity
+version: 1.0.0
+publish_to: 'none'
+
+environment:
+  sdk: ^3.6.0
+  flutter: '>=3.27.1'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  infinity:
+    path: ../
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
