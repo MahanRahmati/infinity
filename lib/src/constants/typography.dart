@@ -1,7 +1,5 @@
 import 'package:flutter/widgets.dart';
 
-import 'colors.dart';
-
 /// This class provides a typography system for Infinity.
 /// This class is not meant to be instantiated.
 class InfinityTypography {
@@ -11,7 +9,6 @@ class InfinityTypography {
   static const TextStyle _default = TextStyle(
     fontFamily: 'Inter',
     fontWeight: FontWeight.w400,
-    color: InfinityColors.black,
     decoration: TextDecoration.none,
     textBaseline: TextBaseline.alphabetic,
   );

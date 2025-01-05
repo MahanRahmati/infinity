@@ -19,7 +19,7 @@ class InfinityTheme {
       colorSchemeSeed: colorSchemeSeed,
       scaffoldBackgroundColor: InfinityColors.windowLightBackground,
       splashFactory: NoSplash.splashFactory,
-      textTheme: _textTheme(),
+      textTheme: _textTheme(InfinityColors.foregroundLightColor),
       pageTransitionsTheme: _pageTransitionsTheme(),
       appBarTheme: const AppBarTheme(
         color: InfinityColors.headerbarLightBackground,
@@ -45,7 +45,7 @@ class InfinityTheme {
       colorSchemeSeed: colorSchemeSeed,
       scaffoldBackgroundColor: InfinityColors.windowDarkBackground,
       splashFactory: NoSplash.splashFactory,
-      textTheme: _textTheme(),
+      textTheme: _textTheme(InfinityColors.foregroundDarkColor),
       pageTransitionsTheme: _pageTransitionsTheme(),
       appBarTheme: const AppBarTheme(
         color: InfinityColors.headerbarDarkBackground,
@@ -62,18 +62,18 @@ class InfinityTheme {
   }
 
   /// Configures the text theme for both light and dark modes.
-  static TextTheme? _textTheme() {
+  static TextTheme? _textTheme(final Color color) {
     return TextTheme(
-      displayLarge: InfinityTypography.title1,
-      displayMedium: InfinityTypography.title2,
-      displaySmall: InfinityTypography.title2,
-      headlineLarge: InfinityTypography.title3,
-      headlineMedium: InfinityTypography.heading,
-      bodyLarge: InfinityTypography.body,
-      bodyMedium: InfinityTypography.body,
-      labelLarge: InfinityTypography.captionHeading,
-      labelMedium: InfinityTypography.caption,
-      labelSmall: InfinityTypography.caption.copyWith(fontSize: 12),
+      displayLarge: InfinityTypography.title1.copyWith(color: color),
+      displayMedium: InfinityTypography.title2.copyWith(color: color),
+      displaySmall: InfinityTypography.title2.copyWith(color: color),
+      headlineLarge: InfinityTypography.title3.copyWith(color: color),
+      headlineMedium: InfinityTypography.heading.copyWith(color: color),
+      bodyLarge: InfinityTypography.body.copyWith(color: color),
+      bodyMedium: InfinityTypography.body.copyWith(color: color),
+      labelLarge: InfinityTypography.captionHeading.copyWith(color: color),
+      labelMedium: InfinityTypography.caption.copyWith(color: color),
+      labelSmall: InfinityTypography.caption.copyWith(color: color),
     );
   }
 

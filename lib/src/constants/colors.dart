@@ -59,6 +59,12 @@ class InfinityColors {
   /// Card background color for dark theme
   static const Color cardDarkBackground = Color(0xFF363636);
 
+  /// Foreground color for light theme
+  static const Color foregroundLightColor = black;
+
+  /// Foreground color for dark theme
+  static const Color foregroundDarkColor = white;
+
   /// Border color for light theme
   static const Color borderLightBackground = Color(0xFFE9E9E9);
 
@@ -145,7 +151,7 @@ class InfinityColors {
   }) {
     final bool isDark =
         (brightness ?? Theme.of(context).brightness) == Brightness.dark;
-    return isDark ? white : getRgbColor(0, 0, 6, 0.8);
+    return isDark ? foregroundDarkColor : foregroundLightColor;
   }
 
   /// Returns the status color based on the [StatusType].
