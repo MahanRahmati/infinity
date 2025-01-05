@@ -97,6 +97,13 @@ class Buttons extends StatelessWidget {
             ),
           ],
         ),
+        Wrap(
+          alignment: WrapAlignment.center,
+          children: [
+            IBackButton(),
+            ICloseButton(),
+          ],
+        )
       ],
     );
   }
