@@ -31,6 +31,7 @@ class ExampleHome extends StatelessWidget {
         child: ListView(
           children: <Widget>[
             Buttons(),
+            ListItemWidget(),
           ],
         ),
       ),
@@ -44,7 +45,7 @@ class Buttons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IBoxedList(
-      header: const Text('Buttons'),
+      title: const Text('Buttons'),
       children: [
         Wrap(
           alignment: WrapAlignment.center,
@@ -107,6 +108,41 @@ class Buttons extends StatelessWidget {
             ICloseButton(),
           ],
         )
+      ],
+    );
+  }
+}
+
+class ListItemWidget extends StatelessWidget {
+  const ListItemWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return IBoxedList(
+      title: const Text('List Item'),
+      children: [
+        IListItem(
+          title: const Text('One-line'),
+        ),
+        IListItem(
+          leading: Icon(MingCuteIcons.mgc_star_line),
+          title: const Text('One-line with leading'),
+        ),
+        IListItem(
+          title: const Text('One-line with trailing'),
+          trailing: Icon(MingCuteIcons.mgc_more_1_line),
+        ),
+        IListItem(
+          leading: Icon(MingCuteIcons.mgc_star_line),
+          title: const Text('One-line with both leading and trailing'),
+          trailing: Icon(MingCuteIcons.mgc_more_1_line),
+        ),
+        IListItem(
+          leading: Icon(MingCuteIcons.mgc_star_line),
+          title: const Text('Two-line'),
+          subtitle: const Text('Here is a subtitle'),
+          trailing: Icon(MingCuteIcons.mgc_more_1_line),
+        ),
       ],
     );
   }

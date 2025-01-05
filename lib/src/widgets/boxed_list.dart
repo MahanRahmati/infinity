@@ -4,6 +4,7 @@ import '../constants/colors.dart';
 import '../constants/dimens.dart';
 import 'card.dart';
 import 'divider.dart';
+import 'list_item.dart';
 
 /// A boxed list widget that follows Infinity's design system.
 /// Combines a card container with optional header and divider-separated
@@ -11,18 +12,32 @@ import 'divider.dart';
 class IBoxedList extends StatelessWidget {
   /// Creates an Infinity boxed list.
   ///
-  /// [header] optional widget displayed above the list.
+  /// [leading] optional widget displayed at the start of the header.
+  /// [title] optional primary text/widget displayed in the header.
+  /// [subtitle] optional secondary text/widget displayed below the title.
+  /// [trailing] optional widget displayed at the end of the header.
   /// [children] optional list of widgets to display in the card container,
   /// separated by dividers.
   const IBoxedList({
     super.key,
-    this.header,
+    this.leading,
+    this.title,
+    this.subtitle,
+    this.trailing,
     this.children,
   });
 
-  /// Widget displayed above the list container.
-  /// Typically used for titles or descriptive content.
-  final Widget? header;
+  /// Widget displayed at the start of the header section.
+  final Widget? leading;
+
+  /// Primary content widget displayed in the header section.
+  final Widget? title;
+
+  /// Secondary content widget displayed below the title in the header section.
+  final Widget? subtitle;
+
+  /// Widget displayed at the end of the header section.
+  final Widget? trailing;
 
   /// List of widgets to display in the card container.
   /// Each widget is separated by a horizontal divider except for the last item.
@@ -31,13 +46,15 @@ class IBoxedList extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     Widget? headerWidget;
-    if (header != null) {
-      headerWidget = Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: InfinityDimens.padding,
-          horizontal: InfinityDimens.largePadding,
-        ),
-        child: header,
+    if (leading != null ||
+        title != null ||
+        subtitle != null ||
+        trailing != null) {
+      headerWidget = IListItem(
+        leading: leading,
+        title: title,
+        subtitle: subtitle,
+        trailing: trailing,
       );
     }
 
