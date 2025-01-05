@@ -32,6 +32,7 @@ class ExampleHome extends StatelessWidget {
           children: <Widget>[
             Buttons(),
             ListItemWidget(),
+            ListItemSeparated(),
           ],
         ),
       ),
@@ -190,6 +191,22 @@ class ListItemWidget extends StatelessWidget {
           subtitle: const Text('Here is a subtitle'),
           trailing: Icon(MingCuteIcons.mgc_more_1_line),
         ),
+      ],
+    );
+  }
+}
+
+class ListItemSeparated extends StatelessWidget {
+  const ListItemSeparated({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return IBoxedList.separated(
+      title: const Text('Separated Items'),
+      children: [
+        IListItem(title: const Text('First Item')),
+        IListItem(title: const Text('Second Item')),
+        IListItem(title: const Text('Third Item')),
       ],
     );
   }

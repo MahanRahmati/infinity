@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
 
-import '../constants/colors.dart';
 import '../constants/dimens.dart';
 import 'card.dart';
 import 'divider.dart';
@@ -18,14 +17,65 @@ class IBoxedList extends StatelessWidget {
   /// [trailing] optional widget displayed at the end of the header.
   /// [children] optional list of widgets to display in the card container,
   /// separated by dividers.
-  const IBoxedList({
+  IBoxedList({
     super.key,
     this.leading,
     this.title,
     this.subtitle,
     this.trailing,
-    this.children,
-  });
+    final List<Widget>? children,
+  }) : children = children != null && children.isNotEmpty
+            ? <Widget>[
+                FocusTraversalGroup(
+                  child: ICard(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: InfinityDimens.padding,
+                      horizontal: InfinityDimens.largePadding,
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        for (int i = 0; i < children.length; i++) ...<Widget>[
+                          children[i],
+                          if (i < children.length - 1)
+                            const IDivider(height: 0),
+                        ],
+                      ],
+                    ),
+                  ),
+                ),
+              ]
+            : null;
+
+  /// Creates an Infinity boxed list with separated rows.
+  ///
+  /// [leading] optional widget displayed at the start of the header.
+  /// [title] optional primary text/widget displayed in the header.
+  /// [subtitle] optional secondary text/widget displayed below the title.
+  /// [trailing] optional widget displayed at the end of the header.
+  /// [children] optional list of widgets to display in separate cards.
+  /// Each child will be placed in its own card with vertical spacing between
+  /// them.
+  IBoxedList.separated({
+    super.key,
+    this.leading,
+    this.title,
+    this.subtitle,
+    this.trailing,
+    final List<Widget>? children,
+  }) : children = children
+            ?.map(
+              (final Widget child) => FocusTraversalGroup(
+                child: ICard(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: InfinityDimens.padding,
+                    horizontal: InfinityDimens.largePadding,
+                  ),
+                  child: child,
+                ),
+              ),
+            )
+            .toList();
 
   /// Widget displayed at the start of the header section.
   final Widget? leading;
@@ -58,35 +108,12 @@ class IBoxedList extends StatelessWidget {
       );
     }
 
-    Widget? childrenWidget;
-    if (children != null && children!.isNotEmpty) {
-      final Color borderColor = InfinityColors.getBorderColor(context);
-      final List<Widget> items = <Widget>[
-        for (int i = 0; i < children!.length; i++) ...<Widget>[
-          children![i],
-          if (i < children!.length - 1) IDivider(height: 0, color: borderColor),
-        ],
-      ];
-      childrenWidget = FocusTraversalGroup(
-        child: ICard(
-          padding: const EdgeInsets.symmetric(
-            vertical: InfinityDimens.padding,
-            horizontal: InfinityDimens.largePadding,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: items,
-          ),
-        ),
-      );
-    }
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         if (headerWidget != null) headerWidget,
-        if (childrenWidget != null) childrenWidget,
+        if (children != null) ...children!,
       ],
     );
   }
