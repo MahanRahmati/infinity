@@ -107,7 +107,32 @@ class Buttons extends StatelessWidget {
             IBackButton(),
             ICloseButton(),
           ],
-        )
+        ),
+        Wrap(
+          alignment: WrapAlignment.center,
+          children: [
+            IButton.compound(
+              text: 'Text Only',
+              onPressed: () {},
+            ),
+            IButton.compound(
+              leadingIcon: MingCuteIcons.mgc_star_line,
+              text: 'Leading',
+              onPressed: () {},
+            ),
+            IButton.compound(
+              text: 'Trailing',
+              trailingIcon: MingCuteIcons.mgc_right_line,
+              onPressed: () {},
+            ),
+            IButton.compound(
+              leadingIcon: MingCuteIcons.mgc_star_line,
+              text: 'Both Icons',
+              trailingIcon: MingCuteIcons.mgc_right_line,
+              onPressed: () {},
+            ),
+          ],
+        ),
       ],
     );
   }

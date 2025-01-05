@@ -106,6 +106,58 @@ class IButton extends StatelessWidget {
           horizontal: InfinityDimens.mediumPadding,
         );
 
+  /// Creates an Infinity button with optional leading icon, text and trailing
+  /// icon.
+  ///
+  /// [leadingIcon] optional icon displayed before the text.
+  /// [text] text to display in the middle of the button.
+  /// [trailingIcon] optional icon displayed after the text.
+  /// [focusNode] defines the focus behavior for keyboard navigation.
+  /// [onFocusChange] called when button focus changes.
+  /// [autofocus] whether button should focus itself when first displayed.
+  /// [alignment] positions the child within the button, defaults to center.
+  /// [backgroundColor] optional custom background color.
+  /// [borderRadius] optional custom border radius.
+  /// [elavation] optional custom elevation level.
+  /// [statusType] optional custom status type.
+  /// [padding] spacing around the button's outer edge.
+  /// [onPressed] callback when button is tapped.
+  /// [onLongPress] callback when button is long pressed.
+  IButton.compound({
+    super.key,
+    final IconData? leadingIcon,
+    required final String text,
+    final IconData? trailingIcon,
+    this.focusNode,
+    this.onFocusChange,
+    this.autofocus = false,
+    this.alignment = Alignment.center,
+    this.backgroundColor,
+    this.borderRadius,
+    this.elavation,
+    this.statusType,
+    this.padding,
+    this.onPressed,
+    this.onLongPress,
+  })  : child = Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            if (leadingIcon != null) ...<Widget>[
+              Icon(leadingIcon),
+              const SizedBox(width: InfinityDimens.smallPadding),
+            ],
+            Text(text),
+            if (trailingIcon != null) ...<Widget>[
+              const SizedBox(width: InfinityDimens.smallPadding),
+              Icon(trailingIcon),
+            ],
+          ],
+        ),
+        margin = const EdgeInsets.symmetric(
+          vertical: InfinityDimens.padding,
+          horizontal: InfinityDimens.mediumPadding,
+        );
+
   /// The widget below this widget in the tree.
   ///
   /// Typically a [Text] widget.
