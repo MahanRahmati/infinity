@@ -73,6 +73,40 @@ class IButton extends StatelessWidget {
         margin = const EdgeInsets.all(InfinityDimens.padding),
         borderRadius = InfinityDimens.smallBorderRadius;
 
+  /// Creates an Infinity button with text.
+  ///
+  /// [text] text to display inside the button.
+  /// [focusNode] defines the focus behavior for keyboard navigation.
+  /// [onFocusChange] called when button focus changes.
+  /// [autofocus] whether button should focus itself when first displayed.
+  /// [alignment] positions the child within the button, defaults to center.
+  /// [backgroundColor] optional custom background color.
+  /// [borderRadius] optional custom border radius.
+  /// [elavation] optional custom elevation level.
+  /// [statusType] optional custom status type.
+  /// [padding] spacing around the button's outer edge.
+  /// [onPressed] callback when button is tapped.
+  /// [onLongPress] callback when button is long pressed.
+  IButton.text({
+    super.key,
+    required final String text,
+    this.focusNode,
+    this.onFocusChange,
+    this.autofocus = false,
+    this.alignment = Alignment.center,
+    this.backgroundColor,
+    this.borderRadius,
+    this.elavation,
+    this.statusType,
+    this.padding,
+    this.onPressed,
+    this.onLongPress,
+  })  : child = Text(text),
+        margin = const EdgeInsets.symmetric(
+          vertical: InfinityDimens.padding,
+          horizontal: InfinityDimens.mediumPadding,
+        );
+
   /// The widget below this widget in the tree.
   ///
   /// Typically a [Text] widget.
