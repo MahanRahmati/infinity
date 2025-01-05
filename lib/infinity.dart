@@ -15,4 +15,5 @@ export 'src/widgets/button.dart';
 export 'src/widgets/card.dart';
 export 'src/widgets/close_button.dart';
 export 'src/widgets/divider.dart';
+export 'src/widgets/header_bar.dart';
 export 'src/widgets/status_page.dart';

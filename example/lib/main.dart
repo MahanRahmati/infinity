@@ -23,9 +23,12 @@ class ExampleHome extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      appBar: IHeaderBar(
+        middle: Text('Showcase'),
+      ),
       body: IBoundedBox(
-        child: Column(
+        child: ListView(
           children: <Widget>[
             Buttons(),
           ],

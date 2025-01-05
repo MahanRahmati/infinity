@@ -23,6 +23,9 @@ class InfinityDimens {
   /// Small border radius - 8.0
   static const double smallBorderRadius = base;
 
+  /// Header bar scroll under animation extent - 8.0
+  static const double headerBarScrollUnderAnimationExtent = base;
+
   /// Medium padding - 12.0
   static const double mediumPadding = base * 1.5;
 
