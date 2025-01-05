@@ -41,6 +41,9 @@ class InfinityDimens {
   /// Height for header bars - 56.0
   static const double headerbarHeight = base * 7;
 
+  /// Height for list items - 56.0
+  static const double listItemHeight = base * 7;
+
   /// Minimum height for dialogs - 80.0
   static const double dialogMinHeight = base * 10;
 
