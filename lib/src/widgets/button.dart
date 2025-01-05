@@ -53,7 +53,6 @@ class IButton extends StatelessWidget {
   /// [elavation] optional custom elevation level.
   /// [statusType] optional custom status type.
   /// [padding] spacing around the button's outer edge.
-  /// [margin] spacing around the button's inner content.
   /// [onPressed] callback when button is tapped.
   /// [onLongPress] callback when button is long pressed.
   IButton.icon({
