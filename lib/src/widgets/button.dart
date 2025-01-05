@@ -158,6 +158,39 @@ class IButton extends StatelessWidget {
           horizontal: InfinityDimens.mediumPadding,
         );
 
+  /// Creates a pill-shaped Infinity button.
+  ///
+  /// [child] optional widget to display inside the button, typically a
+  /// Text widget.
+  /// [focusNode] defines the focus behavior for keyboard navigation.
+  /// [onFocusChange] called when button focus changes.
+  /// [autofocus] whether button should focus itself when first displayed.
+  /// [alignment] positions the child within the button, defaults to center.
+  /// [backgroundColor] optional custom background color.
+  /// [elavation] optional custom elevation level.
+  /// [statusType] optional custom status type.
+  /// [padding] spacing around the button's outer edge.
+  /// [onPressed] callback when button is tapped.
+  /// [onLongPress] callback when button is long pressed.
+  const IButton.pill({
+    super.key,
+    this.child,
+    this.focusNode,
+    this.onFocusChange,
+    this.autofocus = false,
+    this.alignment = Alignment.center,
+    this.backgroundColor,
+    this.elavation,
+    this.statusType,
+    this.padding,
+    this.onPressed,
+    this.onLongPress,
+  })  : borderRadius = double.infinity,
+        margin = const EdgeInsets.symmetric(
+          vertical: InfinityDimens.mediumPadding,
+          horizontal: InfinityDimens.largePadding,
+        );
+
   /// The widget below this widget in the tree.
   ///
   /// Typically a [Text] widget.

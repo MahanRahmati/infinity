@@ -133,6 +133,28 @@ class Buttons extends StatelessWidget {
             ),
           ],
         ),
+        Wrap(
+          alignment: WrapAlignment.center,
+          children: [
+            IButton.pill(
+              child: Text('Pill Button'),
+              onPressed: () {},
+            ),
+            IButton.pill(
+              child: Text('Disabled Pill'),
+            ),
+            IButton.pill(
+              statusType: StatusType.success,
+              child: Text('Success Pill'),
+              onPressed: () {},
+            ),
+            IButton.pill(
+              statusType: StatusType.error,
+              child: Text('Error Pill'),
+              onPressed: () {},
+            ),
+          ],
+        ),
       ],
     );
   }
