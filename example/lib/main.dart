@@ -31,6 +31,7 @@ class ExampleHome extends StatelessWidget {
         child: ListView(
           children: <Widget>[
             Buttons(),
+            CardsWidget(),
             ListItemWidget(),
             ListItemSeparated(),
           ],
@@ -155,6 +156,48 @@ class Buttons extends StatelessWidget {
               onPressed: () {},
             ),
           ],
+        ),
+      ],
+    );
+  }
+}
+
+class CardsWidget extends StatelessWidget {
+  const CardsWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        IListItem(title: Text('Cards')),
+        Padding(
+          padding: const EdgeInsets.only(
+            left: InfinityDimens.largePadding,
+            right: InfinityDimens.largePadding,
+            bottom: InfinityDimens.padding,
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: SizedBox(
+                  height: 200,
+                  child: ICard(
+                    child: Center(child: Text('Card 1')),
+                  ),
+                ),
+              ),
+              const SizedBox(width: InfinityDimens.largePadding),
+              Expanded(
+                child: SizedBox(
+                  height: 200,
+                  child: ICard(
+                    child: Center(child: Text('Card 2')),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ],
     );
