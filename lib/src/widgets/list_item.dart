@@ -12,13 +12,13 @@ class IListItem extends StatelessWidget {
   /// Creates an Infinity list item.
   ///
   /// [leading] optional widget displayed before the title.
-  /// [title] required primary content widget.
+  /// [title] primary content widget.
   /// [subtitle] optional secondary content displayed below the title.
   /// [trailing] optional widget displayed after the title/subtitle.
   const IListItem({
     super.key,
     this.leading,
-    required this.title,
+    this.title,
     this.subtitle,
     this.trailing,
   });
@@ -27,7 +27,7 @@ class IListItem extends StatelessWidget {
   final Widget? leading;
 
   /// The primary content of the list tile.
-  final Widget title;
+  final Widget? title;
 
   /// Additional content displayed below the title.
   final Widget? subtitle;
@@ -44,7 +44,7 @@ class IListItem extends StatelessWidget {
       ),
       softWrap: false,
       overflow: TextOverflow.ellipsis,
-      child: title,
+      child: title ?? const SizedBox.shrink(),
     );
 
     Widget? subtitleText;
