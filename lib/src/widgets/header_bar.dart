@@ -45,7 +45,11 @@ class IHeaderBar extends StatefulWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize {
     final double bottomHeight = bottom?.preferredSize.height ?? 0.0;
-    return Size.fromHeight(InfinityDimens.headerbarHeight + bottomHeight);
+    return Size.fromHeight(
+      InfinityDimens.headerbarHeight +
+          bottomHeight +
+          InfinityDimens.borderThickness,
+    );
   }
 
   @override
@@ -208,7 +212,6 @@ class _IHeaderBarState extends State<IHeaderBar> {
     // If the toolbar is allocated less than toolbarHeight make it
     // appear to scroll upwards within its shrinking container.
     Widget headerBar = Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Flexible(
           child: ConstrainedBox(
