@@ -67,16 +67,14 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IBoundedBox(
-      child: ListView(
-        children: <Widget>[
-          Buttons(),
-          CardsWidget(),
-          ListItemWidget(),
-          ListItemSeparated(),
-          ModalsWidget(),
-        ],
-      ),
+    return ListView(
+      children: <Widget>[
+        Buttons(),
+        CardsWidget(),
+        ListItemWidget(),
+        ListItemSeparated(),
+        ModalsWidget(),
+      ],
     );
   }
 }
@@ -207,39 +205,41 @@ class CardsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        IListItem(title: Text('Cards')),
-        Padding(
-          padding: const EdgeInsets.only(
-            left: InfinityDimens.largePadding,
-            right: InfinityDimens.largePadding,
-            bottom: InfinityDimens.padding,
-          ),
-          child: Row(
-            children: [
-              Expanded(
-                child: SizedBox(
-                  height: 200,
-                  child: ICard(
-                    child: Center(child: Text('Card 1')),
+    return IBoundedBox(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          IListItem(title: Text('Cards')),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: InfinityDimens.largePadding,
+              right: InfinityDimens.largePadding,
+              bottom: InfinityDimens.padding,
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: SizedBox(
+                    height: 200,
+                    child: ICard(
+                      child: Center(child: Text('Card 1')),
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(width: InfinityDimens.largePadding),
-              Expanded(
-                child: SizedBox(
-                  height: 200,
-                  child: ICard(
-                    child: Center(child: Text('Card 2')),
+                const SizedBox(width: InfinityDimens.largePadding),
+                Expanded(
+                  child: SizedBox(
+                    height: 200,
+                    child: ICard(
+                      child: Center(child: Text('Card 2')),
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

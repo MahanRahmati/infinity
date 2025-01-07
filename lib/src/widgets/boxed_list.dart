@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 import '/src/constants/dimens.dart';
+import 'bounded_box.dart';
 import 'card.dart';
 import 'divider.dart';
 import 'list_item.dart';
@@ -108,13 +109,15 @@ class IBoxedList extends StatelessWidget {
       );
     }
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        if (headerWidget != null) headerWidget,
-        if (children != null) ...children!,
-      ],
+    return IBoundedBox(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          if (headerWidget != null) headerWidget,
+          if (children != null) ...children!,
+        ],
+      ),
     );
   }
 }
