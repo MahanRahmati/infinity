@@ -74,6 +74,7 @@ class HomePage extends StatelessWidget {
           CardsWidget(),
           ListItemWidget(),
           ListItemSeparated(),
+          ModalsWidget(),
         ],
       ),
     );
@@ -289,6 +290,50 @@ class ListItemSeparated extends StatelessWidget {
         IListItem(title: const Text('First Item')),
         IListItem(title: const Text('Second Item')),
         IListItem(title: const Text('Third Item')),
+      ],
+    );
+  }
+}
+
+class ModalsWidget extends StatelessWidget {
+  const ModalsWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return IBoxedList(
+      title: const Text('Modals'),
+      children: [
+        SizedBox(
+          width: double.infinity,
+          child: Wrap(
+            alignment: WrapAlignment.center,
+            children: [
+              IButton.text(
+                text: 'Modal',
+                onPressed: () {
+                  showModal(
+                    context: context,
+                    pageListBuilder: (final BuildContext context) {
+                      return <SliverWoltModalSheetPage>[
+                        IModalSheetPage(
+                          hasTopBarLayer: false,
+                          child: IBoxedList(
+                            title: const Text('Items'),
+                            children: [
+                              IListItem(title: const Text('First Item')),
+                              IListItem(title: const Text('Second Item')),
+                              IListItem(title: const Text('Third Item')),
+                            ],
+                          ),
+                        ),
+                      ];
+                    },
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }

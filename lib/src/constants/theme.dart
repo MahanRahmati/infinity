@@ -28,8 +28,10 @@ class InfinityTheme {
       ),
       extensions: const <ThemeExtension<dynamic>>[
         WoltModalSheetThemeData(
+          backgroundColor: InfinityColors.windowLightBackground,
           topBarShadowColor: InfinityColors.transparent,
           topBarElevation: 0,
+          surfaceTintColor: InfinityColors.transparent,
         ),
       ],
     );
@@ -54,8 +56,10 @@ class InfinityTheme {
       ),
       extensions: const <ThemeExtension<dynamic>>[
         WoltModalSheetThemeData(
+          backgroundColor: InfinityColors.windowDarkBackground,
           topBarShadowColor: InfinityColors.transparent,
           topBarElevation: 0,
+          surfaceTintColor: InfinityColors.transparent,
         ),
       ],
     );

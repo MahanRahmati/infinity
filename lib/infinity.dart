@@ -2,6 +2,7 @@
 library;
 
 export 'package:ming_cute_icons/ming_cute_icons.dart';
+export 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
 
 export 'src/constants/colors.dart';
 export 'src/constants/dimens.dart';
@@ -19,5 +20,7 @@ export 'src/widgets/header_bar.dart';
 export 'src/widgets/lazy_indexed_stack.dart';
 export 'src/widgets/list_item.dart';
 export 'src/widgets/list_item_chevron.dart';
+export 'src/widgets/modals/modal_sheet.dart';
+export 'src/widgets/modals/modal_sheet_page.dart';
 export 'src/widgets/status_page.dart';
 export 'src/widgets/tabs.dart';
