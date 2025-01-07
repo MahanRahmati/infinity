@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import '../constants/dimens.dart';
+import '/src/constants/dimens.dart';
 import 'card.dart';
 import 'divider.dart';
 import 'list_item.dart';

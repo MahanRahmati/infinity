@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import '../constants/dimens.dart';
+import '/src/constants/dimens.dart';
 import 'squircle.dart';
 
 /// An application icon widget that follows Infinity's design system.

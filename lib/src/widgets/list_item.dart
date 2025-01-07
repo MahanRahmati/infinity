@@ -3,9 +3,9 @@ import 'dart:math' as math;
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
-import '../constants/colors.dart';
-import '../constants/dimens.dart';
-import '../constants/typography.dart';
+import '/src/constants/colors.dart';
+import '/src/constants/dimens.dart';
+import '/src/constants/typography.dart';
 
 /// A list item widget that follows Infinity's design system.
 class IListItem extends StatelessWidget {

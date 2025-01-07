@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
-import '../constants/colors.dart';
-import '../constants/dimens.dart';
+import '/src/constants/colors.dart';
+import '/src/constants/dimens.dart';
 
 /// A horizontal divider line that follows Infinity's design system.
 class IDivider extends StatelessWidget {

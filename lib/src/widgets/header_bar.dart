@@ -2,9 +2,9 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
-import '../constants/colors.dart';
-import '../constants/dimens.dart';
-import '../constants/typography.dart';
+import '/src/constants/colors.dart';
+import '/src/constants/dimens.dart';
+import '/src/constants/typography.dart';
 import 'back_button.dart';
 
 /// A header bar widget that follows Infinity's design system.

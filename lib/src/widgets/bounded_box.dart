@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import '../constants/dimens.dart';
+import '/src/constants/dimens.dart';
 
 /// A container widget that centers and constrains its child's width and
 /// follows Infinity's design system.
