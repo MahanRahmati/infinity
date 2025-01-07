@@ -43,18 +43,38 @@ class _ExampleHomeState extends State<ExampleHome> {
               selectedIcon: Icon(MingCuteIcons.mgc_home_1_fill),
               label: 'Home',
             ),
+            ITabItem(
+              icon: Icon(MingCuteIcons.mgc_information_line),
+              selectedIcon: Icon(MingCuteIcons.mgc_information_fill),
+              label: 'Status',
+            ),
           ],
         ),
       ),
-      body: IBoundedBox(
-        child: ListView(
-          children: <Widget>[
-            Buttons(),
-            CardsWidget(),
-            ListItemWidget(),
-            ListItemSeparated(),
-          ],
-        ),
+      body: ILazyIndexedStack(
+        index: _selectedIndex,
+        children: [
+          HomePage(),
+          StatusPage(),
+        ],
+      ),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return IBoundedBox(
+      child: ListView(
+        children: <Widget>[
+          Buttons(),
+          CardsWidget(),
+          ListItemWidget(),
+          ListItemSeparated(),
+        ],
       ),
     );
   }
@@ -270,6 +290,21 @@ class ListItemSeparated extends StatelessWidget {
         IListItem(title: const Text('Second Item')),
         IListItem(title: const Text('Third Item')),
       ],
+    );
+  }
+}
+
+class StatusPage extends StatelessWidget {
+  const StatusPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return IBoundedBox(
+      child: IStatusPage(
+        icon: MingCuteIcons.mgc_search_line,
+        title: 'No Results Found',
+        subtitle: 'Try a different search',
+      ),
     );
   }
 }
