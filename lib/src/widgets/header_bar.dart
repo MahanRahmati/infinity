@@ -146,12 +146,14 @@ class _IHeaderBarState extends State<IHeaderBar> {
       const Border(
         bottom: BorderSide(
           color: InfinityColors.transparent,
+          // ignore: avoid_redundant_argument_values
           width: InfinityDimens.borderThickness,
         ),
       ),
       Border(
         bottom: BorderSide(
           color: borderColor,
+          // ignore: avoid_redundant_argument_values
           width: InfinityDimens.borderThickness,
         ),
       ),

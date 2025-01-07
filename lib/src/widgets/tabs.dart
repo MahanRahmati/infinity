@@ -134,6 +134,7 @@ class _ITabItem extends StatelessWidget {
                 ),
                 side: BorderSide(
                   color: InfinityColors.getButtonBorderColor(bgColor, state),
+                  // ignore: avoid_redundant_argument_values
                   width: InfinityDimens.borderThickness,
                 ),
               ),

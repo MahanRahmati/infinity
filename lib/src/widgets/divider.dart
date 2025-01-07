@@ -43,6 +43,7 @@ class IDivider extends StatelessWidget {
             border: Border(
               bottom: BorderSide(
                 color: color ?? InfinityColors.getBorderColor(context),
+                // ignore: avoid_redundant_argument_values
                 width: InfinityDimens.borderThickness,
               ),
             ),
@@ -93,6 +94,7 @@ class IVerticalDivider extends StatelessWidget {
             border: Border(
               left: BorderSide(
                 color: color ?? InfinityColors.getBorderColor(context),
+                // ignore: avoid_redundant_argument_values
                 width: InfinityDimens.borderThickness,
               ),
             ),

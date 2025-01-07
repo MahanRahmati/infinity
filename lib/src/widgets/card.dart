@@ -56,6 +56,7 @@ class ICard extends StatelessWidget {
             borderRadius: BorderRadius.circular(InfinityDimens.borderRadius),
             side: BorderSide(
               color: borderColor,
+              // ignore: avoid_redundant_argument_values
               width: InfinityDimens.borderThickness,
             ),
           ),
