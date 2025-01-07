@@ -130,6 +130,24 @@ class InfinityColors {
     );
   }
 
+  /// Returns a color with opacity based on the [InteractionState].
+  static Color getStateOpacityColor(
+    final BuildContext context,
+    final InteractionState state,
+  ) {
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    final double value = switch (state) {
+      InteractionState.hover => _hover,
+      InteractionState.focused => _focused,
+      InteractionState.pressed => _pressed,
+      InteractionState.disabled => _disabledOpacity,
+    };
+
+    return isDark
+        ? white.withTransparency(value)
+        : black.withTransparency(value);
+  }
+
   /// Calculates the elevation color based on the elevation level.
   static Color getElevationColor(
     final BuildContext context,

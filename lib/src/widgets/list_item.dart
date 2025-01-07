@@ -5,7 +5,9 @@ import 'package:flutter/widgets.dart';
 
 import '/src/constants/colors.dart';
 import '/src/constants/dimens.dart';
+import '/src/constants/interaction_state.dart';
 import '/src/constants/typography.dart';
+import 'interaction.dart';
 
 /// A list item widget that follows Infinity's design system.
 class IListItem extends StatelessWidget {
@@ -15,12 +17,14 @@ class IListItem extends StatelessWidget {
   /// [title] primary content widget.
   /// [subtitle] optional secondary content displayed below the title.
   /// [trailing] optional widget displayed after the title/subtitle.
+  /// [onPressed] optional callback when the user taps on this list item.
   const IListItem({
     super.key,
     this.leading,
     this.title,
     this.subtitle,
     this.trailing,
+    this.onPressed,
   });
 
   /// A widget to display before the title.
@@ -34,6 +38,9 @@ class IListItem extends StatelessWidget {
 
   /// A widget to display after the title.
   final Widget? trailing;
+
+  /// Called when the user taps on this list item.
+  final VoidCallback? onPressed;
 
   @override
   Widget build(final BuildContext context) {
@@ -62,12 +69,31 @@ class IListItem extends StatelessWidget {
     return SafeArea(
       top: false,
       bottom: false,
-      child: _ListItem(
-        leading: leading,
-        title: titleText,
-        subtitle: subtitleText,
-        trailing: trailing,
-        textDirection: textDirection,
+      child: Interaction(
+        onPressed: onPressed,
+        useScale: false,
+        builder: (
+          final BuildContext context,
+          final InteractionState? state,
+        ) {
+          final Color bg = state == null || state == InteractionState.disabled
+              ? InfinityColors.transparent
+              : InfinityColors.getStateOpacityColor(context, state);
+          return Semantics(
+            button: onPressed != null,
+            enabled: state != InteractionState.disabled,
+            child: ColoredBox(
+              color: bg,
+              child: _ListItem(
+                leading: leading,
+                title: titleText,
+                subtitle: subtitleText,
+                trailing: trailing,
+                textDirection: textDirection,
+              ),
+            ),
+          );
+        },
       ),
     );
   }
