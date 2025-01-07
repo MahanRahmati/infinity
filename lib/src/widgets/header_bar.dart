@@ -78,7 +78,9 @@ class _IHeaderBarState extends State<IHeaderBar> {
   }
 
   void _handleScrollNotification(final ScrollNotification notification) {
-    if (notification is ScrollUpdateNotification && notification.depth == 0) {
+    if (notification is ScrollUpdateNotification &&
+        notification.depth == 0 &&
+        notification.metrics.axis == Axis.vertical) {
       final ScrollMetrics metrics = notification.metrics;
       final double oldScrollAnimationValue = _scrollAnimationValue;
       double scrollExtent = 0.0;

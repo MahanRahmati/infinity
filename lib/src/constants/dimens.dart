@@ -38,6 +38,9 @@ class InfinityDimens {
   /// Huge padding - 32.0
   static const double hugePadding = base * 4;
 
+  /// Height for tab bars - 40.0
+  static const double tabbarHeight = base * 5;
+
   /// Height for header bars - 56.0
   static const double headerbarHeight = base * 7;
 

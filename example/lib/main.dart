@@ -18,14 +18,33 @@ class ExampleApp extends StatelessWidget {
   }
 }
 
-class ExampleHome extends StatelessWidget {
+class ExampleHome extends StatefulWidget {
   const ExampleHome({super.key});
 
+  @override
+  State<ExampleHome> createState() => _ExampleHomeState();
+}
+
+class _ExampleHomeState extends State<ExampleHome> {
+  int _selectedIndex = 0;
   @override
   Widget build(final BuildContext context) {
     return Scaffold(
       appBar: IHeaderBar(
         middle: Text('Showcase'),
+        bottom: ITabBar(
+          selectedIndex: _selectedIndex,
+          onDestinationSelected: (index) {
+            setState(() => _selectedIndex = index);
+          },
+          tabs: [
+            ITabItem(
+              icon: Icon(MingCuteIcons.mgc_home_1_line),
+              selectedIcon: Icon(MingCuteIcons.mgc_home_1_fill),
+              label: 'Home',
+            ),
+          ],
+        ),
       ),
       body: IBoundedBox(
         child: ListView(
