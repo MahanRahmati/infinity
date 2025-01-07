@@ -331,6 +331,29 @@ class ModalsWidget extends StatelessWidget {
                   );
                 },
               ),
+              IButton.text(
+                text: 'Dialog Modal',
+                onPressed: () {
+                  showDialogModal(
+                    context: context,
+                    pageListBuilder: (final BuildContext context) {
+                      return <SliverWoltModalSheetPage>[
+                        IModalSheetPage(
+                          hasTopBarLayer: false,
+                          child: IBoxedList(
+                            title: const Text('Items'),
+                            children: [
+                              IListItem(title: const Text('First Item')),
+                              IListItem(title: const Text('Second Item')),
+                              IListItem(title: const Text('Third Item')),
+                            ],
+                          ),
+                        ),
+                      ];
+                    },
+                  );
+                },
+              ),
             ],
           ),
         ),
