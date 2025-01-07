@@ -20,6 +20,7 @@ export 'src/widgets/header_bar.dart';
 export 'src/widgets/lazy_indexed_stack.dart';
 export 'src/widgets/list_item.dart';
 export 'src/widgets/list_item_chevron.dart';
+export 'src/widgets/modals/dialog_header.dart';
 export 'src/widgets/modals/modal_sheet.dart';
 export 'src/widgets/modals/modal_sheet_page.dart';
 export 'src/widgets/status_page.dart';
