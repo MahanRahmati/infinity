@@ -8,11 +8,11 @@ class InfinityDimens {
   /// Base unit for all measurements
   static const double base = 8.0;
 
+  /// Border thickness - 1.0
+  static const double borderThickness = base * 0.125;
+
   /// Tiny padding - 2.0
   static const double tinyPadding = base * 0.25;
-
-  /// Border thickness - 2.0
-  static const double borderThickness = base * 0.125;
 
   /// Small padding - 4.0
   static const double smallPadding = base * 0.5;
