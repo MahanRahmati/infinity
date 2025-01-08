@@ -39,62 +39,130 @@ class _ExampleHomeState extends State<ExampleHome> {
 
   @override
   Widget build(final BuildContext context) {
-    return Scaffold(
-      appBar: IHeaderBar(
-        middle: Text('Showcase'),
-        trailing: [
-          IButton.icon(
-            icon: MingCuteIcons.mgc_information_line,
-            onPressed: () async {
-              final String license = await getLicense();
-              if (!context.mounted) {
-                return;
-              }
-              showAboutDialogModal(
-                context: context,
-                applicationName: 'Showcase',
-                version: '1.0.0',
-                applicationIcon: IApplicationIcon(
-                  Icon(
-                    MingCuteIcons.mgc_presentation_1_line,
-                    size: InfinityDimens.appIconSize,
-                  ),
-                  size: InfinityDimens.appIconSize,
-                ),
-                developers: ['Mahan Rahmati'],
-                website: 'https://github.com/MahanRahmati/infinity',
-                issueUrl: 'https://github.com/MahanRahmati/infinity/issues',
-                license: license,
-              );
-            },
-          ),
-        ],
-        bottom: ITabBar(
+    return IResponsiveScaffold(
+      bottomWidgetBuilder: (
+        final BuildContext context,
+        final ResponsiveStates state,
+      ) {
+        final IBottomTabBar bottomTabBar = IBottomTabBar(
           selectedIndex: _selectedIndex,
-          onDestinationSelected: (index) {
+          onDestinationSelected: (final int index) {
             setState(() => _selectedIndex = index);
           },
-          tabs: [
+          tabs: <ITabItem>[
             ITabItem(
-              icon: Icon(MingCuteIcons.mgc_home_1_line),
-              selectedIcon: Icon(MingCuteIcons.mgc_home_1_fill),
+              icon: const Icon(MingCuteIcons.mgc_home_1_line),
+              selectedIcon: const Icon(MingCuteIcons.mgc_home_1_fill),
               label: 'Home',
             ),
             ITabItem(
-              icon: Icon(MingCuteIcons.mgc_ghost_line),
-              selectedIcon: Icon(MingCuteIcons.mgc_ghost_fill),
+              icon: const Icon(MingCuteIcons.mgc_ghost_line),
+              selectedIcon: const Icon(MingCuteIcons.mgc_ghost_fill),
               label: 'Status',
             ),
           ],
-        ),
-      ),
-      body: ILazyIndexedStack(
-        index: _selectedIndex,
-        children: [
-          HomePage(),
-          StatusPage(),
-        ],
-      ),
+        );
+        return switch (state) {
+          ResponsiveStates.collapsed => bottomTabBar,
+          ResponsiveStates.extended => null,
+          ResponsiveStates.fullExtended => null,
+        };
+      },
+      headerBarBuilder: (
+        final BuildContext context,
+        final ResponsiveStates state,
+      ) {
+        final ITabBar tabBar = ITabBar(
+          selectedIndex: _selectedIndex,
+          onDestinationSelected: (final int index) {
+            setState(() => _selectedIndex = index);
+          },
+          tabs: <ITabItem>[
+            ITabItem(
+              icon: const Icon(MingCuteIcons.mgc_home_1_line),
+              selectedIcon: const Icon(MingCuteIcons.mgc_home_1_fill),
+              label: 'Home',
+            ),
+            ITabItem(
+              icon: const Icon(MingCuteIcons.mgc_ghost_line),
+              selectedIcon: const Icon(MingCuteIcons.mgc_ghost_fill),
+              label: 'Status',
+            ),
+          ],
+        );
+
+        return IHeaderBar(
+          middle: const Text('Showcase'),
+          trailing: <Widget>[
+            IButton.icon(
+              icon: MingCuteIcons.mgc_information_line,
+              onPressed: () async {
+                final String license = await getLicense();
+                if (!context.mounted) {
+                  return;
+                }
+                showAboutDialogModal(
+                  context: context,
+                  applicationName: 'Showcase',
+                  version: '1.0.0',
+                  applicationIcon: IApplicationIcon(
+                    const Icon(
+                      MingCuteIcons.mgc_presentation_1_line,
+                      size: InfinityDimens.appIconSize,
+                    ),
+                    size: InfinityDimens.appIconSize,
+                  ),
+                  developers: <String>['Mahan Rahmati'],
+                  website: 'https://github.com/MahanRahmati/infinity',
+                  issueUrl: 'https://github.com/MahanRahmati/infinity/issues',
+                  license: license,
+                );
+              },
+            ),
+          ],
+          bottom: switch (state) {
+            ResponsiveStates.collapsed => null,
+            ResponsiveStates.extended => tabBar,
+            ResponsiveStates.fullExtended => tabBar,
+          },
+        );
+      },
+      childWidgetBuilder: (
+        final BuildContext context,
+        final ResponsiveStates state,
+      ) {
+        return ILazyIndexedStack(
+          index: _selectedIndex,
+          children: const <Widget>[
+            HomePage(),
+            StatusPage(),
+          ],
+        );
+      },
+      startWidgetBuilder: (
+        final BuildContext context,
+        final ResponsiveStates state,
+      ) {
+        const Widget child = Center(child: Text('Content'));
+
+        return switch (state) {
+          ResponsiveStates.collapsed => null,
+          ResponsiveStates.extended => child,
+          ResponsiveStates.fullExtended => child,
+        };
+      },
+      endWidgetBuilder: (
+        final BuildContext context,
+        final ResponsiveStates state,
+      ) {
+        const Widget child = Center(child: Text('Content'));
+
+        return switch (state) {
+          ResponsiveStates.collapsed => null,
+          ResponsiveStates.extended => null,
+          ResponsiveStates.fullExtended => child,
+        };
+      },
     );
   }
 }
@@ -103,9 +171,9 @@ class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return ListView(
-      children: <Widget>[
+      children: const <Widget>[
         Buttons(),
         CardsWidget(),
         ListItemWidget(),
@@ -120,13 +188,13 @@ class Buttons extends StatelessWidget {
   const Buttons({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return IBoxedList(
       title: const Text('Buttons'),
-      children: [
+      children: <Widget>[
         Wrap(
           alignment: WrapAlignment.center,
-          children: [
+          children: <Widget>[
             IButton.text(
               onPressed: () {},
               text: 'Primary',
@@ -153,7 +221,7 @@ class Buttons extends StatelessWidget {
         ),
         Wrap(
           alignment: WrapAlignment.center,
-          children: [
+          children: <Widget>[
             IButton.icon(
               onPressed: () {},
               icon: MingCuteIcons.mgc_star_line,
@@ -178,16 +246,16 @@ class Buttons extends StatelessWidget {
             ),
           ],
         ),
-        Wrap(
+        const Wrap(
           alignment: WrapAlignment.center,
-          children: [
+          children: <Widget>[
             IBackButton(),
             ICloseButton(),
           ],
         ),
         Wrap(
           alignment: WrapAlignment.center,
-          children: [
+          children: <Widget>[
             IButton.compound(
               text: 'Text Only',
               onPressed: () {},
@@ -212,22 +280,22 @@ class Buttons extends StatelessWidget {
         ),
         Wrap(
           alignment: WrapAlignment.center,
-          children: [
+          children: <Widget>[
             IButton.pill(
-              child: Text('Pill Button'),
+              child: const Text('Pill Button'),
               onPressed: () {},
             ),
-            IButton.pill(
+            const IButton.pill(
               child: Text('Disabled Pill'),
             ),
             IButton.pill(
               statusType: StatusType.success,
-              child: Text('Success Pill'),
+              child: const Text('Success Pill'),
               onPressed: () {},
             ),
             IButton.pill(
               statusType: StatusType.error,
-              child: Text('Error Pill'),
+              child: const Text('Error Pill'),
               onPressed: () {},
             ),
           ],
@@ -241,20 +309,20 @@ class CardsWidget extends StatelessWidget {
   const CardsWidget({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return IBoundedBox(
+  Widget build(final BuildContext context) {
+    return const IBoundedBox(
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: [
+        children: <Widget>[
           IListItem(title: Text('Cards')),
           Padding(
-            padding: const EdgeInsets.only(
+            padding: EdgeInsets.only(
               left: InfinityDimens.largePadding,
               right: InfinityDimens.largePadding,
               bottom: InfinityDimens.padding,
             ),
             child: Row(
-              children: [
+              children: <Widget>[
                 Expanded(
                   child: SizedBox(
                     height: 200,
@@ -263,7 +331,7 @@ class CardsWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(width: InfinityDimens.largePadding),
+                SizedBox(width: InfinityDimens.largePadding),
                 Expanded(
                   child: SizedBox(
                     height: 200,
@@ -285,30 +353,30 @@ class ListItemWidget extends StatelessWidget {
   const ListItemWidget({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return IBoxedList(
       title: const Text('List Item'),
-      children: [
+      children: const <Widget>[
         IListItem(
-          title: const Text('One-line'),
+          title: Text('One-line'),
         ),
         IListItem(
           leading: Icon(MingCuteIcons.mgc_star_line),
-          title: const Text('One-line with leading'),
+          title: Text('One-line with leading'),
         ),
         IListItem(
-          title: const Text('One-line with trailing'),
+          title: Text('One-line with trailing'),
           trailing: Icon(MingCuteIcons.mgc_more_1_line),
         ),
         IListItem(
           leading: Icon(MingCuteIcons.mgc_star_line),
-          title: const Text('One-line with both leading and trailing'),
+          title: Text('One-line with both leading and trailing'),
           trailing: Icon(MingCuteIcons.mgc_more_1_line),
         ),
         IListItem(
           leading: Icon(MingCuteIcons.mgc_star_line),
-          title: const Text('Two-line'),
-          subtitle: const Text('Here is a subtitle'),
+          title: Text('Two-line'),
+          subtitle: Text('Here is a subtitle'),
           trailing: Icon(MingCuteIcons.mgc_more_1_line),
         ),
       ],
@@ -320,13 +388,13 @@ class ListItemSeparated extends StatelessWidget {
   const ListItemSeparated({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return IBoxedList.separated(
       title: const Text('Separated Items'),
-      children: [
-        IListItem(title: const Text('First Item')),
-        IListItem(title: const Text('Second Item')),
-        IListItem(title: const Text('Third Item')),
+      children: const <Widget>[
+        IListItem(title: Text('First Item')),
+        IListItem(title: Text('Second Item')),
+        IListItem(title: Text('Third Item')),
       ],
     );
   }
@@ -336,15 +404,15 @@ class ModalsWidget extends StatelessWidget {
   const ModalsWidget({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return IBoxedList(
       title: const Text('Modals'),
-      children: [
+      children: <Widget>[
         SizedBox(
           width: double.infinity,
           child: Wrap(
             alignment: WrapAlignment.center,
-            children: [
+            children: <Widget>[
               IButton.text(
                 text: 'Modal',
                 onPressed: () {
@@ -356,10 +424,10 @@ class ModalsWidget extends StatelessWidget {
                           hasTopBarLayer: false,
                           child: IBoxedList(
                             title: const Text('Items'),
-                            children: [
-                              IListItem(title: const Text('First Item')),
-                              IListItem(title: const Text('Second Item')),
-                              IListItem(title: const Text('Third Item')),
+                            children: const <Widget>[
+                              IListItem(title: Text('First Item')),
+                              IListItem(title: Text('Second Item')),
+                              IListItem(title: Text('Third Item')),
                             ],
                           ),
                         ),
@@ -379,10 +447,10 @@ class ModalsWidget extends StatelessWidget {
                           hasTopBarLayer: false,
                           child: IBoxedList(
                             title: const Text('Items'),
-                            children: [
-                              IListItem(title: const Text('First Item')),
-                              IListItem(title: const Text('Second Item')),
-                              IListItem(title: const Text('Third Item')),
+                            children: const <Widget>[
+                              IListItem(title: Text('First Item')),
+                              IListItem(title: Text('Second Item')),
+                              IListItem(title: Text('Third Item')),
                             ],
                           ),
                         ),
@@ -403,8 +471,8 @@ class StatusPage extends StatelessWidget {
   const StatusPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return IBoundedBox(
+  Widget build(final BuildContext context) {
+    return const IBoundedBox(
       child: IStatusPage(
         icon: MingCuteIcons.mgc_search_line,
         title: 'No Results Found',

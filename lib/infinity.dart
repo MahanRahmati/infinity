@@ -23,5 +23,6 @@ export 'src/widgets/list_item_chevron.dart';
 export 'src/widgets/modals/dialog_header.dart';
 export 'src/widgets/modals/modal_sheet.dart';
 export 'src/widgets/modals/modal_sheet_page.dart';
+export 'src/widgets/responsive/responsive_scaffold.dart';
 export 'src/widgets/status_page.dart';
 export 'src/widgets/tabs.dart';
