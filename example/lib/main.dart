@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:infinity/infinity.dart';
 
 void main() {
@@ -27,11 +28,47 @@ class ExampleHome extends StatefulWidget {
 
 class _ExampleHomeState extends State<ExampleHome> {
   int _selectedIndex = 0;
+
+  static Future<String> getLicense() async {
+    try {
+      return await rootBundle.loadString('LICENSE');
+    } catch (e) {
+      return '';
+    }
+  }
+
   @override
   Widget build(final BuildContext context) {
     return Scaffold(
       appBar: IHeaderBar(
         middle: Text('Showcase'),
+        trailing: [
+          IButton.icon(
+            icon: MingCuteIcons.mgc_information_line,
+            onPressed: () async {
+              final String license = await getLicense();
+              if (!context.mounted) {
+                return;
+              }
+              showAboutDialogModal(
+                context: context,
+                applicationName: 'Showcase',
+                version: '1.0.0',
+                applicationIcon: IApplicationIcon(
+                  Icon(
+                    MingCuteIcons.mgc_presentation_1_line,
+                    size: InfinityDimens.appIconSize,
+                  ),
+                  size: InfinityDimens.appIconSize,
+                ),
+                developers: ['Mahan Rahmati'],
+                website: 'https://github.com/MahanRahmati/infinity',
+                issueUrl: 'https://github.com/MahanRahmati/infinity/issues',
+                license: license,
+              );
+            },
+          ),
+        ],
         bottom: ITabBar(
           selectedIndex: _selectedIndex,
           onDestinationSelected: (index) {
@@ -44,8 +81,8 @@ class _ExampleHomeState extends State<ExampleHome> {
               label: 'Home',
             ),
             ITabItem(
-              icon: Icon(MingCuteIcons.mgc_information_line),
-              selectedIcon: Icon(MingCuteIcons.mgc_information_fill),
+              icon: Icon(MingCuteIcons.mgc_ghost_line),
+              selectedIcon: Icon(MingCuteIcons.mgc_ghost_fill),
               label: 'Status',
             ),
           ],
