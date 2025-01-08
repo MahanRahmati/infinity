@@ -12,6 +12,7 @@ class ExampleApp extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: InfinityTheme.light(),
       darkTheme: InfinityTheme.dark(),
       home: const ExampleHome(),
