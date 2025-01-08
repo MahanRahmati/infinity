@@ -92,6 +92,7 @@ class _ResponsiveSideWidgetState extends State<ResponsiveSideWidget> {
                     context,
                     BackgroundType.sidebar,
                   ),
+                  borderColor: InfinityColors.getBorderColor(context),
                   padding: EdgeInsetsDirectional.only(
                     start: widget.position == ResponsiveSideWidgetPosition.end
                         ? 0
