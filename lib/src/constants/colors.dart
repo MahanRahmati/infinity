@@ -69,7 +69,7 @@ class InfinityColors {
   static const Color borderLightBackground = Color(0xFFE9E9E9);
 
   /// Border color for dark theme
-  static const Color borderDarkBackground = Color(0xFF171717);
+  static const Color borderDarkBackground = Color(0xFF191919);
 
   /// Destructive/error color for light theme
   static const Color destructiveLight = Color(0xFFC30000);
