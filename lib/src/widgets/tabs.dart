@@ -85,6 +85,92 @@ class ITabBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
+/// A bottom tab bar widget that follows Infinity's design system.
+class IBottomTabBar extends StatelessWidget {
+  /// Creates an Infinity bottom tab bar.
+  ///
+  /// [selectedIndex] The currently selected tab index.
+  /// [tabs] List of tab items to display.
+  /// [onDestinationSelected] Callback when a tab is selected.
+  const IBottomTabBar({
+    super.key,
+    this.selectedIndex = 0,
+    required this.tabs,
+    this.onDestinationSelected,
+  });
+
+  /// The index of the currently selected tab.
+  final int selectedIndex;
+
+  /// The list of tab items to display.
+  final List<ITabItem> tabs;
+
+  /// Called when a tab is selected.
+  final ValueChanged<int>? onDestinationSelected;
+
+  @override
+  Widget build(final BuildContext context) {
+    return SizedBox(
+      height: InfinityDimens.tabbarHeight +
+          (InfinityDimens.padding * 2) +
+          InfinityDimens.borderThickness,
+      child: ColoredBox(
+        color: InfinityColors.getBackgroundColor(
+          context,
+          BackgroundType.headerbar,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            SizedBox(
+              width: double.infinity,
+              height: InfinityDimens.borderThickness,
+              child: ColoredBox(color: InfinityColors.getBorderColor(context)),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: InfinityDimens.padding,
+              ),
+              child: LayoutBuilder(
+                builder: (
+                  final BuildContext context,
+                  final BoxConstraints constraints,
+                ) {
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: InfinityDimens.smallPadding,
+                    ),
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        minWidth: constraints.maxWidth -
+                            (InfinityDimens.smallPadding * 2),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          for (int i = 0; i < tabs.length; i++)
+                            _ITabItem(
+                              icon: tabs[i].icon,
+                              selectedIcon: tabs[i].selectedIcon,
+                              label: tabs[i].label,
+                              isSelected: selectedIndex == i,
+                              onTap: () => onDestinationSelected?.call(i),
+                            ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class _ITabItem extends StatelessWidget {
   const _ITabItem({
     required this.icon,
