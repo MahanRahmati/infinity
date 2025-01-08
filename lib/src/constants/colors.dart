@@ -89,6 +89,12 @@ class InfinityColors {
   /// Warning color for dark theme
   static const Color warningDark = Color(0xFFffc252);
 
+  /// Modal barrier color for light theme
+  static const Color modalBarrierLight = Color(0x2B000000);
+
+  /// Modal barrier color for dark theme
+  static const Color modalBarrierDark = Color(0x7F000000);
+
   /// Returns the appropriate background color for the [BackgroundType].
   static Color getBackgroundColor(
     final BuildContext context,

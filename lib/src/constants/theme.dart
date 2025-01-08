@@ -32,6 +32,7 @@ class InfinityTheme {
           topBarShadowColor: InfinityColors.transparent,
           topBarElevation: 0,
           surfaceTintColor: InfinityColors.transparent,
+          modalBarrierColor: InfinityColors.modalBarrierLight,
         ),
       ],
     );
@@ -60,6 +61,7 @@ class InfinityTheme {
           topBarShadowColor: InfinityColors.transparent,
           topBarElevation: 0,
           surfaceTintColor: InfinityColors.transparent,
+          modalBarrierColor: InfinityColors.modalBarrierDark,
         ),
       ],
     );
