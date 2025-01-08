@@ -60,7 +60,7 @@ class InfinityColors {
   static const Color cardDarkBackground = Color(0xFF363636);
 
   /// Foreground color for light theme
-  static const Color foregroundLightColor = black;
+  static const Color foregroundLightColor = Color(0xFF323232);
 
   /// Foreground color for dark theme
   static const Color foregroundDarkColor = white;
