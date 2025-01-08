@@ -15,6 +15,7 @@ class ICard extends StatelessWidget {
   const ICard({
     super.key,
     this.backgroundColor,
+    this.borderColor,
     this.padding = EdgeInsets.zero,
     this.margin = EdgeInsets.zero,
     this.child,
@@ -22,6 +23,9 @@ class ICard extends StatelessWidget {
 
   /// The background color of the card.
   final Color? backgroundColor;
+
+  /// The border color of the card.
+  final Color? borderColor;
 
   /// The padding around the card's outer edge.
   final EdgeInsetsGeometry padding;
@@ -43,10 +47,11 @@ class ICard extends StatelessWidget {
           context,
           BackgroundType.card,
         );
-    final Color borderColor = InfinityColors.getBorderColor(
-      context,
-      color: backgroundColor,
-    );
+    final Color bColor = borderColor ??
+        InfinityColors.getBorderColor(
+          context,
+          color: backgroundColor,
+        );
     return Padding(
       padding: padding,
       child: DecoratedBox(
@@ -55,7 +60,7 @@ class ICard extends StatelessWidget {
           shape: SmoothRectangleBorder(
             borderRadius: BorderRadius.circular(InfinityDimens.borderRadius),
             side: BorderSide(
-              color: borderColor,
+              color: bColor,
               // ignore: avoid_redundant_argument_values
               width: InfinityDimens.borderThickness,
             ),
