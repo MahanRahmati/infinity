@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:infinity_widgets/infinity_widgets.dart';
 
 import 'bounded_page.dart';
+import 'welcome_page.dart';
 
 void main() {
   runApp(const ExampleApp());
@@ -54,20 +55,20 @@ class _ExampleHomeState extends State<ExampleHome> {
           },
           tabs: <ITabItem>[
             ITabItem(
-              icon: const Icon(MingCuteIcons.mgc_home_1_line),
-              selectedIcon: const Icon(MingCuteIcons.mgc_home_1_fill),
-              label: 'Home',
-            ),
-            ITabItem(
-              icon: const Icon(MingCuteIcons.mgc_ghost_line),
-              selectedIcon: const Icon(MingCuteIcons.mgc_ghost_fill),
-              label: 'Status',
+              icon: const Icon(MingCuteIcons.mgc_presentation_1_line),
+              selectedIcon: const Icon(MingCuteIcons.mgc_presentation_1_fill),
+              label: 'Welcome',
             ),
             ITabItem(
               icon: const Icon(MingCuteIcons.mgc_spacing_horizontal_line),
               selectedIcon:
                   const Icon(MingCuteIcons.mgc_spacing_horizontal_fill),
               label: 'Bounded',
+            ),
+            ITabItem(
+              icon: const Icon(MingCuteIcons.mgc_home_1_line),
+              selectedIcon: const Icon(MingCuteIcons.mgc_home_1_fill),
+              label: 'Home',
             ),
           ],
         );
@@ -115,9 +116,9 @@ class _ExampleHomeState extends State<ExampleHome> {
         return ILazyIndexedStack(
           index: _selectedIndex,
           children: const <Widget>[
-            HomePage(),
-            StatusPage(),
+            WelcomePage(),
             BoundedPage(),
+            HomePage(),
           ],
         );
       },
@@ -156,20 +157,20 @@ class _ExampleHomeState extends State<ExampleHome> {
           },
           tabs: <ITabItem>[
             ITabItem(
-              icon: const Icon(MingCuteIcons.mgc_home_1_line),
-              selectedIcon: const Icon(MingCuteIcons.mgc_home_1_fill),
-              label: 'Home',
-            ),
-            ITabItem(
-              icon: const Icon(MingCuteIcons.mgc_ghost_line),
-              selectedIcon: const Icon(MingCuteIcons.mgc_ghost_fill),
-              label: 'Status',
+              icon: const Icon(MingCuteIcons.mgc_presentation_1_line),
+              selectedIcon: const Icon(MingCuteIcons.mgc_presentation_1_fill),
+              label: 'Welcome',
             ),
             ITabItem(
               icon: const Icon(MingCuteIcons.mgc_spacing_horizontal_line),
               selectedIcon:
                   const Icon(MingCuteIcons.mgc_spacing_horizontal_fill),
               label: 'Bounded',
+            ),
+            ITabItem(
+              icon: const Icon(MingCuteIcons.mgc_home_1_line),
+              selectedIcon: const Icon(MingCuteIcons.mgc_home_1_fill),
+              label: 'Home',
             ),
           ],
         );
@@ -505,19 +506,6 @@ class ModalsWidget extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class StatusPage extends StatelessWidget {
-  const StatusPage({super.key});
-
-  @override
-  Widget build(final BuildContext context) {
-    return const IStatusPage(
-      icon: MingCuteIcons.mgc_search_line,
-      title: 'No Results Found',
-      subtitle: 'Try a different search',
     );
   }
 }
