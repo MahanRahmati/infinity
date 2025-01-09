@@ -30,34 +30,39 @@ class IStatusPage extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          if (icon != null) ...<Widget>[
-            Icon(
-              icon,
-              size: InfinityDimens.statusPageIconSize,
-              color: InfinityColors.getForegroundColor(context).dimmed(),
-            ),
-            const SizedBox(height: InfinityDimens.largePadding),
-          ],
-          if (title != null) ...<Widget>[
-            Text(
-              title!,
-              style: InfinityTypography.title2.copyWith(
-                color: InfinityColors.getForegroundColor(context),
-              ),
-            ),
-            const SizedBox(height: InfinityDimens.padding),
-          ],
-          if (subtitle != null)
-            Text(
-              subtitle!,
-              style: InfinityTypography.caption.copyWith(
+      child: Padding(
+        padding: const EdgeInsets.all(InfinityDimens.largePadding),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            if (icon != null) ...<Widget>[
+              Icon(
+                icon,
+                size: InfinityDimens.statusPageIconSize,
                 color: InfinityColors.getForegroundColor(context).dimmed(),
               ),
-            ),
-        ],
+              const SizedBox(height: InfinityDimens.largePadding),
+            ],
+            if (title != null) ...<Widget>[
+              Text(
+                title!,
+                style: InfinityTypography.title2.copyWith(
+                  color: InfinityColors.getForegroundColor(context),
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: InfinityDimens.padding),
+            ],
+            if (subtitle != null)
+              Text(
+                subtitle!,
+                style: InfinityTypography.caption.copyWith(
+                  color: InfinityColors.getForegroundColor(context).dimmed(),
+                ),
+                textAlign: TextAlign.center,
+              ),
+          ],
+        ),
       ),
     );
   }
