@@ -1,4 +1,5 @@
-///
+/// A refined widget toolkit delivering production-ready UI elements for modern
+/// application development.
 library;
 
 export 'package:ming_cute_icons/ming_cute_icons.dart';
