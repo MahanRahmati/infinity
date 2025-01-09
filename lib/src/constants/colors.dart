@@ -154,27 +154,9 @@ class InfinityColors {
         : black.withTransparency(value);
   }
 
-  /// Calculates the elevation color based on the elevation level.
-  static Color getElevationColor(
-    final BuildContext context,
-    final int level,
-  ) {
-    final bool isDark = Theme.of(context).brightness == Brightness.dark;
-    // [windowDarkBackground] and [windowLightBackground]
-    final int baseValue = isDark ? 0x24 : 0xFA;
-    const int step = 20;
-    final int diff = level * step;
-    final int newValue = isDark ? baseValue + diff : baseValue - diff;
-    return Color(0xFF000000 | (newValue << 16) | (newValue << 8) | newValue);
-  }
-
   /// Returns the foreground color.
-  static Color getForegroundColor(
-    final BuildContext context, {
-    final Brightness? brightness,
-  }) {
-    final bool isDark =
-        (brightness ?? Theme.of(context).brightness) == Brightness.dark;
+  static Color getForegroundColor(final BuildContext context) {
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
     return isDark ? foregroundDarkColor : foregroundLightColor;
   }
 
@@ -196,7 +178,8 @@ class InfinityColors {
 
   /// Returns the button background color.
   static Color getButtonBackgroundColor(
-    final BuildContext context, {
+    final BuildContext context,
+    final InteractionState? state, {
     final int? elavation,
     final Color? color,
   }) {
@@ -206,12 +189,30 @@ class InfinityColors {
           ? color.withTransparency(0.36)
           : color.withTransparency(0.12);
     }
-    if (elavation == null) {
-      return isDark
-          ? getRgbColor(255, 255, 255, 0.12)
-          : getRgbColor(0, 0, 6, 0.12);
+    if (isDark) {
+      const int base = 25;
+      final int step = 11 + (elavation ?? 0);
+      final int value = switch (state) {
+        InteractionState.hover => base + (step * 1),
+        InteractionState.focused => base + (step * 2),
+        InteractionState.pressed => base + (step * 3),
+        InteractionState.disabled => base + (step * -1),
+        null => base,
+      };
+      return white.withAlpha(value);
     }
-    return getElevationColor(context, elavation);
+
+    const int base = 20;
+    final int step = 8 + (elavation ?? 0);
+    final int value = switch (state) {
+      InteractionState.hover => base + (step * 1),
+      InteractionState.focused => base + (step * 2),
+      InteractionState.pressed => base + (step * 3),
+      InteractionState.disabled => base + (step * -1),
+      null => base,
+    };
+
+    return black.withAlpha(value);
   }
 
   /// Returns the button border color.
@@ -235,17 +236,6 @@ class InfinityColors {
       return color.withTransparency(_borderOpacity);
     }
     return isDark ? borderDarkBackground : borderLightBackground;
-  }
-
-  /// Create a color from RGB values.
-  static Color getRgbColor(
-    final int r,
-    final int g,
-    final int b,
-    final double opacity,
-  ) {
-    final int alpha = (opacity * 255).round();
-    return Color.fromARGB(alpha, r, g, b);
   }
 }
 

@@ -191,8 +191,10 @@ class _ITabItem extends StatelessWidget {
     return Interaction(
       onPressed: onTap,
       builder: (final BuildContext context, final InteractionState? state) {
-        final Color bgColor =
-            InfinityColors.getButtonBackgroundColor(context, elavation: 1);
+        final Color bgColor = InfinityColors.getButtonBackgroundColor(
+          context,
+          state,
+        );
         final Color fgColor = InfinityColors.getForegroundColor(context);
 
         final Color bg = state == null
