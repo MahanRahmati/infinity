@@ -51,6 +51,7 @@ class IResponsiveScaffold extends StatefulWidget {
     this.endWidgetBuilder,
     this.bottomWidgetBuilder,
     this.backgroundColor,
+    this.useSafeArea = false,
   });
 
   /// Builder for the header bar that adapts to different responsive states
@@ -70,6 +71,9 @@ class IResponsiveScaffold extends StatefulWidget {
 
   /// Background color of the scaffold
   final Color? backgroundColor;
+
+  /// Whether to use safe area for the scaffold
+  final bool useSafeArea;
 
   @override
   State<IResponsiveScaffold> createState() => _IResponsiveScaffoldState();
@@ -156,32 +160,35 @@ class _IResponsiveScaffoldState extends State<IResponsiveScaffold>
     return AnimatedBuilder(
       animation: _controller,
       builder: (final BuildContext context, final Widget? child) {
+        final Row body = Row(
+          children: <Widget>[
+            if (widget.startWidgetBuilder != null)
+              ResponsiveSideWidget(
+                animation: _startWidgetAnimation,
+                child: widget.startWidgetBuilder!(context, _getState()),
+              ),
+            Expanded(
+              child: widget.childWidgetBuilder?.call(context, _getState()) ??
+                  const SizedBox(),
+            ),
+            if (widget.endWidgetBuilder != null)
+              ResponsiveSideWidget(
+                animation: _endWidgetAnimation,
+                position: ResponsiveSideWidgetPosition.end,
+                child: widget.endWidgetBuilder!(context, _getState()),
+              ),
+          ],
+        );
         return Scaffold(
           backgroundColor: widget.backgroundColor,
           appBar: widget.headerBarBuilder?.call(context, _getState()),
-          body: Row(
-            children: <Widget>[
-              if (widget.startWidgetBuilder != null)
-                ResponsiveSideWidget(
-                  animation: _startWidgetAnimation,
-                  child: widget.startWidgetBuilder!(context, _getState()),
-                ),
-              Expanded(
-                child: widget.childWidgetBuilder?.call(context, _getState()) ??
-                    const SizedBox(),
-              ),
-              if (widget.endWidgetBuilder != null)
-                ResponsiveSideWidget(
-                  animation: _endWidgetAnimation,
-                  position: ResponsiveSideWidgetPosition.end,
-                  child: widget.endWidgetBuilder!(context, _getState()),
-                ),
-            ],
-          ),
-          bottomNavigationBar: ResponsiveBottomWidget(
-            animation: _bottomWidgetAnimation,
-            child: widget.bottomWidgetBuilder?.call(context, _getState()),
-          ),
+          body: widget.useSafeArea ? SafeArea(child: body) : body,
+          bottomNavigationBar: widget.bottomWidgetBuilder != null
+              ? ResponsiveBottomWidget(
+                  animation: _bottomWidgetAnimation,
+                  child: widget.bottomWidgetBuilder?.call(context, _getState()),
+                )
+              : null,
         );
       },
     );

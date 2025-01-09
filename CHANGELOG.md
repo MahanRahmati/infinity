@@ -1,3 +1,7 @@
+## 1.0.3
+
+- Added SafeArea to ResponsiveScaffold
+
 ## 1.0.2
 
 - Added keyboard activation animation to Interaction
