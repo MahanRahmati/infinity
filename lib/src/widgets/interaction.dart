@@ -84,6 +84,7 @@ class Interaction extends StatefulWidget {
 class _InteractionState extends State<Interaction> {
   late bool _isFocused;
   late bool _isHovered;
+  bool _isKeyboardActivated = false;
 
   @override
   void initState() {
@@ -114,8 +115,14 @@ class _InteractionState extends State<Interaction> {
 
   void _handleTap([final Intent? _]) {
     if (widget.onPressed != null) {
+      setState(() => _isKeyboardActivated = true);
       widget.onPressed!();
       context.findRenderObject()!.sendSemanticsEvent(const TapSemanticEvent());
+      Future<void>.delayed(_scaleDuration, () {
+        if (mounted) {
+          setState(() => _isKeyboardActivated = false);
+        }
+      });
     }
   }
 
@@ -170,7 +177,7 @@ class _InteractionState extends State<Interaction> {
           onLongPress: widget.onLongPress,
           child: AnimatedScale(
             scale: widget.useScale
-                ? _isPressed
+                ? (_isPressed || _isKeyboardActivated)
                     ? _scale
                     : 1.0
                 : 1.0,
