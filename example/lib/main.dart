@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:infinity_widgets/infinity_widgets.dart';
 
 import 'bounded_page.dart';
+import 'lists_page.dart';
 import 'welcome_page.dart';
 
 void main() {
@@ -66,6 +67,11 @@ class _ExampleHomeState extends State<ExampleHome> {
               label: 'Bounded',
             ),
             ITabItem(
+              icon: const Icon(MingCuteIcons.mgc_rows_4_line),
+              selectedIcon: const Icon(MingCuteIcons.mgc_rows_4_fill),
+              label: 'Rows',
+            ),
+            ITabItem(
               icon: const Icon(MingCuteIcons.mgc_home_1_line),
               selectedIcon: const Icon(MingCuteIcons.mgc_home_1_fill),
               label: 'Home',
@@ -118,33 +124,10 @@ class _ExampleHomeState extends State<ExampleHome> {
           children: const <Widget>[
             WelcomePage(),
             BoundedPage(),
+            ListsPage(),
             HomePage(),
           ],
         );
-      },
-      startWidgetBuilder: (
-        final BuildContext context,
-        final ResponsiveStates state,
-      ) {
-        const Widget child = Center(child: Text('Content'));
-
-        return switch (state) {
-          ResponsiveStates.collapsed => null,
-          ResponsiveStates.extended => child,
-          ResponsiveStates.fullExtended => child,
-        };
-      },
-      endWidgetBuilder: (
-        final BuildContext context,
-        final ResponsiveStates state,
-      ) {
-        const Widget child = Center(child: Text('Content'));
-
-        return switch (state) {
-          ResponsiveStates.collapsed => null,
-          ResponsiveStates.extended => null,
-          ResponsiveStates.fullExtended => child,
-        };
       },
       bottomWidgetBuilder: (
         final BuildContext context,
@@ -166,6 +149,11 @@ class _ExampleHomeState extends State<ExampleHome> {
               selectedIcon:
                   const Icon(MingCuteIcons.mgc_spacing_horizontal_fill),
               label: 'Bounded',
+            ),
+            ITabItem(
+              icon: const Icon(MingCuteIcons.mgc_rows_4_line),
+              selectedIcon: const Icon(MingCuteIcons.mgc_rows_4_fill),
+              label: 'Rows',
             ),
             ITabItem(
               icon: const Icon(MingCuteIcons.mgc_home_1_line),
@@ -193,8 +181,6 @@ class HomePage extends StatelessWidget {
       children: const <Widget>[
         Buttons(),
         CardsWidget(),
-        ListItemWidget(),
-        ListItemSeparated(),
         ModalsWidget(),
       ],
     );
@@ -362,57 +348,6 @@ class CardsWidget extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class ListItemWidget extends StatelessWidget {
-  const ListItemWidget({super.key});
-
-  @override
-  Widget build(final BuildContext context) {
-    return IBoxedList(
-      title: const Text('List Item'),
-      children: const <Widget>[
-        IListItem(
-          title: Text('One-line'),
-        ),
-        IListItem(
-          leading: Icon(MingCuteIcons.mgc_star_line),
-          title: Text('One-line with leading'),
-        ),
-        IListItem(
-          title: Text('One-line with trailing'),
-          trailing: Icon(MingCuteIcons.mgc_more_1_line),
-        ),
-        IListItem(
-          leading: Icon(MingCuteIcons.mgc_star_line),
-          title: Text('One-line with both leading and trailing'),
-          trailing: Icon(MingCuteIcons.mgc_more_1_line),
-        ),
-        IListItem(
-          leading: Icon(MingCuteIcons.mgc_star_line),
-          title: Text('Two-line'),
-          subtitle: Text('Here is a subtitle'),
-          trailing: Icon(MingCuteIcons.mgc_more_1_line),
-        ),
-      ],
-    );
-  }
-}
-
-class ListItemSeparated extends StatelessWidget {
-  const ListItemSeparated({super.key});
-
-  @override
-  Widget build(final BuildContext context) {
-    return IBoxedList.separated(
-      title: const Text('Separated Items'),
-      children: const <Widget>[
-        IListItem(title: Text('First Item')),
-        IListItem(title: Text('Second Item')),
-        IListItem(title: Text('Third Item')),
-      ],
     );
   }
 }
