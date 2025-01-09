@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:infinity_widgets/infinity_widgets.dart';
 
+import 'bounded_page.dart';
+
 void main() {
   runApp(const ExampleApp());
 }
@@ -61,6 +63,12 @@ class _ExampleHomeState extends State<ExampleHome> {
               selectedIcon: const Icon(MingCuteIcons.mgc_ghost_fill),
               label: 'Status',
             ),
+            ITabItem(
+              icon: const Icon(MingCuteIcons.mgc_spacing_horizontal_line),
+              selectedIcon:
+                  const Icon(MingCuteIcons.mgc_spacing_horizontal_fill),
+              label: 'Bounded',
+            ),
           ],
         );
 
@@ -109,6 +117,7 @@ class _ExampleHomeState extends State<ExampleHome> {
           children: const <Widget>[
             HomePage(),
             StatusPage(),
+            BoundedPage(),
           ],
         );
       },
@@ -155,6 +164,12 @@ class _ExampleHomeState extends State<ExampleHome> {
               icon: const Icon(MingCuteIcons.mgc_ghost_line),
               selectedIcon: const Icon(MingCuteIcons.mgc_ghost_fill),
               label: 'Status',
+            ),
+            ITabItem(
+              icon: const Icon(MingCuteIcons.mgc_spacing_horizontal_line),
+              selectedIcon:
+                  const Icon(MingCuteIcons.mgc_spacing_horizontal_fill),
+              label: 'Bounded',
             ),
           ],
         );
@@ -499,12 +514,10 @@ class StatusPage extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    return const IBoundedBox(
-      child: IStatusPage(
-        icon: MingCuteIcons.mgc_search_line,
-        title: 'No Results Found',
-        subtitle: 'Try a different search',
-      ),
+    return const IStatusPage(
+      icon: MingCuteIcons.mgc_search_line,
+      title: 'No Results Found',
+      subtitle: 'Try a different search',
     );
   }
 }
