@@ -155,8 +155,13 @@ class InfinityColors {
   }
 
   /// Returns the foreground color.
-  static Color getForegroundColor(final BuildContext context) {
-    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+  static Color getForegroundColor(
+    final BuildContext context, {
+    final Color? color,
+  }) {
+    final Brightness brightness =
+        color?.estimateBrightness() ?? Theme.of(context).brightness;
+    final bool isDark = brightness == Brightness.dark;
     return isDark ? foregroundDarkColor : foregroundLightColor;
   }
 
