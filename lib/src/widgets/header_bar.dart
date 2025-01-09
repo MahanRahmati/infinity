@@ -25,6 +25,7 @@ class IHeaderBar extends StatefulWidget implements PreferredSizeWidget {
     this.middle,
     this.trailing,
     this.bottom,
+    this.primary = true,
   });
 
   /// Widget displayed at the start of the header bar.
@@ -41,6 +42,9 @@ class IHeaderBar extends StatefulWidget implements PreferredSizeWidget {
 
   /// Widget displayed below the main header bar content.
   final PreferredSizeWidget? bottom;
+
+  /// Whether this header bar is part of the primary content of the app.
+  final bool primary;
 
   @override
   Size get preferredSize {
@@ -228,6 +232,13 @@ class _IHeaderBarState extends State<IHeaderBar> {
         if (widget.bottom != null) widget.bottom!,
       ],
     );
+
+    if (widget.primary) {
+      headerBar = SafeArea(
+        bottom: false,
+        child: headerBar,
+      );
+    }
 
     headerBar = Align(
       alignment: Alignment.topCenter,

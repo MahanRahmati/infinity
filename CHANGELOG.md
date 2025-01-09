@@ -1,6 +1,7 @@
 ## 1.0.2
 
-- Added keyboard activation animation to Interaction widget
+- Added keyboard activation animation to Interaction
+- Added primary to HeaderBar
 
 ## 1.0.1
 
