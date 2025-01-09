@@ -2,7 +2,8 @@
 
 - Added SafeArea to ResponsiveScaffold
 - Updated BoundedBox's maximum width.
-- Updated StatusPages's padding and text alignment.
+- Updated StatusPage's padding and text alignment.
+- Added BoundedBox to StatusPage.
 
 ## 1.0.2
 

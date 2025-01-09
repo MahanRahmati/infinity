@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import '/src/constants/colors.dart';
 import '/src/constants/dimens.dart';
 import '/src/constants/typography.dart';
+import 'bounded_box.dart';
 
 /// A status page widget that follows Infinity's design system.
 /// Displays a centered icon and/or title message.
@@ -29,7 +30,7 @@ class IStatusPage extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    return Center(
+    return IBoundedBox(
       child: Padding(
         padding: const EdgeInsets.all(InfinityDimens.largePadding),
         child: Column(
