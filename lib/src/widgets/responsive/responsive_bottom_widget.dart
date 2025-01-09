@@ -1,5 +1,8 @@
 import 'package:flutter/widgets.dart';
 
+import '/src/constants/colors.dart';
+import '/src/constants/dimens.dart';
+
 /// A responsive bottom widget that animates in/out vertically from the bottom
 /// following Infinity's design system.
 class ResponsiveBottomWidget extends StatefulWidget {
@@ -48,7 +51,22 @@ class _ResponsiveBottomWidgetState extends State<ResponsiveBottomWidget> {
         heightFactor: heightAnimation.value,
         child: FractionalTranslation(
           translation: offsetAnimation.value,
-          child: widget.child,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: InfinityColors.getBackgroundColor(
+                context,
+                BackgroundType.headerbar,
+              ),
+              border: Border(
+                top: BorderSide(
+                  color: InfinityColors.getBorderColor(context),
+                  // ignore: avoid_redundant_argument_values
+                  width: InfinityDimens.borderThickness,
+                ),
+              ),
+            ),
+            child: widget.child,
+          ),
         ),
       ),
     );

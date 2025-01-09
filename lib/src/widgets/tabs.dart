@@ -110,61 +110,44 @@ class IBottomTabBar extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    return SizedBox(
-      height: InfinityDimens.tabbarHeight +
-          (InfinityDimens.padding * 2) +
-          InfinityDimens.borderThickness,
-      child: ColoredBox(
-        color: InfinityColors.getBackgroundColor(
-          context,
-          BackgroundType.headerbar,
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            SizedBox(
-              width: double.infinity,
-              height: InfinityDimens.borderThickness,
-              child: ColoredBox(color: InfinityColors.getBorderColor(context)),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: InfinityDimens.padding,
-              ),
-              child: LayoutBuilder(
-                builder: (
-                  final BuildContext context,
-                  final BoxConstraints constraints,
-                ) {
-                  return SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: InfinityDimens.smallPadding,
-                    ),
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints(
-                        minWidth: constraints.maxWidth -
-                            (InfinityDimens.smallPadding * 2),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          for (int i = 0; i < tabs.length; i++)
-                            _ITabItem(
-                              icon: tabs[i].icon,
-                              selectedIcon: tabs[i].selectedIcon,
-                              label: tabs[i].label,
-                              isSelected: selectedIndex == i,
-                              onTap: () => onDestinationSelected?.call(i),
-                            ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ],
+    return SafeArea(
+      top: false,
+      child: SizedBox(
+        height: InfinityDimens.tabbarHeight + (InfinityDimens.padding * 2),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: InfinityDimens.padding),
+          child: LayoutBuilder(
+            builder: (
+              final BuildContext context,
+              final BoxConstraints constraints,
+            ) {
+              return SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: InfinityDimens.smallPadding,
+                ),
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minWidth: constraints.maxWidth -
+                        (InfinityDimens.smallPadding * 2),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      for (int i = 0; i < tabs.length; i++)
+                        _ITabItem(
+                          icon: tabs[i].icon,
+                          selectedIcon: tabs[i].selectedIcon,
+                          label: tabs[i].label,
+                          isSelected: selectedIndex == i,
+                          onTap: () => onDestinationSelected?.call(i),
+                        ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
         ),
       ),
     );

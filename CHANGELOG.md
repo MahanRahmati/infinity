@@ -2,6 +2,7 @@
 
 - Added keyboard activation animation to Interaction
 - Added primary to HeaderBar
+- Updated BottomTabBar and ResponsiveBottomWidget
 
 ## 1.0.1
 
