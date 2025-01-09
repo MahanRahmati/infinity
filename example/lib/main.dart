@@ -70,7 +70,7 @@ class _ExampleHomeState extends State<ExampleHome> {
             ITabItem(
               icon: const Icon(MingCuteIcons.mgc_rows_4_line),
               selectedIcon: const Icon(MingCuteIcons.mgc_rows_4_fill),
-              label: 'Rows',
+              label: 'Lists',
             ),
             ITabItem(
               icon: const Icon(MingCuteIcons.mgc_star_line),
@@ -160,7 +160,7 @@ class _ExampleHomeState extends State<ExampleHome> {
             ITabItem(
               icon: const Icon(MingCuteIcons.mgc_rows_4_line),
               selectedIcon: const Icon(MingCuteIcons.mgc_rows_4_fill),
-              label: 'Rows',
+              label: 'Lists',
             ),
             ITabItem(
               icon: const Icon(MingCuteIcons.mgc_star_line),
