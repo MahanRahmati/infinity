@@ -191,6 +191,48 @@ class IButton extends StatelessWidget {
           horizontal: InfinityDimens.largePadding,
         );
 
+  /// Creates a filled Infinity button.
+  ///
+  /// [child] optional widget to display inside the button, typically a
+  /// Text widget.
+  /// [focusNode] defines the focus behavior for keyboard navigation.
+  /// [onFocusChange] called when button focus changes.
+  /// [autofocus] whether button should focus itself when first displayed.
+  /// [alignment] positions the child within the button, defaults to center.
+  /// [backgroundColor] optional custom background color.
+  /// [elavation] optional custom elevation level.
+  /// [statusType] optional custom status type.
+  /// [padding] spacing around the button's outer edge.
+  /// [onPressed] callback when button is tapped.
+  /// [onLongPress] callback when button is long pressed.
+  IButton.filled({
+    super.key,
+    final Widget? child,
+    this.focusNode,
+    this.onFocusChange,
+    this.autofocus = false,
+    this.alignment = Alignment.center,
+    this.backgroundColor,
+    this.borderRadius,
+    this.elavation,
+    this.statusType,
+    this.padding,
+    this.margin,
+    this.onPressed,
+    this.onLongPress,
+  }) : child = Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: InfinityDimens.mediumPadding,
+                horizontal: InfinityDimens.padding,
+              ),
+              child: child,
+            ),
+          ],
+        );
+
   /// The widget below this widget in the tree.
   ///
   /// Typically a [Text] widget.

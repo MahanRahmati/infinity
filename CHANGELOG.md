@@ -1,6 +1,7 @@
 ## 1.0.1
 
-- Add color argument to getForegroundColor
+- Added color argument to getForegroundColor
+- Added filled constructor to Button
 
 ## 1.0.0
 
