@@ -41,34 +41,6 @@ class _ExampleHomeState extends State<ExampleHome> {
   @override
   Widget build(final BuildContext context) {
     return IResponsiveScaffold(
-      bottomWidgetBuilder: (
-        final BuildContext context,
-        final ResponsiveStates state,
-      ) {
-        final IBottomTabBar bottomTabBar = IBottomTabBar(
-          selectedIndex: _selectedIndex,
-          onDestinationSelected: (final int index) {
-            setState(() => _selectedIndex = index);
-          },
-          tabs: <ITabItem>[
-            ITabItem(
-              icon: const Icon(MingCuteIcons.mgc_home_1_line),
-              selectedIcon: const Icon(MingCuteIcons.mgc_home_1_fill),
-              label: 'Home',
-            ),
-            ITabItem(
-              icon: const Icon(MingCuteIcons.mgc_ghost_line),
-              selectedIcon: const Icon(MingCuteIcons.mgc_ghost_fill),
-              label: 'Status',
-            ),
-          ],
-        );
-        return switch (state) {
-          ResponsiveStates.collapsed => bottomTabBar,
-          ResponsiveStates.extended => null,
-          ResponsiveStates.fullExtended => null,
-        };
-      },
       headerBarBuilder: (
         final BuildContext context,
         final ResponsiveStates state,
@@ -162,6 +134,34 @@ class _ExampleHomeState extends State<ExampleHome> {
           ResponsiveStates.collapsed => null,
           ResponsiveStates.extended => null,
           ResponsiveStates.fullExtended => child,
+        };
+      },
+      bottomWidgetBuilder: (
+        final BuildContext context,
+        final ResponsiveStates state,
+      ) {
+        final IBottomTabBar bottomTabBar = IBottomTabBar(
+          selectedIndex: _selectedIndex,
+          onDestinationSelected: (final int index) {
+            setState(() => _selectedIndex = index);
+          },
+          tabs: <ITabItem>[
+            ITabItem(
+              icon: const Icon(MingCuteIcons.mgc_home_1_line),
+              selectedIcon: const Icon(MingCuteIcons.mgc_home_1_fill),
+              label: 'Home',
+            ),
+            ITabItem(
+              icon: const Icon(MingCuteIcons.mgc_ghost_line),
+              selectedIcon: const Icon(MingCuteIcons.mgc_ghost_fill),
+              label: 'Status',
+            ),
+          ],
+        );
+        return switch (state) {
+          ResponsiveStates.collapsed => bottomTabBar,
+          ResponsiveStates.extended => null,
+          ResponsiveStates.fullExtended => null,
         };
       },
     );
