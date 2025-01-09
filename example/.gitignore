@@ -45,5 +45,6 @@ app.*.map.json
 /android/app/release
 
 /macos/
+/ios/
 .metadata
 analysis_options.yaml
