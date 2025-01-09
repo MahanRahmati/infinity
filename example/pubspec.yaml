@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  infinity:
+  infinity_widgets:
     path: ../
 
 dev_dependencies:

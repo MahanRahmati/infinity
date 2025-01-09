@@ -72,7 +72,7 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  infinity:
+  infinity_widgets:
     dependency: "direct main"
     description:
       path: ".."

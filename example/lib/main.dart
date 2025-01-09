@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:infinity/infinity.dart';
+import 'package:infinity_widgets/infinity_widgets.dart';
 
 void main() {
   runApp(const ExampleApp());
