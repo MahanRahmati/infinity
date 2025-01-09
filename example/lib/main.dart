@@ -460,6 +460,32 @@ class ModalsWidget extends StatelessWidget {
                   );
                 },
               ),
+              IButton.text(
+                text: 'Message Dialog Modal',
+                onPressed: () {
+                  showDialogModal(
+                    context: context,
+                    pageListBuilder: (final BuildContext context) {
+                      return <SliverWoltModalSheetPage>[
+                        IModalSheetPage(
+                          hasTopBarLayer: false,
+                          child: IMessageDialog(
+                            title: 'Message',
+                            description: 'This is a message dialog',
+                            actions: <Widget>[
+                              IButton.filled(
+                                statusType: StatusType.success,
+                                onPressed: Navigator.of(context).pop,
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ];
+                    },
+                  );
+                },
+              ),
             ],
           ),
         ),
