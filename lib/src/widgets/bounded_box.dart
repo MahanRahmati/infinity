@@ -22,7 +22,7 @@ class IBoundedBox extends StatelessWidget {
     return Center(
       child: ConstrainedBox(
         constraints: const BoxConstraints(
-          maxWidth: InfinityDimens.iphone16ProMaxLandscapeWidth,
+          maxWidth: InfinityDimens.boundedMaxWidth,
         ),
         child: child,
       ),

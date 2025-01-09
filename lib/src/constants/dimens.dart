@@ -65,8 +65,11 @@ class InfinityDimens {
   /// Maximum width for dialogs - 480.0
   static const double dialogMaxWidth = base * 60;
 
+  /// Maximum width for bounded layouts - 720.0
+  static const double boundedMaxWidth = base * 90;
+
   /// Sidebar width that defaults to iPhone 16 Pro Max width
-  static double sidebarWidth = iphone16ProMaxWidth;
+  static const double sidebarWidth = iphone16ProMaxWidth;
 
   /// Standard iPhone 16 Pro Max width
   static const double iphone16ProMaxWidth = 440;

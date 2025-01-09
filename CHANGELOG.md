@@ -1,6 +1,7 @@
 ## 1.0.3
 
 - Added SafeArea to ResponsiveScaffold
+- Updated BoundedBox's maximum width.
 
 ## 1.0.2
 
