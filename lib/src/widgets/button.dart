@@ -313,8 +313,10 @@ class IButton extends StatelessWidget {
             context,
             statusType!,
           );
-          bgColor = fgColor.withTransparency(0.15);
-          bg = state == null
+          bgColor = fgColor.withTransparency(
+            state == InteractionState.disabled ? 0.08 : 0.15,
+          );
+          bg = state == null || state == InteractionState.disabled
               ? bgColor
               : InfinityColors.getStateColor(bgColor, state);
         }

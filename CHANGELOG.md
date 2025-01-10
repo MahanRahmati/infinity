@@ -1,3 +1,7 @@
+## 1.0.4
+
+- Updated disabled states for Button.
+
 ## 1.0.3
 
 - Added SafeArea to ResponsiveScaffold

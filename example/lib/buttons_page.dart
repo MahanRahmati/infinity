@@ -43,14 +43,26 @@ class Buttons extends StatelessWidget {
               text: 'Error',
             ),
             IButton.text(
+              statusType: StatusType.error,
+              text: 'Error Disabled',
+            ),
+            IButton.text(
               statusType: StatusType.warning,
               onPressed: () {},
               text: 'Warning',
             ),
             IButton.text(
+              statusType: StatusType.warning,
+              text: 'Warning Disabled',
+            ),
+            IButton.text(
               statusType: StatusType.success,
               onPressed: () {},
               text: 'Success',
+            ),
+            IButton.text(
+              statusType: StatusType.success,
+              text: 'Success Disabled',
             ),
           ],
         ),
@@ -70,13 +82,25 @@ class Buttons extends StatelessWidget {
               icon: MingCuteIcons.mgc_delete_line,
             ),
             IButton.icon(
+              statusType: StatusType.error,
+              icon: MingCuteIcons.mgc_delete_line,
+            ),
+            IButton.icon(
               statusType: StatusType.warning,
               onPressed: () {},
               icon: MingCuteIcons.mgc_warning_line,
             ),
             IButton.icon(
+              statusType: StatusType.warning,
+              icon: MingCuteIcons.mgc_warning_line,
+            ),
+            IButton.icon(
               statusType: StatusType.success,
               onPressed: () {},
+              icon: MingCuteIcons.mgc_check_line,
+            ),
+            IButton.icon(
+              statusType: StatusType.success,
               icon: MingCuteIcons.mgc_check_line,
             ),
           ],
@@ -124,14 +148,31 @@ class Buttons extends StatelessWidget {
               child: Text('Disabled Pill'),
             ),
             IButton.pill(
+              statusType: StatusType.error,
+              child: const Text('Error Pill'),
+              onPressed: () {},
+            ),
+            const IButton.pill(
+              statusType: StatusType.error,
+              child: Text('Error Pill Disabled'),
+            ),
+            IButton.pill(
+              statusType: StatusType.warning,
+              child: const Text('Warning Pill'),
+              onPressed: () {},
+            ),
+            const IButton.pill(
+              statusType: StatusType.warning,
+              child: Text('Warning Pill Disabled'),
+            ),
+            IButton.pill(
               statusType: StatusType.success,
               child: const Text('Success Pill'),
               onPressed: () {},
             ),
-            IButton.pill(
-              statusType: StatusType.error,
-              child: const Text('Error Pill'),
-              onPressed: () {},
+            const IButton.pill(
+              statusType: StatusType.success,
+              child: Text('Success Pill Disabled'),
             ),
           ],
         ),
