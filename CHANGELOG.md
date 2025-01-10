@@ -1,13 +1,14 @@
 ## 1.0.4
 
-- Updated disabled states for Button.
+- Updated disabled states for Button
+- Added transparent color to Button
 
 ## 1.0.3
 
 - Added SafeArea to ResponsiveScaffold
-- Updated BoundedBox's maximum width.
-- Updated StatusPage's padding and text alignment.
-- Added BoundedBox to StatusPage.
+- Updated BoundedBox's maximum width
+- Updated StatusPage's padding and text alignment
+- Added BoundedBox to StatusPage
 
 ## 1.0.2
 
@@ -23,4 +24,4 @@
 
 ## 1.0.0
 
-- Initial release.
+- Initial release

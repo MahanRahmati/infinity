@@ -90,6 +90,7 @@ class _ExampleHomeState extends State<ExampleHome> {
           trailing: <Widget>[
             IButton.icon(
               icon: MingCuteIcons.mgc_information_line,
+              isTransparent: true,
               onPressed: () async {
                 final String license = await getLicense();
                 if (!context.mounted) {

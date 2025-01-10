@@ -23,6 +23,7 @@ class IButton extends StatelessWidget {
   /// [statusType] optional custom status type.
   /// [padding] spacing around the button's outer edge.
   /// [margin] spacing around the button's inner content.
+  /// [isTransparent] whether button should be transparent.
   /// [onPressed] callback when button is tapped.
   /// [onLongPress] callback when button is long pressed.
   const IButton({
@@ -38,6 +39,7 @@ class IButton extends StatelessWidget {
     this.statusType,
     this.padding,
     this.margin,
+    this.isTransparent = false,
     this.onPressed,
     this.onLongPress,
   });
@@ -53,6 +55,7 @@ class IButton extends StatelessWidget {
   /// [elavation] optional custom elevation level.
   /// [statusType] optional custom status type.
   /// [padding] spacing around the button's outer edge.
+  /// [isTransparent] whether button should have a transparent background.
   /// [onPressed] callback when button is tapped.
   /// [onLongPress] callback when button is long pressed.
   IButton.icon({
@@ -66,6 +69,7 @@ class IButton extends StatelessWidget {
     this.elavation,
     this.statusType,
     this.padding,
+    this.isTransparent = false,
     this.onPressed,
     this.onLongPress,
   })  : child = Icon(icon),
@@ -84,6 +88,7 @@ class IButton extends StatelessWidget {
   /// [elavation] optional custom elevation level.
   /// [statusType] optional custom status type.
   /// [padding] spacing around the button's outer edge.
+  /// [isTransparent] whether the button should be transparent.
   /// [onPressed] callback when button is tapped.
   /// [onLongPress] callback when button is long pressed.
   IButton.text({
@@ -98,6 +103,7 @@ class IButton extends StatelessWidget {
     this.elavation,
     this.statusType,
     this.padding,
+    this.isTransparent = false,
     this.onPressed,
     this.onLongPress,
   })  : child = Text(text),
@@ -121,6 +127,7 @@ class IButton extends StatelessWidget {
   /// [elavation] optional custom elevation level.
   /// [statusType] optional custom status type.
   /// [padding] spacing around the button's outer edge.
+  /// [isTransparent] whether button should be transparent.
   /// [onPressed] callback when button is tapped.
   /// [onLongPress] callback when button is long pressed.
   IButton.compound({
@@ -137,6 +144,7 @@ class IButton extends StatelessWidget {
     this.elavation,
     this.statusType,
     this.padding,
+    this.isTransparent = false,
     this.onPressed,
     this.onLongPress,
   })  : child = Row(
@@ -185,7 +193,8 @@ class IButton extends StatelessWidget {
     this.padding,
     this.onPressed,
     this.onLongPress,
-  })  : borderRadius = double.infinity,
+  })  : isTransparent = false,
+        borderRadius = double.infinity,
         margin = const EdgeInsets.symmetric(
           vertical: InfinityDimens.mediumPadding,
           horizontal: InfinityDimens.largePadding,
@@ -220,7 +229,8 @@ class IButton extends StatelessWidget {
     this.margin,
     this.onPressed,
     this.onLongPress,
-  }) : child = Row(
+  })  : isTransparent = false,
+        child = Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Padding(
@@ -290,6 +300,9 @@ class IButton extends StatelessWidget {
   /// be disabled.
   final VoidCallback? onLongPress;
 
+  /// Whether the button is transparent.
+  final bool isTransparent;
+
   @override
   Widget build(final BuildContext context) {
     return Interaction(
@@ -320,7 +333,15 @@ class IButton extends StatelessWidget {
               ? bgColor
               : InfinityColors.getStateColor(bgColor, state);
         }
-
+        if (isTransparent) {
+          bg = switch (state) {
+            InteractionState.hover => bg,
+            InteractionState.focused => bg,
+            InteractionState.pressed => bg,
+            InteractionState.disabled => InfinityColors.transparent,
+            null => InfinityColors.transparent,
+          };
+        }
         final Color fg =
             state == InteractionState.disabled ? fgColor.dimmed() : fgColor;
 

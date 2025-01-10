@@ -176,6 +176,53 @@ class Buttons extends StatelessWidget {
             ),
           ],
         ),
+        Wrap(
+          alignment: WrapAlignment.center,
+          children: <Widget>[
+            IButton.text(
+              onPressed: () {},
+              isTransparent: true,
+              text: 'Primary',
+            ),
+            IButton.text(
+              text: 'Disabled',
+              isTransparent: true,
+            ),
+            IButton.text(
+              statusType: StatusType.error,
+              onPressed: () {},
+              isTransparent: true,
+              text: 'Error',
+            ),
+            IButton.text(
+              statusType: StatusType.error,
+              isTransparent: true,
+              text: 'Error Disabled',
+            ),
+            IButton.text(
+              statusType: StatusType.warning,
+              onPressed: () {},
+              isTransparent: true,
+              text: 'Warning',
+            ),
+            IButton.text(
+              statusType: StatusType.warning,
+              text: 'Warning Disabled',
+              isTransparent: true,
+            ),
+            IButton.text(
+              statusType: StatusType.success,
+              onPressed: () {},
+              isTransparent: true,
+              text: 'Success',
+            ),
+            IButton.text(
+              statusType: StatusType.success,
+              text: 'Success Disabled',
+              isTransparent: true,
+            ),
+          ],
+        ),
       ],
     );
   }
