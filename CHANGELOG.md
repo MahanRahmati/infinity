@@ -2,6 +2,7 @@
 
 - Fixed the leading in HeaderBar
 - Added transparent color to BackButton and CloseButton
+- Update the primary states in HeaderBar
 
 ## 1.0.4
 

@@ -145,27 +145,30 @@ class _IHeaderBarState extends State<IHeaderBar> {
     );
 
     final Color borderColor = InfinityColors.getBorderColor(context);
+    final Border border = Border(
+      bottom: BorderSide(
+        color: borderColor,
+        // ignore: avoid_redundant_argument_values
+        width: InfinityDimens.borderThickness,
+      ),
+    );
 
     final Border? effectiveBorder = Border.lerp(
-      const Border(
-        bottom: BorderSide(
-          color: InfinityColors.transparent,
-          // ignore: avoid_redundant_argument_values
-          width: InfinityDimens.borderThickness,
-        ),
-      ),
-      Border(
-        bottom: BorderSide(
-          color: borderColor,
-          // ignore: avoid_redundant_argument_values
-          width: InfinityDimens.borderThickness,
-        ),
-      ),
+      widget.primary
+          ? const Border(
+              bottom: BorderSide(
+                color: InfinityColors.transparent,
+                // ignore: avoid_redundant_argument_values
+                width: InfinityDimens.borderThickness,
+              ),
+            )
+          : border,
+      border,
       _scrollAnimationValue,
     );
 
     final Color effectiveBackgroundColor = Color.lerp(
-          windowBackgroundColor,
+          widget.primary ? windowBackgroundColor : backgroundColor,
           backgroundColor,
           _scrollAnimationValue,
         ) ??
