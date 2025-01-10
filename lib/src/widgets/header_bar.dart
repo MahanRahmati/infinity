@@ -173,20 +173,19 @@ class _IHeaderBarState extends State<IHeaderBar> {
 
     final ModalRoute<dynamic>? parentRoute = ModalRoute.of(context);
 
-    Widget? leading = widget.leading;
-    if (leading == null) {
+    Widget? leading;
+    if (widget.leading != null) {
+      leading = Row(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[widget.leading!],
+      );
+    } else {
       if (parentRoute?.impliesAppBarDismissal ?? false) {
         leading = const Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[IBackButton()],
         );
       }
-    }
-    if (leading != null) {
-      leading = Row(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[widget.leading!],
-      );
     }
 
     Widget? middle = widget.middle;
