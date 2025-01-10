@@ -108,7 +108,7 @@ class Buttons extends StatelessWidget {
         const Wrap(
           alignment: WrapAlignment.center,
           children: <Widget>[
-            IBackButton(),
+            IBackButton(isTransparent: false),
             ICloseButton(),
           ],
         ),

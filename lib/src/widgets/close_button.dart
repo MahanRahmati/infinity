@@ -12,15 +12,20 @@ class ICloseButton extends StatelessWidget {
   const ICloseButton({
     super.key,
     this.onPressed,
+    this.isTransparent = false,
   });
 
   /// The callback that is called when the button is tapped.
   /// If null, will attempt to pop the current route using Navigator.maybePop().
   final VoidCallback? onPressed;
 
+  /// Whether the close button is transparent.
+  final bool isTransparent;
+
   @override
   Widget build(final BuildContext context) {
     return IButton.icon(
+      isTransparent: isTransparent,
       onPressed: onPressed ?? () => Navigator.maybePop(context),
       icon: MingCuteIcons.mgc_close_line,
     );

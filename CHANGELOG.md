@@ -1,6 +1,7 @@
 ## 1.0.5
 
 - Fixed the leading in HeaderBar
+- Added transparent color to BackButton and CloseButton
 
 ## 1.0.4
 
