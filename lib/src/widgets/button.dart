@@ -19,7 +19,7 @@ class IButton extends StatelessWidget {
   /// [alignment] positions the child within the button, defaults to center.
   /// [backgroundColor] optional custom background color.
   /// [borderRadius] optional custom border radius.
-  /// [elavation] optional custom elevation level.
+  /// [elevation] optional custom elevation level.
   /// [statusType] optional custom status type.
   /// [padding] spacing around the button's outer edge.
   /// [margin] spacing around the button's inner content.
@@ -35,7 +35,7 @@ class IButton extends StatelessWidget {
     this.alignment = Alignment.center,
     this.backgroundColor,
     this.borderRadius,
-    this.elavation,
+    this.elevation,
     this.statusType,
     this.padding,
     this.margin,
@@ -52,7 +52,7 @@ class IButton extends StatelessWidget {
   /// [autofocus] whether button should focus itself when first displayed.
   /// [alignment] positions the child within the button, defaults to center.
   /// [backgroundColor] optional custom background color.
-  /// [elavation] optional custom elevation level.
+  /// [elevation] optional custom elevation level.
   /// [statusType] optional custom status type.
   /// [padding] spacing around the button's outer edge.
   /// [isTransparent] whether button should have a transparent background.
@@ -66,7 +66,7 @@ class IButton extends StatelessWidget {
     this.autofocus = false,
     this.alignment = Alignment.center,
     this.backgroundColor,
-    this.elavation,
+    this.elevation,
     this.statusType,
     this.padding,
     this.isTransparent = false,
@@ -85,7 +85,7 @@ class IButton extends StatelessWidget {
   /// [alignment] positions the child within the button, defaults to center.
   /// [backgroundColor] optional custom background color.
   /// [borderRadius] optional custom border radius.
-  /// [elavation] optional custom elevation level.
+  /// [elevation] optional custom elevation level.
   /// [statusType] optional custom status type.
   /// [padding] spacing around the button's outer edge.
   /// [isTransparent] whether the button should be transparent.
@@ -100,7 +100,7 @@ class IButton extends StatelessWidget {
     this.alignment = Alignment.center,
     this.backgroundColor,
     this.borderRadius,
-    this.elavation,
+    this.elevation,
     this.statusType,
     this.padding,
     this.isTransparent = false,
@@ -124,7 +124,7 @@ class IButton extends StatelessWidget {
   /// [alignment] positions the child within the button, defaults to center.
   /// [backgroundColor] optional custom background color.
   /// [borderRadius] optional custom border radius.
-  /// [elavation] optional custom elevation level.
+  /// [elevation] optional custom elevation level.
   /// [statusType] optional custom status type.
   /// [padding] spacing around the button's outer edge.
   /// [isTransparent] whether button should be transparent.
@@ -141,7 +141,7 @@ class IButton extends StatelessWidget {
     this.alignment = Alignment.center,
     this.backgroundColor,
     this.borderRadius,
-    this.elavation,
+    this.elevation,
     this.statusType,
     this.padding,
     this.isTransparent = false,
@@ -175,7 +175,7 @@ class IButton extends StatelessWidget {
   /// [autofocus] whether button should focus itself when first displayed.
   /// [alignment] positions the child within the button, defaults to center.
   /// [backgroundColor] optional custom background color.
-  /// [elavation] optional custom elevation level.
+  /// [elevation] optional custom elevation level.
   /// [statusType] optional custom status type.
   /// [padding] spacing around the button's outer edge.
   /// [onPressed] callback when button is tapped.
@@ -188,7 +188,7 @@ class IButton extends StatelessWidget {
     this.autofocus = false,
     this.alignment = Alignment.center,
     this.backgroundColor,
-    this.elavation,
+    this.elevation,
     this.statusType,
     this.padding,
     this.onPressed,
@@ -209,7 +209,7 @@ class IButton extends StatelessWidget {
   /// [autofocus] whether button should focus itself when first displayed.
   /// [alignment] positions the child within the button, defaults to center.
   /// [backgroundColor] optional custom background color.
-  /// [elavation] optional custom elevation level.
+  /// [elevation] optional custom elevation level.
   /// [statusType] optional custom status type.
   /// [padding] spacing around the button's outer edge.
   /// [onPressed] callback when button is tapped.
@@ -223,7 +223,7 @@ class IButton extends StatelessWidget {
     this.alignment = Alignment.center,
     this.backgroundColor,
     this.borderRadius,
-    this.elavation,
+    this.elevation,
     this.statusType,
     this.padding,
     this.margin,
@@ -278,7 +278,7 @@ class IButton extends StatelessWidget {
   final double? borderRadius;
 
   /// The button's elevation.
-  final int? elavation;
+  final int? elevation;
 
   /// The button's status type.
   final StatusType? statusType;
@@ -316,7 +316,7 @@ class IButton extends StatelessWidget {
             InfinityColors.getButtonBackgroundColor(
               context,
               state,
-              elavation: elavation,
+              elevation: elevation,
             );
         Color fgColor = InfinityColors.getForegroundColor(context);
 

@@ -185,7 +185,7 @@ class InfinityColors {
   static Color getButtonBackgroundColor(
     final BuildContext context,
     final InteractionState? state, {
-    final int? elavation,
+    final int? elevation,
     final Color? color,
   }) {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
@@ -196,7 +196,7 @@ class InfinityColors {
     }
     if (isDark) {
       const int base = 25;
-      final int step = 11 + (elavation ?? 0);
+      final int step = 11 + (elevation ?? 0);
       final int value = switch (state) {
         InteractionState.hover => base + (step * 1),
         InteractionState.focused => base + (step * 2),
@@ -208,7 +208,7 @@ class InfinityColors {
     }
 
     const int base = 20;
-    final int step = 8 + (elavation ?? 0);
+    final int step = 8 + (elevation ?? 0);
     final int value = switch (state) {
       InteractionState.hover => base + (step * 1),
       InteractionState.focused => base + (step * 2),
