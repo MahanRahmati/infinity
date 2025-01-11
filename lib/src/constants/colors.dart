@@ -194,27 +194,28 @@ class InfinityColors {
           ? color.withTransparency(0.36)
           : color.withTransparency(0.12);
     }
+    final int e = elevation != null ? elevation * 10 : 0;
     if (isDark) {
       const int base = 25;
-      final int step = 11 + (elevation ?? 0);
+      final int step = 11 + e;
       final int value = switch (state) {
         InteractionState.hover => base + (step * 1),
         InteractionState.focused => base + (step * 2),
         InteractionState.pressed => base + (step * 3),
-        InteractionState.disabled => base + (step * -1),
-        null => base,
+        InteractionState.disabled => base + ((step - e) * -1),
+        null => base + e,
       };
       return white.withAlpha(value);
     }
 
     const int base = 20;
-    final int step = 8 + (elevation ?? 0);
+    final int step = 8 + e;
     final int value = switch (state) {
       InteractionState.hover => base + (step * 1),
       InteractionState.focused => base + (step * 2),
       InteractionState.pressed => base + (step * 3),
-      InteractionState.disabled => base + (step * -1),
-      null => base,
+      InteractionState.disabled => base + ((step - e) * -1),
+      null => base + e,
     };
 
     return black.withAlpha(value);
