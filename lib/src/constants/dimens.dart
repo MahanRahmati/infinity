@@ -84,6 +84,7 @@ class InfinityDimens {
   static const double ipadPro13LandscapeWidth = 1376;
 }
 
+/// Extensions for [BuildContext].
 extension DimensExtensions on BuildContext {
   /// Checks if the current context width is extended.
   bool isExtended() {
@@ -98,6 +99,7 @@ extension DimensExtensions on BuildContext {
   }
 }
 
+/// Extensions for [double].
 extension DimensDoubleExtensions on double {
   /// Checks if a specific width value is extended.
   bool isWidthExtended() {

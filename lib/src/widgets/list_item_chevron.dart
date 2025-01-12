@@ -3,6 +3,7 @@ import 'package:ming_cute_icons/ming_cute_icons.dart';
 
 /// A directional chevron icon widget that follows Infinity's design system.
 class IListItemChevron extends StatelessWidget {
+  /// Creates a directional chevron icon widget.
   const IListItemChevron({super.key});
 
   @override

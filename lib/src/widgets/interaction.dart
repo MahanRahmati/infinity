@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 
 import '/src/constants/interaction_state.dart';
 
+/// A builder function that returns a widget based on the current interaction
 typedef InteractionBuilder = Widget? Function(
   BuildContext context,
   InteractionState? state,

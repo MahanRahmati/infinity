@@ -247,20 +247,33 @@ class InfinityColors {
 
 /// Defines the type of background surface in the Infinity.
 enum BackgroundType {
+  /// The background color for the entire window.
   window,
+
+  /// The background color for the header bar.
   headerbar,
+
+  /// The background color for the sidebar.
   sidebar,
+
+  /// The background color for the content area.
   card,
 }
 
 /// Defines status types for displaying different states of operations or
 /// feedback.
 enum StatusType {
+  /// Represents a successful state.
   success,
+
+  /// Represents a warning state.
   warning,
+
+  /// Represents an error state.
   error,
 }
 
+/// Extensions for [Color] class.
 extension ColorExtensions on Color {
   /// Returns a new color with reduced opacity to indicate a disabled state.
   Color disabled() {

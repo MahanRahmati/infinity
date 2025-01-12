@@ -3,11 +3,25 @@ import 'dart:ui';
 
 import 'package:flutter/widgets.dart';
 
-enum CornerLocation { tl, tr, bl, br }
+/// The location of a corner.
+enum CornerLocation {
+  /// The top-left corner.
+  tl,
+
+  /// The top-right corner.
+  tr,
+
+  /// The bottom-left corner.
+  bl,
+
+  /// The bottom-right corner.
+  br,
+}
 
 /// A rectangular border with variable smoothness transitions between
 /// the straight sides and the rounded corners.
 class SmoothRectangleBorder extends OutlinedBorder {
+  /// Creates a rectangular border with variable smoothness transitions between
   const SmoothRectangleBorder({
     this.smoothness = 0.6,
     this.borderRadius = BorderRadius.zero,
@@ -40,6 +54,7 @@ class SmoothRectangleBorder extends OutlinedBorder {
     );
   }
 
+  /// Returns the path for the outer edge of this border.
   Path getPath(final RRect rrect) {
     final Path path = Path();
     if (smoothness == 0 || borderRadius == BorderRadius.zero) {
@@ -289,7 +304,9 @@ extension _Math on double {
   double toRadian() => this * pi / 180;
 }
 
+/// A class that represents a corner of a rectangle.
 class Corner {
+  /// The corner of the rectangle.
   Corner(final RRect rrect, final CornerLocation location, double smoothness) {
     if (smoothness > 1) {
       smoothness = 1;
@@ -319,14 +336,31 @@ class Corner {
     a = 2 * b;
   }
 
+  /// The angle bezier
   late double angleBezier;
+
+  /// The angle circle
   late double angleCircle;
+
+  /// The corner location
   late double a;
+
+  /// The corner location
   late double b;
+
+  /// The corner location
   late double c;
+
+  /// The corner location
   late double d;
+
+  /// The corner location
   late double p;
+
+  /// The corner radius
   late double radius;
+
+  /// The shortest side of the rectangle
   late double shortestSide;
 
   double _getRadius(final RRect rrect, final CornerLocation location) {
@@ -351,7 +385,9 @@ class Corner {
   }
 }
 
+/// The smooth clipping rectangle.
 class SmoothClipRRect extends StatelessWidget {
+  /// Creates a smooth clipping rectangle.
   const SmoothClipRRect({
     super.key,
     this.smoothness = 0.6,
@@ -382,6 +418,7 @@ class SmoothClipRRect extends StatelessWidget {
   /// drawn. Otherwise the outline is centered over the shape's boundary.
   final BorderSide side;
 
+  /// The widget below this widget in the tree.
   final Widget? child;
 
   @override

@@ -14,6 +14,7 @@ class LegalDialog extends StatelessWidget {
     required this.license,
   });
 
+  ///  The legal text content to display.
   final String license;
 
   @override

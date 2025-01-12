@@ -48,6 +48,7 @@ class ILazyIndexedStack extends StatefulWidget {
   ILazyIndexedStackState createState() => ILazyIndexedStackState();
 }
 
+/// State for [ILazyIndexedStack].
 class ILazyIndexedStackState extends State<ILazyIndexedStack> {
   late List<bool> _activated = _initializeActivatedList();
 
