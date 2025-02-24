@@ -196,28 +196,48 @@ class InfinityColors {
     }
     final int e = elevation != null ? elevation * 10 : 0;
     if (isDark) {
-      const int base = 25;
-      final int step = 11 + e;
-      final int value = switch (state) {
-        InteractionState.hover => base + (step * 1),
-        InteractionState.focused => base + (step * 2),
-        InteractionState.pressed => base + (step * 3),
-        InteractionState.disabled => base + ((step - e) * -1),
-        null => base + e,
-      };
-      return white.withAlpha(value);
+      return getDarkBackgroundColor(e, state);
     }
+    return getLightBackgroundColor(e, state);
+  }
 
-    const int base = 20;
-    final int step = 8 + e;
+  /// Calculates the alpha of the background color based on the
+  /// [InteractionState].
+  static int _getBackgroundAlphaValue(
+    final int base,
+    final int step,
+    final int elevation,
+    final InteractionState? state,
+  ) {
     final int value = switch (state) {
       InteractionState.hover => base + (step * 1),
       InteractionState.focused => base + (step * 2),
       InteractionState.pressed => base + (step * 3),
-      InteractionState.disabled => base + ((step - e) * -1),
-      null => base + e,
+      InteractionState.disabled => base + ((step - elevation) * -1),
+      null => base + elevation,
     };
+    return value;
+  }
 
+  /// Returns the dark background color based on the [InteractionState].
+  static Color getDarkBackgroundColor(
+    final int elevation,
+    final InteractionState? state,
+  ) {
+    const int base = 25;
+    final int step = 11 + elevation;
+    final int value = _getBackgroundAlphaValue(base, step, elevation, state);
+    return white.withAlpha(value);
+  }
+
+  /// Returns the light background color based on the [InteractionState].
+  static Color getLightBackgroundColor(
+    final int elevation,
+    final InteractionState? state,
+  ) {
+    const int base = 20;
+    final int step = 8 + elevation;
+    final int value = _getBackgroundAlphaValue(base, step, elevation, state);
     return black.withAlpha(value);
   }
 
