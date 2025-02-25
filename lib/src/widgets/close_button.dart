@@ -9,11 +9,7 @@ class ICloseButton extends StatelessWidget {
   ///
   /// [onPressed] optional callback when button is tapped. If not provided,
   /// defaults to Navigator.maybePop().
-  const ICloseButton({
-    super.key,
-    this.onPressed,
-    this.isTransparent = false,
-  });
+  const ICloseButton({super.key, this.onPressed, this.isTransparent = false});
 
   /// The callback that is called when the button is tapped.
   /// If null, will attempt to pop the current route using Navigator.maybePop().

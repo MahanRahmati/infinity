@@ -9,10 +9,7 @@ class IBoundedBox extends StatelessWidget {
   ///
   /// [child] the widget to display inside the bounded box with constrained
   /// width.
-  const IBoundedBox({
-    super.key,
-    this.child,
-  });
+  const IBoundedBox({super.key, this.child});
 
   /// The widget to display inside the bounded box.
   final Widget? child;

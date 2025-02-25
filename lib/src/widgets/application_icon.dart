@@ -9,42 +9,22 @@ class IApplicationIcon extends StatelessWidget {
   ///
   /// [child] the widget to display inside the icon.
   /// [size] optional size constraint for both width and height.
-  IApplicationIcon(
-    final Widget child, {
-    super.key,
-    this.size,
-  }) : child = SizedBox.square(
-          dimension: size,
-          child: child,
-        );
+  IApplicationIcon(final Widget child, {super.key, this.size})
+    : child = SizedBox.square(dimension: size, child: child);
 
   /// Creates an Infinity application icon from an asset image.
   ///
   /// [name] the asset image path to load.
   /// [size] optional size constraint for both width and height.
-  IApplicationIcon.asset(
-    final String name, {
-    super.key,
-    this.size,
-  }) : child = Image.asset(
-          name,
-          width: size,
-          height: size,
-        );
+  IApplicationIcon.asset(final String name, {super.key, this.size})
+    : child = Image.asset(name, width: size, height: size);
 
   /// Creates an Infinity application icon from a network image.
   ///
   /// [url] the network image URL to load.
   /// [size] optional size constraint for both width and height.
-  IApplicationIcon.network(
-    final String url, {
-    super.key,
-    this.size,
-  }) : child = Image.network(
-          url,
-          width: size,
-          height: size,
-        );
+  IApplicationIcon.network(final String url, {super.key, this.size})
+    : child = Image.network(url, width: size, height: size);
 
   /// The widget to display inside the rounded container.
   final Widget child;

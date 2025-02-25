@@ -71,12 +71,11 @@ class ILazyIndexedStackState extends State<ILazyIndexedStack> {
   Widget build(final BuildContext context) {
     // Mark current index as active
     _activated[widget.index] = true;
-    final List<Widget> children = List<Widget>.generate(
-      _activated.length,
-      (final int i) {
-        return _activated[i] ? widget.children[i] : const SizedBox.shrink();
-      },
-    );
+    final List<Widget> children = List<Widget>.generate(_activated.length, (
+      final int i,
+    ) {
+      return _activated[i] ? widget.children[i] : const SizedBox.shrink();
+    });
     return IndexedStack(
       alignment: widget.alignment,
       textDirection: widget.textDirection,

@@ -10,9 +10,7 @@ class InfinityTheme {
   InfinityTheme._();
 
   /// Creates a light theme for the application.
-  static ThemeData light({
-    final Color? colorSchemeSeed,
-  }) {
+  static ThemeData light({final Color? colorSchemeSeed}) {
     return ThemeData(
       brightness: Brightness.light,
       useMaterial3: true,
@@ -39,9 +37,7 @@ class InfinityTheme {
   }
 
   /// Creates a dark theme for the application.
-  static ThemeData dark({
-    final Color? colorSchemeSeed,
-  }) {
+  static ThemeData dark({final Color? colorSchemeSeed}) {
     return ThemeData(
       brightness: Brightness.dark,
       useMaterial3: true,

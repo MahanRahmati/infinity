@@ -19,17 +19,13 @@ enum ResponsiveStates {
 
 /// Function signature for building responsive widgets based on the current
 /// state.
-typedef ResponsiveBuilder = Widget? Function(
-  BuildContext context,
-  ResponsiveStates state,
-);
+typedef ResponsiveBuilder =
+    Widget? Function(BuildContext context, ResponsiveStates state);
 
 /// Function signature for building responsive header bars based on the current
 /// state.
-typedef ResponsiveHeaderBarBuilder = PreferredSizeWidget? Function(
-  BuildContext context,
-  ResponsiveStates state,
-);
+typedef ResponsiveHeaderBarBuilder =
+    PreferredSizeWidget? Function(BuildContext context, ResponsiveStates state);
 
 /// A responsive scaffold that adapts its layout based on screen size and
 /// following Infinity's design system.
@@ -168,7 +164,8 @@ class _IResponsiveScaffoldState extends State<IResponsiveScaffold>
                 child: widget.startWidgetBuilder!(context, _getState()),
               ),
             Expanded(
-              child: widget.childWidgetBuilder?.call(context, _getState()) ??
+              child:
+                  widget.childWidgetBuilder?.call(context, _getState()) ??
                   const SizedBox(),
             ),
             if (widget.endWidgetBuilder != null)
@@ -183,12 +180,16 @@ class _IResponsiveScaffoldState extends State<IResponsiveScaffold>
           backgroundColor: widget.backgroundColor,
           appBar: widget.headerBarBuilder?.call(context, _getState()),
           body: widget.useSafeArea ? SafeArea(child: body) : body,
-          bottomNavigationBar: widget.bottomWidgetBuilder != null
-              ? ResponsiveBottomWidget(
-                  animation: _bottomWidgetAnimation,
-                  child: widget.bottomWidgetBuilder?.call(context, _getState()),
-                )
-              : null,
+          bottomNavigationBar:
+              widget.bottomWidgetBuilder != null
+                  ? ResponsiveBottomWidget(
+                    animation: _bottomWidgetAnimation,
+                    child: widget.bottomWidgetBuilder?.call(
+                      context,
+                      _getState(),
+                    ),
+                  )
+                  : null,
         );
       },
     );

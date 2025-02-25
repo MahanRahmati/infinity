@@ -25,28 +25,29 @@ class IBoxedList extends StatelessWidget {
     this.subtitle,
     this.trailing,
     final List<Widget>? children,
-  }) : children = children != null && children.isNotEmpty
-            ? <Widget>[
-                FocusTraversalGroup(
-                  child: ICard(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: InfinityDimens.padding,
-                      horizontal: InfinityDimens.largePadding,
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        for (int i = 0; i < children.length; i++) ...<Widget>[
-                          children[i],
-                          if (i < children.length - 1)
-                            const IDivider(height: 0),
-                        ],
-                      ],
-                    ),
-                  ),
-                ),
-              ]
-            : null;
+  }) : children =
+           children != null && children.isNotEmpty
+               ? <Widget>[
+                 FocusTraversalGroup(
+                   child: ICard(
+                     padding: const EdgeInsets.symmetric(
+                       vertical: InfinityDimens.padding,
+                       horizontal: InfinityDimens.largePadding,
+                     ),
+                     child: Column(
+                       mainAxisSize: MainAxisSize.min,
+                       children: <Widget>[
+                         for (int i = 0; i < children.length; i++) ...<Widget>[
+                           children[i],
+                           if (i < children.length - 1)
+                             const IDivider(height: 0),
+                         ],
+                       ],
+                     ),
+                   ),
+                 ),
+               ]
+               : null;
 
   /// Creates an Infinity boxed list with separated rows.
   ///
@@ -64,19 +65,20 @@ class IBoxedList extends StatelessWidget {
     this.subtitle,
     this.trailing,
     final List<Widget>? children,
-  }) : children = children
-            ?.map(
-              (final Widget child) => FocusTraversalGroup(
-                child: ICard(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: InfinityDimens.padding,
-                    horizontal: InfinityDimens.largePadding,
-                  ),
-                  child: child,
-                ),
-              ),
-            )
-            .toList();
+  }) : children =
+           children
+               ?.map(
+                 (final Widget child) => FocusTraversalGroup(
+                   child: ICard(
+                     padding: const EdgeInsets.symmetric(
+                       vertical: InfinityDimens.padding,
+                       horizontal: InfinityDimens.largePadding,
+                     ),
+                     child: child,
+                   ),
+                 ),
+               )
+               .toList();
 
   /// Widget displayed at the start of the header section.
   final Widget? leading;

@@ -107,10 +107,7 @@ class SmoothRectangleBorder extends OutlinedBorder {
 
       //bottom right
       path
-        ..lineTo(
-          right,
-          top + max(height / 2, height - br.p),
-        )
+        ..lineTo(right, top + max(height / 2, height - br.p))
         ..cubicTo(
           right,
           bottom - (br.p - br.a),
@@ -278,11 +275,7 @@ class SmoothRectangleBorder extends OutlinedBorder {
 
   @override
   int get hashCode {
-    return Object.hash(
-      smoothness,
-      borderRadius,
-      side,
-    );
+    return Object.hash(smoothness, borderRadius, side);
   }
 
   @override
@@ -432,9 +425,7 @@ class SmoothClipRRect extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.all(max(0.0, side.width - 1)),
         child: ClipPath(
-          clipper: ShapeBorderClipper(
-            shape: shaper,
-          ),
+          clipper: ShapeBorderClipper(shape: shaper),
           child: child,
         ),
       ),
@@ -443,11 +434,7 @@ class SmoothClipRRect extends StatelessWidget {
 }
 
 class _BorderPainter extends CustomPainter {
-  _BorderPainter(
-    this.side,
-    this.borderRadius,
-    this.shaper,
-  );
+  _BorderPainter(this.side, this.borderRadius, this.shaper);
 
   final BorderSide side;
   final BorderRadius borderRadius;
