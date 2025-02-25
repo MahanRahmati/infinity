@@ -61,7 +61,7 @@ class InfinityTypography {
     fontWeight: FontWeight.w400,
   );
 
-  /// Small heading text style - 14.76px
+  /// Small heading text style
   static TextStyle captionHeading = _default.copyWith(
     fontSize: 14,
     fontWeight: FontWeight.w500,

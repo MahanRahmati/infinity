@@ -47,7 +47,7 @@ class InfinityDimens {
   /// Height for list items - 56.0
   static const double listItemHeight = base * 7;
 
-  /// Minimum height for dialogs - 80.0
+  /// Minimum height for dialog - 80.0
   static const double dialogMinHeight = base * 10;
 
   /// Size for status page icons - 96.0
@@ -59,10 +59,10 @@ class InfinityDimens {
   /// Width for popups - 280.0
   static const double popupWidth = base * 35;
 
-  /// Minimum width for dialogs - 280.0
+  /// Minimum width for dialog - 280.0
   static const double dialogMinWidth = base * 35;
 
-  /// Maximum width for dialogs - 480.0
+  /// Maximum width for dialog - 480.0
   static const double dialogMaxWidth = base * 60;
 
   /// Maximum width for bounded layouts - 720.0
