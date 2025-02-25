@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 
 import '/src/constants/colors.dart';
 import '/src/constants/dimens.dart';
+import '/src/utils/extensions/build_context.dart';
 
 /// A responsive bottom widget that animates in/out vertically from the bottom
 /// following Infinity's design system.
@@ -45,6 +46,7 @@ class _ResponsiveBottomWidgetState extends State<ResponsiveBottomWidget> {
 
   @override
   Widget build(final BuildContext context) {
+    final bool isDarkMode = context.isDarkMode;
     return ClipRect(
       child: Align(
         alignment: Alignment.topLeft,
@@ -54,12 +56,12 @@ class _ResponsiveBottomWidgetState extends State<ResponsiveBottomWidget> {
           child: DecoratedBox(
             decoration: BoxDecoration(
               color: InfinityColors.getBackgroundColor(
-                context,
+                isDarkMode,
                 BackgroundType.headerbar,
               ),
               border: Border(
                 top: BorderSide(
-                  color: InfinityColors.getBorderColor(context),
+                  color: InfinityColors.getBorderColor(isDarkMode),
                   // ignore: avoid_redundant_argument_values
                   width: InfinityDimens.borderThickness,
                 ),

@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import '/src/constants/colors.dart';
 import '/src/constants/dimens.dart';
 import '/src/constants/typography.dart';
+import '/src/utils/extensions/build_context.dart';
 import 'bounded_box.dart';
 
 /// A status page widget that follows Infinity's design system.
@@ -12,12 +13,7 @@ class IStatusPage extends StatelessWidget {
   ///
   /// [icon] optional icon to display above the title.
   /// [title] optional text message to display below the icon.
-  const IStatusPage({
-    super.key,
-    this.icon,
-    this.title,
-    this.subtitle,
-  });
+  const IStatusPage({super.key, this.icon, this.title, this.subtitle});
 
   /// The icon to display at the top of the status page.
   final IconData? icon;
@@ -30,6 +26,7 @@ class IStatusPage extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
+    final bool isDarkMode = context.isDarkMode;
     return IBoundedBox(
       child: Padding(
         padding: const EdgeInsets.all(InfinityDimens.largePadding),
@@ -40,7 +37,7 @@ class IStatusPage extends StatelessWidget {
               Icon(
                 icon,
                 size: InfinityDimens.statusPageIconSize,
-                color: InfinityColors.getForegroundColor(context).dimmed(),
+                color: InfinityColors.getForegroundColor(isDarkMode).dimmed(),
               ),
               const SizedBox(height: InfinityDimens.largePadding),
             ],
@@ -48,7 +45,7 @@ class IStatusPage extends StatelessWidget {
               Text(
                 title!,
                 style: InfinityTypography.title2.copyWith(
-                  color: InfinityColors.getForegroundColor(context),
+                  color: InfinityColors.getForegroundColor(isDarkMode),
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -58,7 +55,7 @@ class IStatusPage extends StatelessWidget {
               Text(
                 subtitle!,
                 style: InfinityTypography.caption.copyWith(
-                  color: InfinityColors.getForegroundColor(context).dimmed(),
+                  color: InfinityColors.getForegroundColor(isDarkMode).dimmed(),
                 ),
                 textAlign: TextAlign.center,
               ),

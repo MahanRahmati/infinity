@@ -4,6 +4,7 @@ import '/src/constants/colors.dart';
 import '/src/constants/dimens.dart';
 import '/src/constants/interaction_state.dart';
 import '/src/constants/typography.dart';
+import '/src/utils/extensions/build_context.dart';
 import 'interaction.dart';
 import 'squircle.dart';
 
@@ -14,11 +15,7 @@ class ITabItem {
   /// [icon] The default icon widget shown for this tab.
   /// [selectedIcon] Optional icon widget shown when tab is selected.
   /// [label] Text label displayed next to the icon.
-  ITabItem({
-    required this.icon,
-    this.selectedIcon,
-    required this.label,
-  });
+  ITabItem({required this.icon, this.selectedIcon, required this.label});
 
   /// The default icon widget shown for this tab.
   final Widget icon;
@@ -55,8 +52,8 @@ class ITabBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => const Size.fromHeight(
-        InfinityDimens.tabbarHeight + InfinityDimens.padding,
-      );
+    InfinityDimens.tabbarHeight + InfinityDimens.padding,
+  );
 
   @override
   Widget build(final BuildContext context) {
@@ -128,7 +125,8 @@ class IBottomTabBar extends StatelessWidget {
                 ),
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
-                    minWidth: constraints.maxWidth -
+                    minWidth:
+                        constraints.maxWidth -
                         (InfinityDimens.smallPadding * 2),
                   ),
                   child: Row(
@@ -171,27 +169,31 @@ class _ITabItem extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
+    final bool isDarkMode = context.isDarkMode;
     return Interaction(
       onPressed: onTap,
       builder: (final BuildContext context, final InteractionState? state) {
         final Color bgColor = InfinityColors.getButtonBackgroundColor(
-          context,
+          isDarkMode,
           state,
         );
-        final Color fgColor = InfinityColors.getForegroundColor(context);
+        final Color fgColor = InfinityColors.getForegroundColor(isDarkMode);
+        final Color borderColor = InfinityColors.getButtonBorderColor(
+          isDarkMode,
+          state,
+        );
 
-        final Color bg = state == null
-            ? bgColor
-            : InfinityColors.getStateColor(bgColor, state);
+        final Color bg =
+            state == null
+                ? bgColor
+                : InfinityColors.getStateColor(bgColor, state);
         final Color fg =
             state == InteractionState.disabled ? fgColor.dimmed() : fgColor;
 
-        final TextStyle textStyle = InfinityTypography.body.copyWith(
-          color: fg,
-        );
-        final IconThemeData iconTheme = IconTheme.of(context).copyWith(
-          color: fg,
-        );
+        final TextStyle textStyle = InfinityTypography.body.copyWith(color: fg);
+        final IconThemeData iconTheme = IconTheme.of(
+          context,
+        ).copyWith(color: fg);
 
         return Padding(
           padding: const EdgeInsets.symmetric(
@@ -204,7 +206,7 @@ class _ITabItem extends StatelessWidget {
                   InfinityDimens.smallBorderRadius,
                 ),
                 side: BorderSide(
-                  color: InfinityColors.getButtonBorderColor(bgColor, state),
+                  color: borderColor,
                   // ignore: avoid_redundant_argument_values
                   width: InfinityDimens.borderThickness,
                 ),

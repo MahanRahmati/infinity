@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 
 import '/src/constants/colors.dart';
 import '/src/constants/dimens.dart';
+import '/src/utils/extensions/build_context.dart';
 import '/src/widgets/card.dart';
 
 /// Position of the responsive side widget relative to its container.
@@ -52,11 +53,12 @@ class _ResponsiveSideWidgetState extends State<ResponsiveSideWidget> {
   // direction changes because this widget only depends on Directionality.
   late final bool ltr = Directionality.of(context) == TextDirection.ltr;
   late final Animation<Offset> offsetAnimation = Tween<Offset>(
-    begin: widget.position == ResponsiveSideWidgetPosition.start
-        ? ltr
-            ? const Offset(-1, 0)
-            : const Offset(1, 0)
-        : ltr
+    begin:
+        widget.position == ResponsiveSideWidgetPosition.start
+            ? ltr
+                ? const Offset(-1, 0)
+                : const Offset(1, 0)
+            : ltr
             ? const Offset(1, 0)
             : const Offset(-1, 0),
     end: Offset.zero,
@@ -76,6 +78,7 @@ class _ResponsiveSideWidgetState extends State<ResponsiveSideWidget> {
     if (widget.child == null) {
       return const SizedBox();
     }
+    final bool isDarkMode = context.isDarkMode;
     return ClipRect(
       child: AnimatedBuilder(
         animation: widthAnimation,
@@ -89,18 +92,20 @@ class _ResponsiveSideWidgetState extends State<ResponsiveSideWidget> {
                 width: InfinityDimens.sidebarWidth,
                 child: ICard(
                   backgroundColor: InfinityColors.getBackgroundColor(
-                    context,
+                    isDarkMode,
                     BackgroundType.sidebar,
                   ),
-                  borderColor: InfinityColors.getBorderColor(context),
+                  borderColor: InfinityColors.getBorderColor(isDarkMode),
                   padding: EdgeInsetsDirectional.only(
-                    start: widget.position == ResponsiveSideWidgetPosition.end
-                        ? 0
-                        : InfinityDimens.largePadding,
+                    start:
+                        widget.position == ResponsiveSideWidgetPosition.end
+                            ? 0
+                            : InfinityDimens.largePadding,
                     top: InfinityDimens.largePadding,
-                    end: widget.position == ResponsiveSideWidgetPosition.start
-                        ? 0
-                        : InfinityDimens.largePadding,
+                    end:
+                        widget.position == ResponsiveSideWidgetPosition.start
+                            ? 0
+                            : InfinityDimens.largePadding,
                     bottom: InfinityDimens.largePadding,
                   ),
                   child: widget.child,

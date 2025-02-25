@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 
 import '/src/constants/colors.dart';
 import '/src/constants/dimens.dart';
+import '/src/utils/extensions/build_context.dart';
 
 /// A horizontal divider line that follows Infinity's design system.
 class IDivider extends StatelessWidget {
@@ -33,6 +34,7 @@ class IDivider extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
+    final bool isDarkMode = context.isDarkMode;
     return SizedBox(
       height: height,
       child: Center(
@@ -42,7 +44,7 @@ class IDivider extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border(
               bottom: BorderSide(
-                color: color ?? InfinityColors.getBorderColor(context),
+                color: color ?? InfinityColors.getBorderColor(isDarkMode),
                 // ignore: avoid_redundant_argument_values
                 width: InfinityDimens.borderThickness,
               ),
@@ -84,6 +86,7 @@ class IVerticalDivider extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
+    final bool isDarkMode = context.isDarkMode;
     return SizedBox(
       width: width,
       child: Center(
@@ -93,7 +96,7 @@ class IVerticalDivider extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border(
               left: BorderSide(
-                color: color ?? InfinityColors.getBorderColor(context),
+                color: color ?? InfinityColors.getBorderColor(isDarkMode),
                 // ignore: avoid_redundant_argument_values
                 width: InfinityDimens.borderThickness,
               ),

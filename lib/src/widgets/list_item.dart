@@ -7,6 +7,7 @@ import '/src/constants/colors.dart';
 import '/src/constants/dimens.dart';
 import '/src/constants/interaction_state.dart';
 import '/src/constants/typography.dart';
+import '/src/utils/extensions/build_context.dart';
 import 'interaction.dart';
 
 /// A list item widget that follows Infinity's design system.
@@ -44,10 +45,11 @@ class IListItem extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
+    final bool isDarkMode = context.isDarkMode;
     final TextDirection textDirection = Directionality.of(context);
     final Widget titleText = DefaultTextStyle(
       style: InfinityTypography.body.copyWith(
-        color: InfinityColors.getForegroundColor(context),
+        color: InfinityColors.getForegroundColor(isDarkMode),
       ),
       softWrap: false,
       overflow: TextOverflow.ellipsis,
@@ -58,7 +60,7 @@ class IListItem extends StatelessWidget {
     if (subtitle != null) {
       subtitleText = DefaultTextStyle(
         style: InfinityTypography.caption.copyWith(
-          color: InfinityColors.getForegroundColor(context).dimmed(),
+          color: InfinityColors.getForegroundColor(isDarkMode).dimmed(),
         ),
         softWrap: false,
         overflow: TextOverflow.ellipsis,
@@ -72,13 +74,11 @@ class IListItem extends StatelessWidget {
       child: Interaction(
         onPressed: onPressed,
         useScale: false,
-        builder: (
-          final BuildContext context,
-          final InteractionState? state,
-        ) {
-          final Color bg = state == null || state == InteractionState.disabled
-              ? InfinityColors.transparent
-              : InfinityColors.getStateOpacityColor(context, state);
+        builder: (final BuildContext context, final InteractionState? state) {
+          final Color bg =
+              state == null || state == InteractionState.disabled
+                  ? InfinityColors.transparent
+                  : InfinityColors.getStateOpacityColor(isDarkMode, state);
           return Semantics(
             button: onPressed != null,
             enabled: state != InteractionState.disabled,
@@ -99,12 +99,7 @@ class IListItem extends StatelessWidget {
   }
 }
 
-enum _ListItemSlot {
-  leading,
-  title,
-  subtitle,
-  trailing,
-}
+enum _ListItemSlot { leading, title, subtitle, trailing }
 
 class _ListItem
     extends SlottedMultiChildRenderObjectWidget<_ListItemSlot, RenderBox> {
@@ -137,9 +132,7 @@ class _ListItem
 
   @override
   _RenderListItem createRenderObject(final BuildContext context) {
-    return _RenderListItem(
-      textDirection: textDirection,
-    );
+    return _RenderListItem(textDirection: textDirection);
   }
 
   @override
@@ -153,9 +146,8 @@ class _ListItem
 
 class _RenderListItem extends RenderBox
     with SlottedContainerRenderObjectMixin<_ListItemSlot, RenderBox> {
-  _RenderListItem({
-    required final TextDirection textDirection,
-  }) : _textDirection = textDirection;
+  _RenderListItem({required final TextDirection textDirection})
+    : _textDirection = textDirection;
 
   RenderBox? get leading => childForSlot(_ListItemSlot.leading);
   RenderBox get title => childForSlot(_ListItemSlot.title)!;
@@ -234,7 +226,8 @@ class _RenderListItem extends RenderBox
   @override
   void performLayout() {
     final BoxConstraints constraints = this.constraints;
-    double width = constraints.maxWidth -
+    double width =
+        constraints.maxWidth -
         InfinityDimens.largePadding -
         InfinityDimens.largePadding;
     double height = 0;
@@ -285,14 +278,16 @@ class _RenderListItem extends RenderBox
       );
     }
 
-    final double x = InfinityDimens.largePadding +
+    final double x =
+        InfinityDimens.largePadding +
         (leading != null
             ? leading!.size.width + InfinityDimens.mediumPadding
             : 0);
 
-    final double titleY = subtitle != null
-        ? InfinityDimens.mediumPadding
-        : (size.height - title.size.height) / 2;
+    final double titleY =
+        subtitle != null
+            ? InfinityDimens.mediumPadding
+            : (size.height - title.size.height) / 2;
     context.paintChild(title, offset.translate(x, titleY));
 
     if (subtitle != null) {

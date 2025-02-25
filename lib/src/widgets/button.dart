@@ -4,6 +4,7 @@ import '/src/constants/colors.dart';
 import '/src/constants/dimens.dart';
 import '/src/constants/interaction_state.dart';
 import '/src/constants/typography.dart';
+import '/src/utils/extensions/build_context.dart';
 import 'interaction.dart';
 import 'squircle.dart';
 
@@ -72,9 +73,9 @@ class IButton extends StatelessWidget {
     this.isTransparent = false,
     this.onPressed,
     this.onLongPress,
-  })  : child = Icon(icon),
-        margin = const EdgeInsets.all(InfinityDimens.padding),
-        borderRadius = InfinityDimens.smallBorderRadius;
+  }) : child = Icon(icon),
+       margin = const EdgeInsets.all(InfinityDimens.padding),
+       borderRadius = InfinityDimens.smallBorderRadius;
 
   /// Creates an Infinity button with text.
   ///
@@ -106,11 +107,11 @@ class IButton extends StatelessWidget {
     this.isTransparent = false,
     this.onPressed,
     this.onLongPress,
-  })  : child = Text(text),
-        margin = const EdgeInsets.symmetric(
-          vertical: InfinityDimens.padding,
-          horizontal: InfinityDimens.mediumPadding,
-        );
+  }) : child = Text(text),
+       margin = const EdgeInsets.symmetric(
+         vertical: InfinityDimens.padding,
+         horizontal: InfinityDimens.mediumPadding,
+       );
 
   /// Creates an Infinity button with optional leading icon, text and trailing
   /// icon.
@@ -147,24 +148,24 @@ class IButton extends StatelessWidget {
     this.isTransparent = false,
     this.onPressed,
     this.onLongPress,
-  })  : child = Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            if (leadingIcon != null) ...<Widget>[
-              Icon(leadingIcon),
-              const SizedBox(width: InfinityDimens.smallPadding),
-            ],
-            Text(text),
-            if (trailingIcon != null) ...<Widget>[
-              const SizedBox(width: InfinityDimens.smallPadding),
-              Icon(trailingIcon),
-            ],
-          ],
-        ),
-        margin = const EdgeInsets.symmetric(
-          vertical: InfinityDimens.padding,
-          horizontal: InfinityDimens.mediumPadding,
-        );
+  }) : child = Row(
+         mainAxisSize: MainAxisSize.min,
+         children: <Widget>[
+           if (leadingIcon != null) ...<Widget>[
+             Icon(leadingIcon),
+             const SizedBox(width: InfinityDimens.smallPadding),
+           ],
+           Text(text),
+           if (trailingIcon != null) ...<Widget>[
+             const SizedBox(width: InfinityDimens.smallPadding),
+             Icon(trailingIcon),
+           ],
+         ],
+       ),
+       margin = const EdgeInsets.symmetric(
+         vertical: InfinityDimens.padding,
+         horizontal: InfinityDimens.mediumPadding,
+       );
 
   /// Creates a pill-shaped Infinity button.
   ///
@@ -193,12 +194,12 @@ class IButton extends StatelessWidget {
     this.padding,
     this.onPressed,
     this.onLongPress,
-  })  : isTransparent = false,
-        borderRadius = double.infinity,
-        margin = const EdgeInsets.symmetric(
-          vertical: InfinityDimens.mediumPadding,
-          horizontal: InfinityDimens.largePadding,
-        );
+  }) : isTransparent = false,
+       borderRadius = double.infinity,
+       margin = const EdgeInsets.symmetric(
+         vertical: InfinityDimens.mediumPadding,
+         horizontal: InfinityDimens.largePadding,
+       );
 
   /// Creates a filled Infinity button.
   ///
@@ -229,19 +230,19 @@ class IButton extends StatelessWidget {
     this.margin,
     this.onPressed,
     this.onLongPress,
-  })  : isTransparent = false,
-        child = Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: InfinityDimens.mediumPadding,
-                horizontal: InfinityDimens.padding,
-              ),
-              child: child,
-            ),
-          ],
-        );
+  }) : isTransparent = false,
+       child = Row(
+         mainAxisAlignment: MainAxisAlignment.center,
+         children: <Widget>[
+           Padding(
+             padding: const EdgeInsets.symmetric(
+               vertical: InfinityDimens.mediumPadding,
+               horizontal: InfinityDimens.padding,
+             ),
+             child: child,
+           ),
+         ],
+       );
 
   /// The widget below this widget in the tree.
   ///
@@ -305,6 +306,7 @@ class IButton extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
+    final bool isDarkMode = context.isDarkMode;
     return Interaction(
       focusNode: focusNode,
       onFocusChange: onFocusChange,
@@ -312,45 +314,35 @@ class IButton extends StatelessWidget {
       onPressed: onPressed,
       onLongPress: onLongPress,
       builder: (final BuildContext context, final InteractionState? state) {
-        Color bgColor = backgroundColor ??
+        final Color effectiveBackgroundColor =
             InfinityColors.getButtonBackgroundColor(
-              context,
+              isDarkMode,
               state,
               elevation: elevation,
+              color: backgroundColor,
+              statusType: statusType,
+              isTransparent: isTransparent,
             );
-        Color fgColor = InfinityColors.getForegroundColor(context);
-
-        Color bg = bgColor;
-        if (statusType != null) {
-          fgColor = InfinityColors.getStatusColor(
-            context,
-            statusType!,
-          );
-          bgColor = fgColor.withTransparency(
-            state == InteractionState.disabled ? 0.08 : 0.15,
-          );
-          bg = state == null || state == InteractionState.disabled
-              ? bgColor
-              : InfinityColors.getStateColor(bgColor, state);
-        }
-        if (isTransparent) {
-          bg = switch (state) {
-            InteractionState.hover => bg,
-            InteractionState.focused => bg,
-            InteractionState.pressed => bg,
-            InteractionState.disabled => InfinityColors.transparent,
-            null => InfinityColors.transparent,
-          };
-        }
-        final Color fg =
-            state == InteractionState.disabled ? fgColor.dimmed() : fgColor;
+        final Color foregroundColor = InfinityColors.getButtonForegroundColor(
+          isDarkMode,
+          state: state,
+          statusType: statusType,
+        );
+        final Color borderColor = InfinityColors.getButtonBorderColor(
+          isDarkMode,
+          state,
+          elevation: elevation,
+          color: backgroundColor,
+          statusType: statusType,
+          isTransparent: isTransparent,
+        );
 
         final TextStyle textStyle = InfinityTypography.body.copyWith(
-          color: fg,
+          color: foregroundColor,
         );
-        final IconThemeData iconTheme = IconTheme.of(context).copyWith(
-          color: fg,
-        );
+        final IconThemeData iconTheme = IconTheme.of(
+          context,
+        ).copyWith(color: foregroundColor);
 
         return Semantics(
           button: true,
@@ -363,12 +355,12 @@ class IButton extends StatelessWidget {
                     borderRadius ?? InfinityDimens.smallBorderRadius,
                   ),
                   side: BorderSide(
-                    color: InfinityColors.getButtonBorderColor(bgColor, state),
+                    color: borderColor,
                     // ignore: avoid_redundant_argument_values
                     width: InfinityDimens.borderThickness,
                   ),
                 ),
-                color: bg,
+                color: effectiveBackgroundColor,
               ),
               child: Align(
                 alignment: alignment,
@@ -379,7 +371,8 @@ class IButton extends StatelessWidget {
                   child: IconTheme(
                     data: iconTheme,
                     child: Padding(
-                      padding: margin ??
+                      padding:
+                          margin ??
                           const EdgeInsets.symmetric(
                             vertical: InfinityDimens.padding,
                             horizontal: InfinityDimens.mediumPadding,

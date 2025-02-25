@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import '/src/constants/colors.dart';
 import '/src/constants/dimens.dart';
 import '/src/constants/typography.dart';
+import '/src/utils/extensions/build_context.dart';
 import 'back_button.dart';
 
 /// A header bar widget that follows Infinity's design system.
@@ -119,9 +120,10 @@ class _IHeaderBarState extends State<IHeaderBar> {
     final Brightness brightness, [
     final Color? backgroundColor,
   ]) {
-    final SystemUiOverlayStyle style = brightness == Brightness.dark
-        ? SystemUiOverlayStyle.light
-        : SystemUiOverlayStyle.dark;
+    final SystemUiOverlayStyle style =
+        brightness == Brightness.dark
+            ? SystemUiOverlayStyle.light
+            : SystemUiOverlayStyle.dark;
     // For backward compatibility, create an overlay style without system
     // navigation bar settings.
     return SystemUiOverlayStyle(
@@ -134,17 +136,18 @@ class _IHeaderBarState extends State<IHeaderBar> {
 
   @override
   Widget build(final BuildContext context) {
+    final bool isDarkMode = context.isDarkMode;
     final Color backgroundColor = InfinityColors.getBackgroundColor(
-      context,
+      isDarkMode,
       BackgroundType.headerbar,
     );
 
     final Color windowBackgroundColor = InfinityColors.getBackgroundColor(
-      context,
+      isDarkMode,
       BackgroundType.window,
     );
 
-    final Color borderColor = InfinityColors.getBorderColor(context);
+    final Color borderColor = InfinityColors.getBorderColor(isDarkMode);
     final Border border = Border(
       bottom: BorderSide(
         color: borderColor,
@@ -156,18 +159,19 @@ class _IHeaderBarState extends State<IHeaderBar> {
     final Border? effectiveBorder = Border.lerp(
       widget.primary
           ? const Border(
-              bottom: BorderSide(
-                color: InfinityColors.transparent,
-                // ignore: avoid_redundant_argument_values
-                width: InfinityDimens.borderThickness,
-              ),
-            )
+            bottom: BorderSide(
+              color: InfinityColors.transparent,
+              // ignore: avoid_redundant_argument_values
+              width: InfinityDimens.borderThickness,
+            ),
+          )
           : border,
       border,
       _scrollAnimationValue,
     );
 
-    final Color effectiveBackgroundColor = Color.lerp(
+    final Color effectiveBackgroundColor =
+        Color.lerp(
           widget.primary ? windowBackgroundColor : backgroundColor,
           backgroundColor,
           _scrollAnimationValue,
@@ -197,7 +201,7 @@ class _IHeaderBarState extends State<IHeaderBar> {
 
       middle = DefaultTextStyle(
         style: InfinityTypography.heading.copyWith(
-          color: InfinityColors.getForegroundColor(context),
+          color: InfinityColors.getForegroundColor(isDarkMode),
         ),
         softWrap: false,
         overflow: TextOverflow.ellipsis,
@@ -236,16 +240,10 @@ class _IHeaderBarState extends State<IHeaderBar> {
     );
 
     if (widget.primary) {
-      headerBar = SafeArea(
-        bottom: false,
-        child: headerBar,
-      );
+      headerBar = SafeArea(bottom: false, child: headerBar);
     }
 
-    headerBar = Align(
-      alignment: Alignment.topCenter,
-      child: headerBar,
-    );
+    headerBar = Align(alignment: Alignment.topCenter, child: headerBar);
 
     final SystemUiOverlayStyle overlayStyle = _systemOverlayStyleForBrightness(
       backgroundColor.estimateBrightness(),
@@ -261,10 +259,7 @@ class _IHeaderBarState extends State<IHeaderBar> {
             border: effectiveBorder,
             color: effectiveBackgroundColor,
           ),
-          child: Semantics(
-            explicitChildNodes: true,
-            child: headerBar,
-          ),
+          child: Semantics(explicitChildNodes: true, child: headerBar),
         ),
       ),
     );
@@ -276,9 +271,7 @@ class _IHeaderBarTitleBox extends SingleChildRenderObjectWidget {
 
   @override
   _RenderIHeaderBarTitleBox createRenderObject(final BuildContext context) {
-    return _RenderIHeaderBarTitleBox(
-      textDirection: Directionality.of(context),
-    );
+    return _RenderIHeaderBarTitleBox(textDirection: Directionality.of(context));
   }
 
   @override
@@ -291,9 +284,8 @@ class _IHeaderBarTitleBox extends SingleChildRenderObjectWidget {
 }
 
 class _RenderIHeaderBarTitleBox extends RenderAligningShiftedBox {
-  _RenderIHeaderBarTitleBox({
-    super.textDirection,
-  }) : super(alignment: Alignment.center);
+  _RenderIHeaderBarTitleBox({super.textDirection})
+    : super(alignment: Alignment.center);
 
   @override
   Size computeDryLayout(final BoxConstraints constraints) {

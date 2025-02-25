@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 
 import '/src/constants/colors.dart';
 import '/src/constants/dimens.dart';
+import '/src/utils/extensions/build_context.dart';
 import 'squircle.dart';
 
 /// A customizable card widget that follows Infinity's design system.
@@ -42,25 +43,22 @@ class ICard extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
-    final Color bg = backgroundColor ??
-        InfinityColors.getBackgroundColor(
-          context,
-          BackgroundType.card,
-        );
-    final Color bColor = borderColor ??
-        InfinityColors.getBorderColor(
-          context,
-          color: backgroundColor,
-        );
+    final bool isDarkMode = context.isDarkMode;
+    final Color effectiveBackgroundColor =
+        backgroundColor ??
+        InfinityColors.getBackgroundColor(isDarkMode, BackgroundType.card);
+    final Color effectiveBorderColor =
+        borderColor ??
+        InfinityColors.getBorderColor(isDarkMode, color: backgroundColor);
     return Padding(
       padding: padding,
       child: DecoratedBox(
         decoration: ShapeDecoration(
-          color: bg,
+          color: effectiveBackgroundColor,
           shape: SmoothRectangleBorder(
             borderRadius: BorderRadius.circular(InfinityDimens.borderRadius),
             side: BorderSide(
-              color: bColor,
+              color: effectiveBorderColor,
               // ignore: avoid_redundant_argument_values
               width: InfinityDimens.borderThickness,
             ),

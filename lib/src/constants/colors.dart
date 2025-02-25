@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart' show Brightness, Theme;
+import 'dart:ui' show Brightness, Color;
+
 import 'package:flutter/widgets.dart';
 
 import 'interaction_state.dart';
@@ -97,19 +98,18 @@ class InfinityColors {
 
   /// Returns the appropriate background color for the [BackgroundType].
   static Color getBackgroundColor(
-    final BuildContext context,
+    final bool isDarkMode,
     final BackgroundType type,
   ) {
-    final bool isDark = Theme.of(context).brightness == Brightness.dark;
     switch (type) {
       case BackgroundType.window:
-        return isDark ? windowDarkBackground : windowLightBackground;
+        return isDarkMode ? windowDarkBackground : windowLightBackground;
       case BackgroundType.headerbar:
-        return isDark ? headerbarDarkBackground : headerbarLightBackground;
+        return isDarkMode ? headerbarDarkBackground : headerbarLightBackground;
       case BackgroundType.sidebar:
-        return isDark ? sidebarDarkBackground : sidebarLightBackground;
+        return isDarkMode ? sidebarDarkBackground : sidebarLightBackground;
       case BackgroundType.card:
-        return isDark ? cardDarkBackground : cardLightBackground;
+        return isDarkMode ? cardDarkBackground : cardLightBackground;
     }
   }
 
@@ -138,67 +138,109 @@ class InfinityColors {
 
   /// Returns a color with opacity based on the [InteractionState].
   static Color getStateOpacityColor(
-    final BuildContext context,
+    final bool isDarkMode,
     final InteractionState state,
   ) {
-    final bool isDark = Theme.of(context).brightness == Brightness.dark;
     final double value = switch (state) {
       InteractionState.hover => _hover,
       InteractionState.focused => _focused,
       InteractionState.pressed => _pressed,
       InteractionState.disabled => _disabledOpacity,
     };
-
-    return isDark
+    return isDarkMode
         ? white.withTransparency(value)
         : black.withTransparency(value);
   }
 
   /// Returns the foreground color.
-  static Color getForegroundColor(
-    final BuildContext context, {
-    final Color? color,
-  }) {
-    final Brightness brightness =
-        color?.estimateBrightness() ?? Theme.of(context).brightness;
-    final bool isDark = brightness == Brightness.dark;
-    return isDark ? foregroundDarkColor : foregroundLightColor;
+  static Color getForegroundColor(final bool isDarkMode) {
+    return isDarkMode ? foregroundDarkColor : foregroundLightColor;
   }
 
   /// Returns the status color based on the [StatusType].
-  static Color getStatusColor(
-    final BuildContext context,
-    final StatusType type,
-  ) {
-    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+  static Color getStatusColor(final bool isDarkMode, final StatusType type) {
     switch (type) {
       case StatusType.success:
-        return isDark ? successDark : successLight;
+        return isDarkMode ? successDark : successLight;
       case StatusType.warning:
-        return isDark ? warningDark : warningLight;
+        return isDarkMode ? warningDark : warningLight;
       case StatusType.error:
-        return isDark ? destructiveDark : destructiveLight;
+        return isDarkMode ? destructiveDark : destructiveLight;
     }
+  }
+
+  /// Returns the base color for button backgrounds and borders
+  static Color _getButtonBaseColor(
+    final bool isDarkMode,
+    final InteractionState? state,
+    final int? elevation,
+    final Color? color,
+    final StatusType? statusType,
+  ) {
+    if (statusType != null) {
+      final Color statusColor = getStatusColor(isDarkMode, statusType);
+      return statusColor.withTransparency(
+        state == InteractionState.disabled ? 0.08 : 0.15,
+      );
+    }
+
+    if (color != null) {
+      return color.withTransparency(isDarkMode ? 0.36 : 0.12);
+    }
+
+    final int e = elevation != null ? elevation * 10 : 0;
+    return isDarkMode
+        ? getDarkBackgroundColor(e, state)
+        : getLightBackgroundColor(e, state);
   }
 
   /// Returns the button background color.
   static Color getButtonBackgroundColor(
-    final BuildContext context,
+    final bool isDarkMode,
     final InteractionState? state, {
     final int? elevation,
     final Color? color,
+    final StatusType? statusType,
+    final bool isTransparent = false,
   }) {
-    final bool isDark = Theme.of(context).brightness == Brightness.dark;
-    if (color != null) {
-      return isDark
-          ? color.withTransparency(0.36)
-          : color.withTransparency(0.12);
+    Color bgColor = _getButtonBaseColor(
+      isDarkMode,
+      state,
+      elevation,
+      color,
+      statusType,
+    );
+
+    if (statusType != null &&
+        state != null &&
+        state != InteractionState.disabled) {
+      bgColor = getStateColor(bgColor, state);
     }
-    final int e = elevation != null ? elevation * 10 : 0;
-    if (isDark) {
-      return getDarkBackgroundColor(e, state);
+
+    if (isTransparent) {
+      return switch (state) {
+        InteractionState.hover => bgColor,
+        InteractionState.focused => bgColor,
+        InteractionState.pressed => bgColor,
+        InteractionState.disabled => transparent,
+        null => transparent,
+      };
     }
-    return getLightBackgroundColor(e, state);
+
+    return bgColor;
+  }
+
+  /// Returns the button foreground color.
+  static Color getButtonForegroundColor(
+    final bool isDarkMode, {
+    final InteractionState? state,
+    final StatusType? statusType,
+  }) {
+    final Color fgColor =
+        statusType != null
+            ? getStatusColor(isDarkMode, statusType)
+            : getForegroundColor(isDarkMode);
+    return state == InteractionState.disabled ? fgColor.dimmed() : fgColor;
   }
 
   /// Calculates the alpha of the background color based on the
@@ -243,25 +285,33 @@ class InfinityColors {
 
   /// Returns the button border color.
   static Color getButtonBorderColor(
-    final Color baseColor,
-    final InteractionState? state,
-  ) {
+    final bool isDarkMode,
+    final InteractionState? state, {
+    final int? elevation,
+    final Color? color,
+    final StatusType? statusType,
+    final bool isTransparent = false,
+  }) {
     if (state == InteractionState.focused) {
+      final Color baseColor = _getButtonBaseColor(
+        isDarkMode,
+        state,
+        elevation,
+        color,
+        statusType,
+      );
       return getStateColor(baseColor, InteractionState.pressed);
     }
+
     return InfinityColors.transparent;
   }
 
   /// Returns the border color.
-  static Color getBorderColor(
-    final BuildContext context, {
-    final Color? color,
-  }) {
-    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+  static Color getBorderColor(final bool isDarkMode, {final Color? color}) {
     if (color != null) {
       return color.withTransparency(_borderOpacity);
     }
-    return isDark ? borderDarkBackground : borderLightBackground;
+    return isDarkMode ? borderDarkBackground : borderLightBackground;
   }
 }
 
