@@ -236,10 +236,9 @@ class InfinityColors {
     final InteractionState? state,
     final StatusType? statusType,
   }) {
-    final Color fgColor =
-        statusType != null
-            ? getStatusColor(isDarkMode, statusType)
-            : getForegroundColor(isDarkMode);
+    final Color fgColor = statusType != null
+        ? getStatusColor(isDarkMode, statusType)
+        : getForegroundColor(isDarkMode);
     return state == InteractionState.disabled ? fgColor.dimmed() : fgColor;
   }
 

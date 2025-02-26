@@ -53,12 +53,11 @@ class _ResponsiveSideWidgetState extends State<ResponsiveSideWidget> {
   // direction changes because this widget only depends on Directionality.
   late final bool ltr = Directionality.of(context) == TextDirection.ltr;
   late final Animation<Offset> offsetAnimation = Tween<Offset>(
-    begin:
-        widget.position == ResponsiveSideWidgetPosition.start
-            ? ltr
-                ? const Offset(-1, 0)
-                : const Offset(1, 0)
-            : ltr
+    begin: widget.position == ResponsiveSideWidgetPosition.start
+        ? ltr
+            ? const Offset(-1, 0)
+            : const Offset(1, 0)
+        : ltr
             ? const Offset(1, 0)
             : const Offset(-1, 0),
     end: Offset.zero,
@@ -97,15 +96,13 @@ class _ResponsiveSideWidgetState extends State<ResponsiveSideWidget> {
                   ),
                   borderColor: InfinityColors.getBorderColor(isDarkMode),
                   padding: EdgeInsetsDirectional.only(
-                    start:
-                        widget.position == ResponsiveSideWidgetPosition.end
-                            ? 0
-                            : InfinityDimens.largePadding,
+                    start: widget.position == ResponsiveSideWidgetPosition.end
+                        ? 0
+                        : InfinityDimens.largePadding,
                     top: InfinityDimens.largePadding,
-                    end:
-                        widget.position == ResponsiveSideWidgetPosition.start
-                            ? 0
-                            : InfinityDimens.largePadding,
+                    end: widget.position == ResponsiveSideWidgetPosition.start
+                        ? 0
+                        : InfinityDimens.largePadding,
                     bottom: InfinityDimens.largePadding,
                   ),
                   child: widget.child,

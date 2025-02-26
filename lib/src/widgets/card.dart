@@ -44,11 +44,9 @@ class ICard extends StatelessWidget {
     }
 
     final bool isDarkMode = context.isDarkMode;
-    final Color effectiveBackgroundColor =
-        backgroundColor ??
+    final Color effectiveBackgroundColor = backgroundColor ??
         InfinityColors.getBackgroundColor(isDarkMode, BackgroundType.card);
-    final Color effectiveBorderColor =
-        borderColor ??
+    final Color effectiveBorderColor = borderColor ??
         InfinityColors.getBorderColor(isDarkMode, color: backgroundColor);
     return Padding(
       padding: padding,

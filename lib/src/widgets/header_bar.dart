@@ -120,10 +120,9 @@ class _IHeaderBarState extends State<IHeaderBar> {
     final Brightness brightness, [
     final Color? backgroundColor,
   ]) {
-    final SystemUiOverlayStyle style =
-        brightness == Brightness.dark
-            ? SystemUiOverlayStyle.light
-            : SystemUiOverlayStyle.dark;
+    final SystemUiOverlayStyle style = brightness == Brightness.dark
+        ? SystemUiOverlayStyle.light
+        : SystemUiOverlayStyle.dark;
     // For backward compatibility, create an overlay style without system
     // navigation bar settings.
     return SystemUiOverlayStyle(
@@ -159,19 +158,18 @@ class _IHeaderBarState extends State<IHeaderBar> {
     final Border? effectiveBorder = Border.lerp(
       widget.primary
           ? const Border(
-            bottom: BorderSide(
-              color: InfinityColors.transparent,
-              // ignore: avoid_redundant_argument_values
-              width: InfinityDimens.borderThickness,
-            ),
-          )
+              bottom: BorderSide(
+                color: InfinityColors.transparent,
+                // ignore: avoid_redundant_argument_values
+                width: InfinityDimens.borderThickness,
+              ),
+            )
           : border,
       border,
       _scrollAnimationValue,
     );
 
-    final Color effectiveBackgroundColor =
-        Color.lerp(
+    final Color effectiveBackgroundColor = Color.lerp(
           widget.primary ? windowBackgroundColor : backgroundColor,
           backgroundColor,
           _scrollAnimationValue,
@@ -285,7 +283,7 @@ class _IHeaderBarTitleBox extends SingleChildRenderObjectWidget {
 
 class _RenderIHeaderBarTitleBox extends RenderAligningShiftedBox {
   _RenderIHeaderBarTitleBox({super.textDirection})
-    : super(alignment: Alignment.center);
+      : super(alignment: Alignment.center);
 
   @override
   Size computeDryLayout(final BoxConstraints constraints) {
