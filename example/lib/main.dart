@@ -4,6 +4,8 @@ import 'package:infinity_widgets/infinity_widgets.dart';
 
 import 'bounded_page.dart';
 import 'buttons_page.dart';
+import 'calendar_page.dart';
+import 'gauge_page.dart';
 import 'lists_page.dart';
 import 'welcome_page.dart';
 
@@ -25,6 +27,8 @@ class ExampleApp extends StatelessWidget {
   }
 }
 
+enum Pages { welcome, bounded, lists, buttons, calendar, gauge, home }
+
 class ExampleHome extends StatefulWidget {
   const ExampleHome({super.key});
 
@@ -33,8 +37,6 @@ class ExampleHome extends StatefulWidget {
 }
 
 class _ExampleHomeState extends State<ExampleHome> {
-  int _selectedIndex = 0;
-
   static Future<String> getLicense() async {
     try {
       return await rootBundle.loadString('LICENSE');
@@ -45,141 +47,151 @@ class _ExampleHomeState extends State<ExampleHome> {
 
   @override
   Widget build(final BuildContext context) {
-    return IResponsiveScaffold(
-      headerBarBuilder: (
-        final BuildContext context,
-        final ResponsiveStates state,
-      ) {
-        final ITabBar tabBar = ITabBar(
-          selectedIndex: _selectedIndex,
-          onDestinationSelected: (final int index) {
-            setState(() => _selectedIndex = index);
+    return IMasterDetailPage<Pages>(
+      items: Pages.values,
+      initialItem: Pages.welcome,
+      masterMiddle: const Text('Showcase'),
+      masterTrailing: <Widget>[
+        IButton.icon(
+          icon: MingCuteIcons.mgc_information_line,
+          isTransparent: true,
+          onPressed: () async {
+            final String license = await getLicense();
+            if (!context.mounted) {
+              return;
+            }
+            showAboutDialogModal(
+              context: context,
+              applicationName: 'Showcase',
+              version: '1.0.0',
+              applicationIcon: IApplicationIcon(
+                const Icon(
+                  MingCuteIcons.mgc_presentation_1_line,
+                  size: InfinityDimens.appIconSize,
+                ),
+                size: InfinityDimens.appIconSize,
+              ),
+              developers: <String>['Mahan Rahmati'],
+              website: 'https://github.com/MahanRahmati/infinity',
+              issueUrl: 'https://github.com/MahanRahmati/infinity/issues',
+              license: license,
+            );
           },
-          tabs: <ITabItem>[
-            ITabItem(
-              icon: const Icon(MingCuteIcons.mgc_presentation_1_line),
-              selectedIcon: const Icon(MingCuteIcons.mgc_presentation_1_fill),
-              label: 'Welcome',
-            ),
-            ITabItem(
-              icon: const Icon(MingCuteIcons.mgc_spacing_horizontal_line),
-              selectedIcon:
-                  const Icon(MingCuteIcons.mgc_spacing_horizontal_fill),
-              label: 'Bounded',
-            ),
-            ITabItem(
-              icon: const Icon(MingCuteIcons.mgc_rows_4_line),
-              selectedIcon: const Icon(MingCuteIcons.mgc_rows_4_fill),
-              label: 'Lists',
-            ),
-            ITabItem(
-              icon: const Icon(MingCuteIcons.mgc_star_line),
-              selectedIcon: const Icon(MingCuteIcons.mgc_star_fill),
-              label: 'Buttons',
-            ),
-            ITabItem(
-              icon: const Icon(MingCuteIcons.mgc_home_1_line),
-              selectedIcon: const Icon(MingCuteIcons.mgc_home_1_fill),
-              label: 'Home',
-            ),
-          ],
-        );
-
-        return IHeaderBar(
-          middle: const Text('Showcase'),
-          trailing: <Widget>[
-            IButton.icon(
-              icon: MingCuteIcons.mgc_information_line,
-              isTransparent: true,
-              onPressed: () async {
-                final String license = await getLicense();
-                if (!context.mounted) {
-                  return;
-                }
-                showAboutDialogModal(
-                  context: context,
-                  applicationName: 'Showcase',
-                  version: '1.0.0',
-                  applicationIcon: IApplicationIcon(
-                    const Icon(
-                      MingCuteIcons.mgc_presentation_1_line,
-                      size: InfinityDimens.appIconSize,
-                    ),
-                    size: InfinityDimens.appIconSize,
+        ),
+      ],
+      masterBuilder: (context, selectedItem, onItemSelected) {
+        return ListView(
+          children: <Widget>[
+            IBoxedList(
+              children: <Widget>[
+                IListItem(
+                  leading: Icon(
+                    selectedItem == Pages.welcome
+                        ? MingCuteIcons.mgc_presentation_1_fill
+                        : MingCuteIcons.mgc_presentation_1_line,
                   ),
-                  developers: <String>['Mahan Rahmati'],
-                  website: 'https://github.com/MahanRahmati/infinity',
-                  issueUrl: 'https://github.com/MahanRahmati/infinity/issues',
-                  license: license,
-                );
-              },
+                  title: const Text('Welcome'),
+                  onPressed: () {
+                    onItemSelected(Pages.welcome);
+                  },
+                ),
+                IListItem(
+                  leading: Icon(
+                    selectedItem == Pages.bounded
+                        ? MingCuteIcons.mgc_spacing_horizontal_fill
+                        : MingCuteIcons.mgc_spacing_horizontal_line,
+                  ),
+                  title: const Text('Bounded'),
+                  onPressed: () {
+                    onItemSelected(Pages.bounded);
+                  },
+                ),
+                IListItem(
+                  leading: Icon(
+                    selectedItem == Pages.lists
+                        ? MingCuteIcons.mgc_rows_4_fill
+                        : MingCuteIcons.mgc_rows_4_line,
+                  ),
+                  title: const Text('Lists'),
+                  onPressed: () {
+                    onItemSelected(Pages.lists);
+                  },
+                ),
+                IListItem(
+                  leading: Icon(
+                    selectedItem == Pages.buttons
+                        ? MingCuteIcons.mgc_star_fill
+                        : MingCuteIcons.mgc_star_line,
+                  ),
+                  title: const Text('Buttons'),
+                  onPressed: () {
+                    onItemSelected(Pages.buttons);
+                  },
+                ),
+                IListItem(
+                  leading: Icon(
+                    selectedItem == Pages.calendar
+                        ? MingCuteIcons.mgc_calendar_fill
+                        : MingCuteIcons.mgc_calendar_line,
+                  ),
+                  title: const Text('Calendar'),
+                  onPressed: () {
+                    onItemSelected(Pages.calendar);
+                  },
+                ),
+                IListItem(
+                  leading: Icon(
+                    selectedItem == Pages.gauge
+                        ? MingCuteIcons.mgc_dashboard_2_fill
+                        : MingCuteIcons.mgc_dashboard_2_line,
+                  ),
+                  title: const Text('Gauge'),
+                  onPressed: () {
+                    onItemSelected(Pages.gauge);
+                  },
+                ),
+                IListItem(
+                  leading: Icon(
+                    selectedItem == Pages.home
+                        ? MingCuteIcons.mgc_home_1_fill
+                        : MingCuteIcons.mgc_home_1_line,
+                  ),
+                  title: const Text('Home'),
+                  onPressed: () {
+                    onItemSelected(Pages.home);
+                  },
+                ),
+              ],
             ),
           ],
-          bottom: switch (state) {
-            ResponsiveStates.collapsed => null,
-            ResponsiveStates.extended => tabBar,
-            ResponsiveStates.fullExtended => tabBar,
-          },
         );
       },
-      childWidgetBuilder: (
+      detailHeaderMiddleBuilder: (
         final BuildContext context,
-        final ResponsiveStates state,
+        final Pages item,
       ) {
-        return ILazyIndexedStack(
-          index: _selectedIndex,
-          children: const <Widget>[
-            WelcomePage(),
-            BoundedPage(),
-            ListsPage(),
-            ButtonsPage(),
-            HomePage(),
-          ],
-        );
-      },
-      bottomWidgetBuilder: (
-        final BuildContext context,
-        final ResponsiveStates state,
-      ) {
-        final IBottomTabBar bottomTabBar = IBottomTabBar(
-          selectedIndex: _selectedIndex,
-          onDestinationSelected: (final int index) {
-            setState(() => _selectedIndex = index);
-          },
-          tabs: <ITabItem>[
-            ITabItem(
-              icon: const Icon(MingCuteIcons.mgc_presentation_1_line),
-              selectedIcon: const Icon(MingCuteIcons.mgc_presentation_1_fill),
-              label: 'Welcome',
-            ),
-            ITabItem(
-              icon: const Icon(MingCuteIcons.mgc_spacing_horizontal_line),
-              selectedIcon:
-                  const Icon(MingCuteIcons.mgc_spacing_horizontal_fill),
-              label: 'Bounded',
-            ),
-            ITabItem(
-              icon: const Icon(MingCuteIcons.mgc_rows_4_line),
-              selectedIcon: const Icon(MingCuteIcons.mgc_rows_4_fill),
-              label: 'Lists',
-            ),
-            ITabItem(
-              icon: const Icon(MingCuteIcons.mgc_star_line),
-              selectedIcon: const Icon(MingCuteIcons.mgc_star_fill),
-              label: 'Buttons',
-            ),
-            ITabItem(
-              icon: const Icon(MingCuteIcons.mgc_home_1_line),
-              selectedIcon: const Icon(MingCuteIcons.mgc_home_1_fill),
-              label: 'Home',
-            ),
-          ],
-        );
-        return switch (state) {
-          ResponsiveStates.collapsed => bottomTabBar,
-          ResponsiveStates.extended => null,
-          ResponsiveStates.fullExtended => null,
+        final String title = switch (item) {
+          Pages.welcome => 'Welcome',
+          Pages.bounded => 'Bounded',
+          Pages.lists => 'Lists',
+          Pages.buttons => 'Buttons',
+          Pages.calendar => 'Calendar',
+          Pages.gauge => 'Gauge',
+          Pages.home => 'Home',
         };
+        return Text(title);
+      },
+      detailBuilder: (final BuildContext context, final Pages item) {
+        final Widget detail = switch (item) {
+          Pages.welcome => const WelcomePage(),
+          Pages.bounded => const BoundedPage(),
+          Pages.lists => const ListsPage(),
+          Pages.buttons => const ButtonsPage(),
+          Pages.calendar => const CalendarPage(),
+          Pages.gauge => const GaugePage(),
+          Pages.home => const HomePage(),
+        };
+        return detail;
       },
     );
   }
@@ -191,7 +203,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(final BuildContext context) {
     return ListView(
-      children: const <Widget>[
+      children: <Widget>[
         CardsWidget(),
         ModalsWidget(),
       ],
@@ -220,18 +232,14 @@ class CardsWidget extends StatelessWidget {
                 Expanded(
                   child: SizedBox(
                     height: 200,
-                    child: ICard(
-                      child: Center(child: Text('Card 1')),
-                    ),
+                    child: ICard(child: Center(child: Text('Card 1'))),
                   ),
                 ),
                 SizedBox(width: InfinityDimens.largePadding),
                 Expanded(
                   child: SizedBox(
                     height: 200,
-                    child: ICard(
-                      child: Center(child: Text('Card 2')),
-                    ),
+                    child: ICard(child: Center(child: Text('Card 2'))),
                   ),
                 ),
               ],
