@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/widgets.dart';
 
 import '/src/constants/colors.dart';
+import '/src/constants/dimens.dart';
 import '/src/constants/durations.dart';
 import '/src/constants/interaction_state.dart';
 import '/src/utils/extensions/build_context.dart';
@@ -69,34 +70,42 @@ class IGauge extends StatelessWidget {
     );
     const Color foregroundColor = InfinityColors.successDark;
 
-    return TweenAnimationBuilder<double>(
-      tween: Tween<double>(begin: 0.0, end: normalizedValue),
-      duration: InfinityDurations.veryLong,
-      builder: (
-        final BuildContext context,
-        final double value,
-        final Widget? child,
-      ) {
-        final double currentValue = minValue + value * (maxValue - minValue);
-        return CustomPaint(
-          size: Size(size, size),
-          painter: _GaugePainter(
-            normalizedValue: value,
-            backgroundColor: backgroundColor,
-            foregroundColor: foregroundColor,
-            thickness: thickness,
-            startAngle: startAngle,
-            sweepAngle: sweepAngle,
-          ),
-          child: SizedBox(
-            width: size,
-            height: size,
-            child: Center(
-              child: childBuilder?.call(currentValue) ?? const SizedBox(),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(
+        InfinityDimens.largePadding,
+        InfinityDimens.largePadding,
+        InfinityDimens.largePadding,
+        InfinityDimens.padding,
+      ),
+      child: TweenAnimationBuilder<double>(
+        tween: Tween<double>(begin: 0.0, end: normalizedValue),
+        duration: InfinityDurations.veryLong,
+        builder: (
+          final BuildContext context,
+          final double value,
+          final Widget? child,
+        ) {
+          final double currentValue = minValue + value * (maxValue - minValue);
+          return CustomPaint(
+            size: Size(size, size),
+            painter: _GaugePainter(
+              normalizedValue: value,
+              backgroundColor: backgroundColor,
+              foregroundColor: foregroundColor,
+              thickness: thickness,
+              startAngle: startAngle,
+              sweepAngle: sweepAngle,
             ),
-          ),
-        );
-      },
+            child: SizedBox(
+              width: size,
+              height: size,
+              child: Center(
+                child: childBuilder?.call(currentValue) ?? const SizedBox(),
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }
