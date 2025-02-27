@@ -47,6 +47,9 @@ class InfinityDimens {
   /// Height for list items - 56.0
   static const double listItemHeight = base * 7;
 
+  /// Height for calendar header - 56.0
+  static const double calendarHeaderHeight = base * 7;
+
   /// Minimum height for dialog - 80.0
   static const double dialogMinHeight = base * 10;
 
@@ -61,6 +64,12 @@ class InfinityDimens {
 
   /// Minimum width for dialog - 280.0
   static const double dialogMinWidth = base * 35;
+
+  /// Maximum height for calendar - 336.0
+  static const double calendarMaxHeight = base * 42;
+
+  /// Width for calendar - 448.0
+  static const double calendarWidth = base * 56;
 
   /// Maximum width for dialog - 480.0
   static const double dialogMaxWidth = base * 60;

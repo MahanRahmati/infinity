@@ -14,6 +14,7 @@ export 'src/widgets/back_button.dart';
 export 'src/widgets/bounded_box.dart';
 export 'src/widgets/boxed_list.dart';
 export 'src/widgets/button.dart';
+export 'src/widgets/calendar.dart';
 export 'src/widgets/card.dart';
 export 'src/widgets/close_button.dart';
 export 'src/widgets/divider.dart';
