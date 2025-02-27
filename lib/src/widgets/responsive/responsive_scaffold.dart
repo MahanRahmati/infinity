@@ -2,6 +2,7 @@ import 'package:flutter/material.dart' show Scaffold;
 import 'package:flutter/widgets.dart';
 
 import '/src/constants/dimens.dart';
+import '/src/constants/durations.dart';
 import 'responsive_bottom_widget.dart';
 import 'responsive_side_widget.dart';
 
@@ -94,8 +95,8 @@ class _IResponsiveScaffoldState extends State<IResponsiveScaffold>
   @override
   void initState() {
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 350),
-      reverseDuration: const Duration(milliseconds: 350),
+      duration: InfinityDurations.long,
+      reverseDuration: InfinityDurations.long,
       value: 0,
       vsync: this,
     );

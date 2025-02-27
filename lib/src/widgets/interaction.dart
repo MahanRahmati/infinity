@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter/widgets.dart';
 
+import '/src/constants/durations.dart';
 import '/src/constants/interaction_state.dart';
 
 /// A builder function that returns a widget based on the current interaction
@@ -11,7 +12,6 @@ typedef InteractionBuilder = Widget? Function(
 );
 
 const double _scale = 0.95;
-const Duration _scaleDuration = Duration(milliseconds: 100);
 
 /// An interactive widget that handles user interactions following Infinity's
 /// design system.
@@ -119,7 +119,7 @@ class _InteractionState extends State<Interaction> {
       setState(() => _isKeyboardActivated = true);
       widget.onPressed!();
       context.findRenderObject()!.sendSemanticsEvent(const TapSemanticEvent());
-      Future<void>.delayed(_scaleDuration, () {
+      Future<void>.delayed(InfinityDurations.short, () {
         if (mounted) {
           setState(() => _isKeyboardActivated = false);
         }
@@ -182,7 +182,7 @@ class _InteractionState extends State<Interaction> {
                     ? _scale
                     : 1.0
                 : 1.0,
-            duration: _scaleDuration,
+            duration: InfinityDurations.short,
             child: widget.builder?.call(context, _getInteractionState()),
           ),
         ),

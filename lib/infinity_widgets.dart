@@ -7,6 +7,7 @@ export 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
 
 export 'src/constants/colors.dart';
 export 'src/constants/dimens.dart';
+export 'src/constants/durations.dart';
 export 'src/constants/theme.dart';
 export 'src/constants/typography.dart';
 export 'src/widgets/application_icon.dart';

@@ -4,6 +4,7 @@ import 'package:ming_cute_icons/ming_cute_icons.dart';
 
 import '/src/constants/colors.dart';
 import '/src/constants/dimens.dart';
+import '/src/constants/durations.dart';
 import '/src/constants/interaction_state.dart';
 import '/src/constants/typography.dart';
 import '/src/utils/date_time.dart';
@@ -88,7 +89,7 @@ class _ICalendarState extends State<ICalendar> {
   void _previousMonth() {
     if (_pageController.page! > 0) {
       _pageController.previousPage(
-        duration: const Duration(milliseconds: 350),
+        duration: InfinityDurations.long,
         curve: Curves.easeOutCubic,
       );
     }
@@ -97,7 +98,7 @@ class _ICalendarState extends State<ICalendar> {
   void _nextMonth() {
     if (_pageController.page! < _pageCount - 1) {
       _pageController.nextPage(
-        duration: const Duration(milliseconds: 350),
+        duration: InfinityDurations.long,
         curve: Curves.easeOutCubic,
       );
     }
