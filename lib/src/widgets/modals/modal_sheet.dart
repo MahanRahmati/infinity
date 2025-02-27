@@ -110,39 +110,41 @@ void showAboutDialogModal({
 
   showDialogModal(
     context: context,
-    pageListBuilder: (final BuildContext context) => <SliverWoltModalSheetPage>[
-      IModalSheetPage(
-        id: aboutId,
-        isTopBarLayerAlwaysVisible: true,
-        topBar: const IDialogHeader(),
-        child: AboutDialog(
-          applicationName: applicationName,
-          version: version,
-          applicationIcon: applicationIcon,
-          website: website,
-          issueUrl: issueUrl,
-          developers: developers,
-          creditsId: creditsId,
-          creditsTitle: creditsTitle,
-          license: license,
-          legalId: legalId,
-          legalTitle: legalTitle,
-        ),
-      ),
-      if (developers.isNotEmpty)
+    pageListBuilder: (final BuildContext context) {
+      return <SliverWoltModalSheetPage>[
         IModalSheetPage(
-          id: creditsId,
+          id: aboutId,
           isTopBarLayerAlwaysVisible: true,
-          topBar: const IDialogHeader(parentId: aboutId, title: creditsTitle),
-          child: CreditsDialog(developers: developers),
+          topBar: const IDialogHeader(),
+          child: AboutDialog(
+            applicationName: applicationName,
+            version: version,
+            applicationIcon: applicationIcon,
+            website: website,
+            issueUrl: issueUrl,
+            developers: developers,
+            creditsId: creditsId,
+            creditsTitle: creditsTitle,
+            license: license,
+            legalId: legalId,
+            legalTitle: legalTitle,
+          ),
         ),
-      if (license != null && license.trim().isNotEmpty)
-        IModalSheetPage(
-          id: legalId,
-          isTopBarLayerAlwaysVisible: true,
-          topBar: const IDialogHeader(parentId: aboutId, title: legalTitle),
-          child: LegalDialog(license: license),
-        ),
-    ],
+        if (developers.isNotEmpty)
+          IModalSheetPage(
+            id: creditsId,
+            isTopBarLayerAlwaysVisible: true,
+            topBar: const IDialogHeader(parentId: aboutId, title: creditsTitle),
+            child: CreditsDialog(developers: developers),
+          ),
+        if (license != null && license.trim().isNotEmpty)
+          IModalSheetPage(
+            id: legalId,
+            isTopBarLayerAlwaysVisible: true,
+            topBar: const IDialogHeader(parentId: aboutId, title: legalTitle),
+            child: LegalDialog(license: license),
+          ),
+      ];
+    },
   );
 }

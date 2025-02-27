@@ -31,9 +31,9 @@ class IGauge extends StatelessWidget {
     this.sweepAngle = pi * 1.5,
     this.childBuilder,
   }) : assert(
-          value >= minValue && value <= maxValue,
-          'Value must be between minValue and maxValue',
-        );
+         value >= minValue && value <= maxValue,
+         'Value must be between minValue and maxValue',
+       );
 
   /// The current value to display on the gauge.
   final double value;
@@ -124,11 +124,12 @@ class _GaugePainter extends CustomPainter {
     final double radius = min(size.width, size.height) / 2 - thickness / 2;
 
     // Draw background arc
-    final Paint backgroundPaint = Paint()
-      ..color = backgroundColor
-      ..strokeWidth = thickness
-      ..style = PaintingStyle.stroke
-      ..strokeCap = StrokeCap.round;
+    final Paint backgroundPaint =
+        Paint()
+          ..color = backgroundColor
+          ..strokeWidth = thickness
+          ..style = PaintingStyle.stroke
+          ..strokeCap = StrokeCap.round;
 
     canvas.drawArc(
       Rect.fromCircle(center: center, radius: radius),
@@ -139,11 +140,12 @@ class _GaugePainter extends CustomPainter {
     );
 
     // Draw foreground arc
-    final Paint foregroundPaint = Paint()
-      ..color = foregroundColor
-      ..strokeWidth = thickness
-      ..style = PaintingStyle.stroke
-      ..strokeCap = StrokeCap.round;
+    final Paint foregroundPaint =
+        Paint()
+          ..color = foregroundColor
+          ..strokeWidth = thickness
+          ..style = PaintingStyle.stroke
+          ..strokeCap = StrokeCap.round;
 
     canvas.drawArc(
       Rect.fromCircle(center: center, radius: radius),

@@ -142,10 +142,12 @@ class _ICalendarState extends State<ICalendar> {
               ),
               const SizedBox(height: InfinityDimens.largePadding),
               Row(
-                children: <String>[' ', ...widget.startDay.days]
-                    .map((final String day) {
-                  return Expanded(child: _WeekDay(day: day));
-                }).toList(),
+                children:
+                    <String>[' ', ...widget.startDay.days].map((
+                      final String day,
+                    ) {
+                      return Expanded(child: _WeekDay(day: day));
+                    }).toList(),
               ),
               const SizedBox(height: InfinityDimens.largePadding),
               ConstrainedBox(
@@ -233,8 +235,10 @@ class _MonthState extends State<_Month> {
   void initState() {
     super.initState();
     _days = widget.month.getDaysInMonth(widget.startDay);
-    _focusNodes =
-        List<FocusNode>.generate(_days.length, (final _) => FocusNode());
+    _focusNodes = List<FocusNode>.generate(
+      _days.length,
+      (final _) => FocusNode(),
+    );
   }
 
   @override
@@ -265,12 +269,13 @@ class _MonthState extends State<_Month> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: weekNumbers.map((final int weekNumber) {
-              return SizedBox.square(
-                dimension: 56,
-                child: _WeekDay(day: weekNumber.toString()),
-              );
-            }).toList(),
+            children:
+                weekNumbers.map((final int weekNumber) {
+                  return SizedBox.square(
+                    dimension: 56,
+                    child: _WeekDay(day: weekNumber.toString()),
+                  );
+                }).toList(),
           ),
         ),
         Expanded(
@@ -283,13 +288,16 @@ class _MonthState extends State<_Month> {
             itemBuilder: (final BuildContext context, final int index) {
               final DateTime date = _days[index];
 
-              final bool isBeforeFirstDate = widget.firstDate != null &&
+              final bool isBeforeFirstDate =
+                  widget.firstDate != null &&
                   date.isBefore(widget.firstDate!.startOfDay);
 
-              final bool isAfterLastDate = widget.lastDate != null &&
+              final bool isAfterLastDate =
+                  widget.lastDate != null &&
                   date.isAfter(widget.lastDate!.startOfDay);
 
-              final bool isDisabled = date.month != widget.month.month ||
+              final bool isDisabled =
+                  date.month != widget.month.month ||
                   isBeforeFirstDate ||
                   isAfterLastDate;
               return _Day(
@@ -332,11 +340,12 @@ class _Day extends StatelessWidget {
 
     return Interaction(
       focusNode: focusNode,
-      onPressed: isDisabled
-          ? null
-          : () {
-              onChanged?.call(day);
-            },
+      onPressed:
+          isDisabled
+              ? null
+              : () {
+                onChanged?.call(day);
+              },
       builder: (final BuildContext context, final InteractionState? state) {
         final StatusType? backgroundStatusType =
             isSelectedDay ? StatusType.success : null;

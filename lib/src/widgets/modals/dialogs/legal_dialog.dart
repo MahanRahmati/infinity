@@ -9,10 +9,7 @@ class LegalDialog extends StatelessWidget {
   /// Creates a legal dialog.
   ///
   /// [license] The legal text content to display
-  const LegalDialog({
-    super.key,
-    required this.license,
-  });
+  const LegalDialog({super.key, required this.license});
 
   ///  The legal text content to display.
   final String license;
@@ -23,10 +20,7 @@ class LegalDialog extends StatelessWidget {
       top: false,
       child: Padding(
         padding: const EdgeInsets.all(InfinityDimens.largePadding),
-        child: Text(
-          license,
-          style: InfinityTypography.body,
-        ),
+        child: Text(license, style: InfinityTypography.body),
       ),
     );
   }

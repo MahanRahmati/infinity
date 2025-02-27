@@ -6,10 +6,8 @@ import '/src/constants/durations.dart';
 import '/src/constants/interaction_state.dart';
 
 /// A builder function that returns a widget based on the current interaction
-typedef InteractionBuilder = Widget? Function(
-  BuildContext context,
-  InteractionState? state,
-);
+typedef InteractionBuilder =
+    Widget? Function(BuildContext context, InteractionState? state);
 
 const double _scale = 0.95;
 
@@ -158,9 +156,10 @@ class _InteractionState extends State<Interaction> {
   @override
   Widget build(final BuildContext context) {
     return MouseRegion(
-      cursor: widget.enabled && kIsWeb
-          ? SystemMouseCursors.click
-          : MouseCursor.defer,
+      cursor:
+          widget.enabled && kIsWeb
+              ? SystemMouseCursors.click
+              : MouseCursor.defer,
       child: FocusableActionDetector(
         actions: _actionMap,
         focusNode: widget.focusNode,
@@ -177,11 +176,12 @@ class _InteractionState extends State<Interaction> {
           onTap: widget.onPressed,
           onLongPress: widget.onLongPress,
           child: AnimatedScale(
-            scale: widget.useScale
-                ? (_isPressed || _isKeyboardActivated)
-                    ? _scale
-                    : 1.0
-                : 1.0,
+            scale:
+                widget.useScale
+                    ? (_isPressed || _isKeyboardActivated)
+                        ? _scale
+                        : 1.0
+                    : 1.0,
             duration: InfinityDurations.short,
             child: widget.builder?.call(context, _getInteractionState()),
           ),

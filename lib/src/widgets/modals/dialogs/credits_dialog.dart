@@ -10,10 +10,7 @@ class CreditsDialog extends StatelessWidget {
   /// Creates a credits dialog.
   ///
   /// [developers] List of developer names to display
-  const CreditsDialog({
-    super.key,
-    required this.developers,
-  });
+  const CreditsDialog({super.key, required this.developers});
 
   /// List of developers to display in the dialog.
   final List<String> developers;
@@ -26,11 +23,10 @@ class CreditsDialog extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           IBoxedList(
-            children: developers.map(
-              (final String developer) {
-                return IListItem(title: Text(developer));
-              },
-            ).toList(),
+            children:
+                developers.map((final String developer) {
+                  return IListItem(title: Text(developer));
+                }).toList(),
           ),
           const SizedBox(height: InfinityDimens.padding),
         ],

@@ -19,9 +19,7 @@ class IBottomDialog extends WoltModalType {
     super.shapeBorder = _defaultShapeBorder,
     super.forceMaxHeight,
     super.barrierDismissible,
-  }) : super(
-          showDragHandle: false,
-        );
+  }) : super(showDragHandle: false);
 
   static const ShapeBorder _defaultShapeBorder = RoundedRectangleBorder(
     borderRadius: BorderRadius.vertical(
@@ -50,10 +48,7 @@ class IBottomDialog extends WoltModalType {
     final Size modalContentSize,
     final TextDirection textDirection,
   ) {
-    return Offset(
-      0,
-      max(0.0, availableSize.height - modalContentSize.height),
-    );
+    return Offset(0, max(0.0, availableSize.height - modalContentSize.height));
   }
 
   @override
@@ -64,13 +59,13 @@ class IBottomDialog extends WoltModalType {
   ) {
     return useSafeArea
         ? SafeArea(
-            top: false,
-            child: MediaQuery.removePadding(
-              context: context,
-              removeTop: true,
-              child: child,
-            ),
-          )
+          top: false,
+          child: MediaQuery.removePadding(
+            context: context,
+            removeTop: true,
+            child: child,
+          ),
+        )
         : child;
   }
 
@@ -96,12 +91,7 @@ class IBottomDialog extends WoltModalType {
       position: Tween<Offset>(
         begin: const Offset(0.0, 1.0),
         end: Offset.zero,
-      ).animate(
-        CurvedAnimation(
-          parent: animation,
-          curve: Curves.easeOutCubic,
-        ),
-      ),
+      ).animate(CurvedAnimation(parent: animation, curve: Curves.easeOutCubic)),
       child: child,
     );
   }

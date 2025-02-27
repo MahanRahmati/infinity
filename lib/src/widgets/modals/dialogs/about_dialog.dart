@@ -83,7 +83,8 @@ class AboutDialog extends StatelessWidget {
     const String issueTitle = 'Report an issue';
     final bool showCredits =
         developers.isNotEmpty && creditsId != null && creditsTitle != null;
-    final bool showLicense = license != null &&
+    final bool showLicense =
+        license != null &&
         license!.trim().isNotEmpty &&
         legalId != null &&
         legalTitle != null;
@@ -96,10 +97,7 @@ class AboutDialog extends StatelessWidget {
             applicationIcon!,
             const SizedBox(height: InfinityDimens.mediumPadding),
           ],
-          Text(
-            applicationName,
-            style: InfinityTypography.title2,
-          ),
+          Text(applicationName, style: InfinityTypography.title2),
           const SizedBox(height: InfinityDimens.padding),
           DecoratedBox(
             decoration: ShapeDecoration(
@@ -157,12 +155,13 @@ class AboutDialog extends StatelessWidget {
               ],
             ),
           SizedBox(
-            height: (issueUrl != null ||
-                    website != null ||
-                    showCredits ||
-                    showLicense)
-                ? 0
-                : InfinityDimens.padding,
+            height:
+                (issueUrl != null ||
+                        website != null ||
+                        showCredits ||
+                        showLicense)
+                    ? 0
+                    : InfinityDimens.padding,
           ),
         ],
       ),

@@ -52,8 +52,8 @@ class ITabBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => const Size.fromHeight(
-        InfinityDimens.tabbarHeight + InfinityDimens.padding,
-      );
+    InfinityDimens.tabbarHeight + InfinityDimens.padding,
+  );
 
   @override
   Widget build(final BuildContext context) {
@@ -125,7 +125,8 @@ class IBottomTabBar extends StatelessWidget {
                 ),
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
-                    minWidth: constraints.maxWidth -
+                    minWidth:
+                        constraints.maxWidth -
                         (InfinityDimens.smallPadding * 2),
                   ),
                   child: Row(
@@ -182,9 +183,10 @@ class _ITabItem extends StatelessWidget {
           state,
         );
 
-        final Color bg = state == null
-            ? bgColor
-            : InfinityColors.getStateColor(bgColor, state);
+        final Color bg =
+            state == null
+                ? bgColor
+                : InfinityColors.getStateColor(bgColor, state);
         final Color fg =
             state == InteractionState.disabled ? fgColor.dimmed() : fgColor;
 

@@ -22,9 +22,7 @@ class ISideSheet extends WoltModalType {
     super.forceMaxHeight = true,
     super.dismissDirection = WoltModalDismissDirection.endToStart,
     super.barrierDismissible,
-  }) : super(
-          showDragHandle: false,
-        );
+  }) : super(showDragHandle: false);
 
   static const ShapeBorder _defaultShapeBorder = RoundedRectangleBorder(
     borderRadius: BorderRadiusDirectional.only(
@@ -58,9 +56,10 @@ class ISideSheet extends WoltModalType {
     final Size modalContentSize,
     final TextDirection textDirection,
   ) {
-    final double xOffset = textDirection == TextDirection.rtl
-        ? 0.0
-        : max(0.0, availableSize.width - modalContentSize.width);
+    final double xOffset =
+        textDirection == TextDirection.rtl
+            ? 0.0
+            : max(0.0, availableSize.width - modalContentSize.width);
     return Offset(xOffset, 0);
   }
 
@@ -73,10 +72,10 @@ class ISideSheet extends WoltModalType {
     final TextDirection textDirection = Directionality.of(context);
     return useSafeArea
         ? SafeArea(
-            left: textDirection != TextDirection.ltr,
-            right: textDirection == TextDirection.ltr,
-            child: child,
-          )
+          left: textDirection != TextDirection.ltr,
+          right: textDirection == TextDirection.ltr,
+          child: child,
+        )
         : child;
   }
 
@@ -102,12 +101,7 @@ class ISideSheet extends WoltModalType {
       position: Tween<Offset>(
         begin: isRtl ? const Offset(-1.0, 0.0) : const Offset(1.0, 0.0),
         end: Offset.zero,
-      ).animate(
-        CurvedAnimation(
-          parent: animation,
-          curve: Curves.easeOutCubic,
-        ),
-      ),
+      ).animate(CurvedAnimation(parent: animation, curve: Curves.easeOutCubic)),
       child: child,
     );
   }

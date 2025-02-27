@@ -18,9 +18,7 @@ class IDialog extends WoltModalType {
     super.shapeBorder = _defaultShapeBorder,
     super.forceMaxHeight,
     super.barrierDismissible,
-  }) : super(
-          showDragHandle: false,
-        );
+  }) : super(showDragHandle: false);
 
   static const ShapeBorder _defaultShapeBorder = RoundedRectangleBorder(
     borderRadius: BorderRadius.all(
@@ -86,16 +84,10 @@ class IDialog extends WoltModalType {
     final Widget child,
   ) {
     return FadeTransition(
-      opacity: CurvedAnimation(
-        parent: animation,
-        curve: Curves.easeOutCubic,
-      ),
+      opacity: CurvedAnimation(parent: animation, curve: Curves.easeOutCubic),
       child: ScaleTransition(
         scale: Tween<double>(begin: 0.8, end: 1.0).animate(
-          CurvedAnimation(
-            parent: animation,
-            curve: Curves.easeOutCubic,
-          ),
+          CurvedAnimation(parent: animation, curve: Curves.easeOutCubic),
         ),
         child: child,
       ),

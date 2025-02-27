@@ -13,11 +13,7 @@ class IDialogHeader extends StatelessWidget {
   ///
   /// [parentId] Optional ID of parent page to enable back navigation
   /// [title] Optional title text to display in the center
-  const IDialogHeader({
-    super.key,
-    this.parentId,
-    this.title,
-  });
+  const IDialogHeader({super.key, this.parentId, this.title});
 
   /// Optional ID of parent page to enable back navigation
   final Object? parentId;
@@ -42,23 +38,22 @@ class IDialogHeader extends StatelessWidget {
       ),
     );
 
-    final Widget? middle = title != null
-        ? Text(
-            title!,
-            maxLines: 1,
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-            style: InfinityTypography.heading,
-          )
-        : null;
+    final Widget? middle =
+        title != null
+            ? Text(
+              title!,
+              maxLines: 1,
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              style: InfinityTypography.heading,
+            )
+            : null;
 
     const Widget trailing = Padding(
       padding: EdgeInsets.symmetric(horizontal: InfinityDimens.padding),
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          ICloseButton(),
-        ],
+        children: <Widget>[ICloseButton()],
       ),
     );
 

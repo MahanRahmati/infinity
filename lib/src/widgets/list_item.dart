@@ -75,9 +75,10 @@ class IListItem extends StatelessWidget {
         onPressed: onPressed,
         useScale: false,
         builder: (final BuildContext context, final InteractionState? state) {
-          final Color bg = state == null || state == InteractionState.disabled
-              ? InfinityColors.transparent
-              : InfinityColors.getStateOpacityColor(isDarkMode, state);
+          final Color bg =
+              state == null || state == InteractionState.disabled
+                  ? InfinityColors.transparent
+                  : InfinityColors.getStateOpacityColor(isDarkMode, state);
           return Semantics(
             button: onPressed != null,
             enabled: state != InteractionState.disabled,
@@ -146,7 +147,7 @@ class _ListItem
 class _RenderListItem extends RenderBox
     with SlottedContainerRenderObjectMixin<_ListItemSlot, RenderBox> {
   _RenderListItem({required final TextDirection textDirection})
-      : _textDirection = textDirection;
+    : _textDirection = textDirection;
 
   RenderBox? get leading => childForSlot(_ListItemSlot.leading);
   RenderBox get title => childForSlot(_ListItemSlot.title)!;
@@ -225,7 +226,8 @@ class _RenderListItem extends RenderBox
   @override
   void performLayout() {
     final BoxConstraints constraints = this.constraints;
-    double width = constraints.maxWidth -
+    double width =
+        constraints.maxWidth -
         InfinityDimens.largePadding -
         InfinityDimens.largePadding;
     double height = 0;
@@ -276,14 +278,16 @@ class _RenderListItem extends RenderBox
       );
     }
 
-    final double x = InfinityDimens.largePadding +
+    final double x =
+        InfinityDimens.largePadding +
         (leading != null
             ? leading!.size.width + InfinityDimens.mediumPadding
             : 0);
 
-    final double titleY = subtitle != null
-        ? InfinityDimens.mediumPadding
-        : (size.height - title.size.height) / 2;
+    final double titleY =
+        subtitle != null
+            ? InfinityDimens.mediumPadding
+            : (size.height - title.size.height) / 2;
     context.paintChild(title, offset.translate(x, titleY));
 
     if (subtitle != null) {

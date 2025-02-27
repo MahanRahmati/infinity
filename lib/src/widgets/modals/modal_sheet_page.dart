@@ -31,18 +31,21 @@ class IModalSheetPage extends SliverWoltModalSheetPage {
     super.topBar,
     super.useSafeArea,
   }) : super(
-          mainContentSliversBuilder: (final BuildContext context) => <Widget>[
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: padding ??
-                    const EdgeInsets.symmetric(
-                      vertical: InfinityDimens.padding,
-                    ),
-                child: child,
-              ),
-            ),
-          ],
-        );
+         mainContentSliversBuilder: (final BuildContext context) {
+           return <Widget>[
+             SliverToBoxAdapter(
+               child: Padding(
+                 padding:
+                     padding ??
+                     const EdgeInsets.symmetric(
+                       vertical: InfinityDimens.padding,
+                     ),
+                 child: child,
+               ),
+             ),
+           ];
+         },
+       );
 
   /// A [Widget] that represents the main content displayed in the page.
   final Widget child;
