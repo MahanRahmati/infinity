@@ -2,6 +2,7 @@
 /// application development.
 library;
 
+export 'package:flutter/widgets.dart';
 export 'package:ming_cute_icons/ming_cute_icons.dart';
 export 'package:wolt_modal_sheet/wolt_modal_sheet.dart';
 
@@ -16,6 +17,7 @@ export 'src/widgets/bounded_box.dart';
 export 'src/widgets/boxed_list.dart';
 export 'src/widgets/button.dart';
 export 'src/widgets/calendar.dart';
+export 'src/widgets/calendar_day_view.dart';
 export 'src/widgets/card.dart';
 export 'src/widgets/close_button.dart';
 export 'src/widgets/divider.dart';

@@ -116,4 +116,9 @@ extension InfinityDateTimeExtension on DateTime {
     final int daysToThursday = thursday.difference(firstDayOfYear).inDays;
     return (daysToThursday / 7).floor() + 1;
   }
+
+  /// Returns `true` if this date is the same as today.
+  bool get isToday {
+    return DateTime.now().startOfDay == startOfDay;
+  }
 }

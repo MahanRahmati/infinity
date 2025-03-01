@@ -1,4 +1,3 @@
-import 'package:flutter/widgets.dart';
 import 'package:infinity_widgets/infinity_widgets.dart';
 
 class GaugePage extends StatelessWidget {

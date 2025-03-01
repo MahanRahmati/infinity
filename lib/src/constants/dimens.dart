@@ -50,6 +50,12 @@ class InfinityDimens {
   /// Height for calendar header - 56.0
   static const double calendarHeaderHeight = base * 7;
 
+  /// Height for calendar day item - 64.0
+  static const double calendarDayItemHeight = base * 8;
+
+  /// Width for calendar day label - 64.0
+  static const double calendarDayLabelWidth = base * 8;
+
   /// Minimum height for dialog - 80.0
   static const double dialogMinHeight = base * 10;
 
